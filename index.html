@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENG101X Research Hub — UMD</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#E21833;--gold:#FFD200;--navy:#1A1F3C;--cream:#FFFDF7;--green:#2ECC8B;--orange:#FF8C42;--purple:#7B61FF;--coral:#FF6B6B;--blue-soft:#EEF3FF;--mint:#D4F5E9;--text:#1A1F3C;--muted:#7A7F99;--border:#E8EAF0;--shadow:0 4px 24px rgba(26,31,60,0.09);--shadow-lg:0 12px 48px rgba(26,31,60,0.14);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:9999;}
+.login-box{background:white;border-radius:24px;padding:44px 38px;width:410px;max-width:93vw;box-shadow:0 24px 80px rgba(0,0,0,0.3);animation:popIn .4s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popIn{from{opacity:0;transform:scale(.88);}to{opacity:1;transform:scale(1);}}
+.login-logo{text-align:center;margin-bottom:24px;}
+.login-logo .tag2{display:inline-block;background:var(--red);color:white;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:4px 10px;border-radius:5px;margin-bottom:10px;}
+.login-logo h1{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy);}
+.login-logo h1 span{color:var(--red);}
+.login-logo p{font-size:13px;color:var(--muted);margin-top:4px;}
+.role-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.role-btn{padding:15px 10px;border-radius:14px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;transition:all .2s;}
+.role-btn:hover{border-color:var(--red);background:#FFF5F7;}
+.role-btn.sel{border-color:var(--red);background:#FFF0F2;box-shadow:0 0 0 3px rgba(226,24,51,.12);}
+.role-btn .ri{font-size:26px;margin-bottom:5px;}
+.role-btn .rl{font-size:13px;font-weight:700;color:var(--navy);}
+.role-btn .rs{font-size:11px;color:var(--muted);margin-top:1px;}
+.lfield{margin-bottom:13px;}
+.lfield label{font-size:12px;font-weight:700;display:block;margin-bottom:5px;}
+.lfield input{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:13.5px;font-family:inherit;background:var(--cream);transition:border .18s;}
+.lfield input:focus{outline:none;border-color:var(--red);}
+.lsubmit{width:100%;padding:13px;margin-top:4px;background:var(--red);color:white;border:none;border-radius:12px;font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 6px 20px rgba(226,24,51,.3);transition:all .2s;}
+.lsubmit:hover{transform:translateY(-2px);}
+.ldemo{text-align:center;margin-top:13px;font-size:12px;color:var(--muted);}
+.ldemo button{background:none;border:none;color:var(--red);font-weight:700;cursor:pointer;font-size:12px;font-family:inherit;}
+
+/* APP */
+#app{display:none;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:242px;background:var(--navy);display:flex;flex-direction:column;z-index:100;box-shadow:4px 0 24px rgba(26,31,60,.18);}
+.sb-logo{padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.08);}
+.sb-logo .utag{display:inline-block;background:var(--red);color:white;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 8px;border-radius:4px;margin-bottom:7px;}
+.sb-logo h1{font-family:'DM Serif Display',serif;color:white;font-size:16.5px;line-height:1.2;}
+.sb-logo h1 span{color:var(--gold);}
+.sb-logo p{color:rgba(255,255,255,.38);font-size:11px;margin-top:3px;}
+.sb-nav{padding:13px 11px;flex:1;overflow-y:auto;}
+.nav-sec{color:rgba(255,255,255,.28);font-size:10px;font-weight:700;letter-spacing:1.5px;padding:8px 10px 3px;text-transform:uppercase;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;color:rgba(255,255,255,.62);font-size:13px;font-weight:500;cursor:pointer;transition:all .18s;margin-bottom:2px;border:none;background:none;width:100%;text-align:left;font-family:inherit;}
+.nav-item:hover{background:rgba(255,255,255,.07);color:white;}
+.nav-item.active{background:var(--red);color:white;font-weight:700;box-shadow:0 4px 14px rgba(226,24,51,.35);}
+.nav-item .ico{font-size:14px;width:18px;text-align:center;}
+.nbadge{margin-left:auto;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;padding:1px 7px;border-radius:20px;}
+.fstar{margin-left:auto;color:var(--gold);font-size:11px;}
+.sb-foot{padding:13px 17px;border-top:1px solid rgba(255,255,255,.08);}
+.pcard{display:flex;align-items:center;gap:9px;}
+.pavatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-size:12px;flex-shrink:0;}
+.pinfo p{color:white;font-size:12.5px;font-weight:600;}
+.pinfo span{color:rgba(255,255,255,.38);font-size:11px;}
+.lout-btn{background:none;border:none;color:rgba(255,255,255,.3);font-size:11px;cursor:pointer;margin-top:7px;padding:3px 0;font-family:inherit;transition:color .15s;}
+.lout-btn:hover{color:rgba(255,255,255,.65);}
+
+/* MAIN */
+.main{margin-left:242px;min-height:100vh;display:flex;flex-direction:column;}
+.topbar{background:white;border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.tb-left h2{font-family:'DM Serif Display',serif;font-size:18px;}
+.tb-left p{font-size:11px;color:var(--muted);}
+.tb-right{display:flex;align-items:center;gap:9px;}
+.tbtn{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .18s;font-family:inherit;}
+.tbtn.outline{background:white;color:var(--text);border:1.5px solid var(--border);}
+.tbtn.outline:hover{border-color:var(--red);color:var(--red);}
+.tbtn.primary{background:var(--red);color:white;box-shadow:0 4px 14px rgba(226,24,51,.25);}
+.tbtn.primary:hover{transform:translateY(-1px);}
+.role-pill{padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:700;}
+.rp-fac{background:#FFE8EB;color:var(--red);}
+.rp-stu{background:#EEF3FF;color:#4A6CF7;}
+
+/* CONTENT */
+.content{padding:24px 28px;flex:1;}
+.page{display:none;}
+.page.active{display:block;}
+.sec-title{font-family:'DM Serif Display',serif;font-size:21px;margin-bottom:4px;}
+.sec-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px;}
+
+/* SEARCH BAR */
+.sbar{background:white;border:1.5px solid var(--border);border-radius:13px;padding:14px 16px;display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:20px;box-shadow:var(--shadow);}
+.swrap{flex:1;min-width:190px;position:relative;}
+.swrap input{width:100%;padding:8px 12px 8px 34px;border:1.5px solid var(--border);border-radius:9px;font-size:12.5px;font-family:inherit;color:var(--text);background:var(--cream);transition:border .18s;}
+.swrap input:focus{outline:none;border-color:var(--red);}
+.swrap .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;}
+.chips{display:flex;gap:5px;flex-wrap:wrap;}
+.chip{padding:5px 11px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--muted);transition:all .15s;}
+.chip:hover{border-color:var(--red);color:var(--red);}
+.chip.on{background:var(--red);border-color:var(--red);color:white;}
+.fsel{padding:7px 10px;border-radius:9px;border:1.5px solid var(--border);background:white;font-size:12px;font-family:inherit;color:var(--text);cursor:pointer;}
+.fsel:focus{outline:none;border-color:var(--red);}
+
+/* STATS */
+.srow{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px;}
+.scard{background:white;border-radius:13px;padding:15px 17px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:transform .18s;}
+.scard:hover{transform:translateY(-2px);}
+.scard .si2{font-size:19px;margin-bottom:6px;}
+.scard .snum{font-family:'DM Serif Display',serif;font-size:25px;}
+.scard .slbl{font-size:11px;color:var(--muted);margin-top:2px;}
+.scard .sdelta{font-size:10.5px;font-weight:700;margin-top:3px;}
+.dup{color:var(--green);}.ddn{color:var(--coral);}
+
+/* ISSUE CARDS */
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.icard{background:white;border-radius:15px;border:1.5px solid var(--border);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.icard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:#bbb;}
+.icard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--cc,var(--red));}
+.tags{display:flex;gap:4px;margin-bottom:9px;flex-wrap:wrap;}
+.tag{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:700;}
+.tr{background:#FFE8EB;color:var(--red);}.tg{background:#FFF8CC;color:#B8920A;}.tn{background:#D4F5E9;color:#1A8C5F;}.tb{background:#EEF3FF;color:#4A6CF7;}.tp{background:#F0EDFF;color:#6B48FF;}.to{background:#FFF0E6;color:#D4600A;}.tt{background:#E0F8F5;color:#0D8A7A;}
+.icard h3{font-size:14px;font-weight:700;margin-bottom:5px;line-height:1.35;}
+.icard p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:11px;}
+.imeta{display:flex;justify-content:space-between;align-items:center;}
+.isrc{font-size:10.5px;color:var(--muted);}
+.tbar{display:flex;gap:2px;align-items:flex-end;}
+.tbar span{width:4px;border-radius:2px;background:var(--cc,var(--red));opacity:.45;display:block;}
+.tbar span:last-child{opacity:1;}
+
+/* PANELS / FORMS */
+.tcol{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.panel{background:white;border-radius:15px;border:1.5px solid var(--border);padding:20px;box-shadow:var(--shadow);}
+.panel h3{font-family:'DM Serif Display',serif;font-size:15.5px;margin-bottom:13px;display:flex;align-items:center;gap:6px;}
+.fg{margin-bottom:13px;}
+.fl{font-size:11.5px;font-weight:700;margin-bottom:4px;display:block;}
+.fi,.fta,.fsel2{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:12.5px;font-family:inherit;color:var(--text);background:var(--cream);transition:border .18s;}
+.fi:focus,.fta:focus,.fsel2:focus{outline:none;border-color:var(--red);}
+.fta{min-height:75px;resize:vertical;}
+.sgrp{margin-bottom:13px;}
+.slr{display:flex;justify-content:space-between;margin-bottom:4px;}
+.slbl{font-size:11.5px;font-weight:700;}
+.sval{font-size:11px;font-weight:700;color:var(--red);background:#FFE8EB;padding:2px 8px;border-radius:20px;}
+input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
+.sticks{display:flex;justify-content:space-between;margin-top:1px;}
+.sticks span{font-size:9px;color:var(--muted);}
+.pills{display:flex;gap:5px;flex-wrap:wrap;}
+.pill{padding:5px 11px;border-radius:20px;font-size:11.5px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--muted);transition:all .15s;font-family:inherit;}
+.pill:hover{border-color:var(--navy);color:var(--navy);}
+.pill.on{background:var(--navy);color:white;border-color:var(--navy);}
+
+/* GENERATE BTN */
+.genbtn{width:100%;padding:12px;background:linear-gradient(135deg,var(--red),#FF4D6D);color:white;border:none;border-radius:11px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer;transition:all .2s;margin-top:4px;box-shadow:0 6px 20px rgba(226,24,51,.3);display:flex;align-items:center;justify-content:center;gap:7px;}
+.genbtn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(226,24,51,.4);}
+.genbtn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+
+/* RESULT BOX */
+.rbox{background:linear-gradient(135deg,#F0EDFF,#EEF3FF);border:1.5px solid #D0CBFF;border-radius:13px;padding:16px;margin-top:16px;display:none;}
+.rbox.show{display:block;animation:fadeIn .4s ease;}
+.rbox h4{font-family:'DM Serif Display',serif;font-size:15.5px;margin-bottom:7px;color:var(--navy);}
+.rbox p{font-size:12.5px;line-height:1.7;}
+.ract{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap;}
+.rbtn{padding:6px 12px;border-radius:8px;font-size:11.5px;font-weight:700;cursor:pointer;border:none;transition:all .15s;font-family:inherit;}
+.rbtn.s{background:var(--purple);color:white;}
+.rbtn.o{background:white;color:var(--navy);border:1.5px solid var(--border);}
+
+/* SUGGESTIONS */
+.sugscroll{display:flex;gap:9px;overflow-x:auto;padding-bottom:5px;margin-top:10px;}
+.sugscroll::-webkit-scrollbar{height:3px;}
+.sugscroll::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
+.sugcard{min-width:185px;background:white;border-radius:11px;border:1.5px solid var(--border);padding:12px;cursor:pointer;transition:all .18s;flex-shrink:0;}
+.sugcard:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:var(--shadow);}
+.sugcard .sh{font-size:9.5px;font-weight:800;color:var(--red);margin-bottom:4px;}
+.sugcard p{font-size:11.5px;font-weight:600;line-height:1.4;}
+.sugcard .st{font-size:10px;color:var(--muted);margin-top:4px;}
+
+/* ESSAY HINTS */
+.ehints{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:11px;}
+.ehint{border-radius:9px;padding:10px;}
+.ehint .en{font-size:9.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px;}
+.ehint p{font-size:11px;line-height:1.5;}
+
+/* TIMELINE */
+.tlwrap{position:relative;padding-left:24px;}
+.tlwrap::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold));border-radius:2px;}
+.tlitem{position:relative;margin-bottom:16px;}
+.tldot{position:absolute;left:-18px;top:8px;width:12px;height:12px;border-radius:50%;background:white;border:2.5px solid var(--red);}
+.tldot.old{border-color:#B8920A;}
+.tlcard{background:white;border-radius:13px;border:1.5px solid var(--border);padding:15px;box-shadow:var(--shadow);cursor:pointer;transition:all .18s;}
+.tlcard:hover{transform:translateX(4px);box-shadow:var(--shadow-lg);}
+.tlera{font-size:10px;font-weight:800;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
+.tlcard h4{font-size:13.5px;font-weight:700;margin-bottom:5px;}
+.tlcard p{font-size:12px;color:var(--muted);line-height:1.6;}
+.tlmet{display:flex;gap:12px;margin-top:9px;}
+.tlmet .mn{font-family:'DM Serif Display',serif;font-size:16px;color:var(--red);}
+.tlmet .ml{font-size:10px;color:var(--muted);}
+
+/* SOURCES */
+.srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:13px;}
+.srccard{background:white;border-radius:13px;border:1.5px solid var(--border);padding:15px;box-shadow:var(--shadow);cursor:pointer;transition:all .18s;}
+.srccard:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.stbadge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.8px;padding:3px 8px;border-radius:4px;margin-bottom:8px;text-transform:uppercase;}
+.stj{background:#D4F5E9;color:#1A8C5F;}.stn{background:#FFF8CC;color:#B8920A;}.str{background:#EEF3FF;color:#4A6CF7;}.sto{background:#F0EDFF;color:#6B48FF;}.stl{background:#FFE8EB;color:var(--red);}
+.srccard h4{font-size:13px;font-weight:700;margin-bottom:5px;line-height:1.3;}
+.srccard p{font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:8px;}
+.srccard a{font-size:11.5px;color:var(--red);font-weight:600;text-decoration:none;}
+.srcmeta{display:flex;justify-content:space-between;margin-top:6px;}
+.srcrel{font-size:10.5px;color:var(--muted);}
+.stars{color:var(--gold);font-size:10.5px;}
+
+/* CONTACTS */
+.ctgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px;}
+.ctcard{background:white;border-radius:13px;border:1.5px solid var(--border);padding:15px;box-shadow:var(--shadow);transition:all .18s;}
+.ctcard:hover{transform:translateY(-2px);}
+.cth{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
+.ctlogo{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.ctinfo h4{font-size:13px;font-weight:700;}
+.ctinfo p{font-size:11px;color:var(--muted);margin-top:1px;}
+.ctdet{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
+.ctrow{display:flex;align-items:center;gap:6px;font-size:11.5px;}
+.ctrow .ci{font-size:11px;color:var(--muted);}
+.ctact{display:flex;gap:5px;}
+.cbtn{flex:1;padding:6px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .15s;font-family:inherit;}
+.cbe{background:#FFE8EB;color:var(--red);}.cbe:hover{background:var(--red);color:white;}
+.cbv{background:#EEF3FF;color:#4A6CF7;}.cbv:hover{background:#4A6CF7;color:white;}
+
+/* EMAILS */
+.elist{display:flex;flex-direction:column;gap:8px;}
+.eitem{background:white;border-radius:11px;border:1.5px solid var(--border);padding:13px 16px;box-shadow:var(--shadow);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px;}
+.eitem:hover{border-color:var(--red);}
+.eavatar{width:35px;height:35px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;}
+.efrom{font-size:13px;font-weight:700;}
+.esub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.emeta{margin-left:auto;text-align:right;}
+.edate{font-size:10.5px;color:var(--muted);}
+.udot{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;}
+
+/* STUDENT ASSIGNMENT */
+.stuview{background:white;border-radius:15px;border:1.5px solid var(--border);padding:22px;box-shadow:var(--shadow);}
+.stuview h3{font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:5px;}
+.rqdisplay{background:linear-gradient(135deg,#F0EDFF,#EEF3FF);border-radius:11px;padding:15px;margin:12px 0;border:1.5px solid #D0CBFF;font-size:14px;font-weight:600;line-height:1.55;color:var(--navy);font-style:italic;}
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:4px;}
+.ecard{border-radius:13px;padding:16px;border:1.5px solid var(--border);cursor:pointer;transition:all .18s;}
+.ecard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.ecard .ecn{font-size:9.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px;}
+.ecard h4{font-size:13.5px;font-weight:800;margin-bottom:6px;line-height:1.3;}
+.ecard p{font-size:11.5px;line-height:1.55;color:var(--muted);}
+.ecard ul{font-size:11px;color:var(--muted);margin-top:7px;padding-left:15px;line-height:1.7;}
+.ectag{display:inline-block;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:9px;color:white;}
+.ecpos{background:#FFF5F7;}.ecpos .ectag{background:var(--red);}
+.ecrhe{background:#EEF3FF;}.ecrhe .ectag{background:#4A6CF7;}
+.ecrem{background:#D4F5E9;}.ecrem .ectag{background:var(--green);}
+
+/* LOCKED */
+.locked{background:#FFF5F7;border:2px dashed #FFAAB8;border-radius:15px;padding:44px 22px;text-align:center;}
+.locked .lk{font-size:44px;margin-bottom:12px;}
+.locked h3{font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:7px;color:var(--red);}
+.locked p{font-size:12.5px;color:var(--muted);max-width:360px;margin:0 auto;}
+
+/* SPINNER */
+.spin{display:inline-block;width:14px;height:14px;border:2.5px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:sp .7s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.bigspin{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 10px;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
+.fadein{animation:fadeIn .35s ease forwards;}
+
+@media(max-width:900px){.srow{grid-template-columns:repeat(2,1fr);}.tcol{grid-template-columns:1fr;}.egrid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="tag2">UMD · ENG101X</div>
+      <h1>Research <span>Hub</span></h1>
+      <p>Sign in to access the campus research platform</p>
+    </div>
+    <div class="fg">
+      <div class="fl">Select your role:</div>
+      <div class="role-row">
+        <div class="role-btn sel" id="rb-fac" onclick="selRole('faculty')">
+          <div class="ri">🎓</div><div class="rl">Faculty / TA</div><div class="rs">Prof · Instructor · TA</div>
+        </div>
+        <div class="role-btn" id="rb-stu" onclick="selRole('student')">
+          <div class="ri">📚</div><div class="rl">Student</div><div class="rs">ENG101X Enrolled</div>
+        </div>
+      </div>
+    </div>
+    <div class="lfield"><label>UMD Directory ID</label><input type="text" id="lid" placeholder="e.g. dramirez or jsmith123"></div>
+    <div class="lfield"><label>Password</label><input type="password" id="lpw" placeholder="UMD password"></div>
+    <button class="lsubmit" onclick="doLogin()">Sign In →</button>
+    <div class="ldemo">Quick demo: <button onclick="qLogin('faculty')">Faculty login</button> &nbsp;·&nbsp; <button onclick="qLogin('student')">Student login</button></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="utag">UMD</div>
+    <h1>ENG<span>101X</span><br>Research Hub</h1>
+    <p id="sb-role">Loading…</p>
+  </div>
+  <nav class="sb-nav" id="sb-nav"></nav>
+  <div class="sb-foot">
+    <div class="pcard">
+      <div class="pavatar" id="ft-av">?</div>
+      <div class="pinfo"><p id="ft-name">User</p><span id="ft-role">ENG101X</span></div>
+    </div>
+    <button class="lout-btn" onclick="doLogout()">⎋ Sign out</button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="tb-left"><h2 id="pt">Campus Issues</h2><p id="ps">Live tracking of UMD campus issues</p></div>
+    <div class="tb-right">
+      <span class="role-pill" id="rpill"></span>
+      <button class="tbtn primary" id="tb-act" style="display:none">📤 Export Report</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ISSUES PAGE -->
+    <div class="page active" id="page-issues">
+      <div class="sec-title">🔥 What's Happening on Campus</div>
+      <p class="sec-sub">Live campus issues — faculty can click any card to jump to the Research Question Creator</p>
+      <div class="sbar">
+        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search issues…" oninput="filterIssues(this.value)"></div>
+        <div class="chips">
+          <div class="chip on" onclick="tc(this)">All</div>
+          <div class="chip" onclick="tc(this)">🏠 Housing</div>
+          <div class="chip" onclick="tc(this)">🧠 Mental Health</div>
+          <div class="chip" onclick="tc(this)">🌿 Sustainability</div>
+          <div class="chip" onclick="tc(this)">🛡️ Safety</div>
+          <div class="chip" onclick="tc(this)">🌍 DEI</div>
+          <div class="chip" onclick="tc(this)">💻 Tech & AI</div>
+          <div class="chip" onclick="tc(this)">🌾 Agriculture</div>
+          <div class="chip" onclick="tc(this)">🏥 Public Health</div>
+          <div class="chip" onclick="tc(this)">🚌 Transport</div>
+          <div class="chip" onclick="tc(this)">💼 Labor</div>
+        </div>
+        <select class="fsel"><option>🔥 Most Trending</option><option>🕐 Most Recent</option><option>⚡ Highest Impact</option><option>📉 Less Trendy</option></select>
+      </div>
+      <div class="srow">
+        <div class="scard"><div class="si2">🔥</div><div class="snum">24</div><div class="slbl">Active Issues</div><div class="sdelta dup">↑ 3 this week</div></div>
+        <div class="scard"><div class="si2">👥</div><div class="snum">8.4K</div><div class="slbl">Students Affected</div><div class="sdelta dup">↑ 12%</div></div>
+        <div class="scard"><div class="si2">💬</div><div class="snum">1,290</div><div class="slbl">Campus Discussions</div><div class="sdelta dup">↑ 8%</div></div>
+        <div class="scard"><div class="si2">📰</div><div class="snum">47</div><div class="slbl">Media Mentions</div><div class="sdelta ddn">↓ 2</div></div>
+      </div>
+      <div class="igrid" id="igrid">
+        <div class="icard" style="--cc:#E21833" onclick="issueClick('Residence Hall Overcrowding & Off-Campus Housing Crisis','housing, affordability, student experience')"><div class="tags"><span class="tag tr">🏠 Housing</span><span class="tag tg">🔥 Trending</span></div><h3>Residence Hall Overcrowding & Off-Campus Housing Crisis</h3><p>1,200+ students in overflow dorms; College Park rents up 22% YoY as enrollment surges.</p><div class="imeta"><span class="isrc">📰 The Diamondback</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:13px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
+        <div class="icard" style="--cc:#7B61FF" onclick="issueClick('Student Mental Health Services Waitlist Crisis','mental health, counseling, burnout, access')"><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tr">🚨 High Impact</span></div><h3>Mental Health Services Waitlist Exceeds 6 Weeks</h3><p>34% of surveyed students report anxiety or burnout; Counseling Center at capacity.</p><div class="imeta"><span class="isrc">📊 SGA Survey</span><div class="tbar"><span style="height:7px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
+        <div class="icard" style="--cc:#2ECC8B" onclick="issueClick('Campus Carbon Neutrality Goal 2030 transparency gap','sustainability, environment, climate, reporting')"><div class="tags"><span class="tag tn">🌿 Sustainability</span><span class="tag tb">📈 Rising</span></div><h3>Carbon Neutrality 2030 — Data Transparency Gap</h3><p>Facilities upgrades underway; student researchers flag missing reporting on actual emissions.</p><div class="imeta"><span class="isrc">🌿 Sustainability Office</span><div class="tbar"><span style="height:9px"></span><span style="height:8px"></span><span style="height:13px"></span><span style="height:12px"></span><span style="height:17px"></span></div></div></div>
+        <div class="icard" style="--cc:#FF8C42" onclick="issueClick('Night-Time Campus Safety and Lighting Gaps on Route 1','safety, crime, lighting, UMPD')"><div class="tags"><span class="tag to">🛡️ Safety</span><span class="tag tg">⚠️ Ongoing</span></div><h3>Night-Time Safety & Lighting Gaps on Route 1</h3><p>15 incidents near Route 1 corridor since fall; UMPD response time data is contested.</p><div class="imeta"><span class="isrc">🚔 UMPD Records</span><div class="tbar"><span style="height:13px"></span><span style="height:15px"></span><span style="height:12px"></span><span style="height:15px"></span><span style="height:18px"></span></div></div></div>
+        <div class="icard" style="--cc:#4A6CF7" onclick="issueClick('DEI Funding Cuts and minority student organizations','DEI, diversity, inclusion, equity, BIPOC')"><div class="tags"><span class="tag tb">🌍 DEI</span></div><h3>DEI Funding Cuts & Minority Student Organizations</h3><p>Budget reallocations reduced support for 8 BIPOC-led orgs; coalition demands reversal.</p><div class="imeta"><span class="isrc">📋 SGA Minutes</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:14px"></span><span style="height:19px"></span><span style="height:22px"></span></div></div></div>
+        <div class="icard" style="--cc:#B8920A" onclick="issueClick('AI Academic Integrity Policy fairness and ESL students','AI, academic integrity, ESL, policy, fairness')"><div class="tags"><span class="tag tg">💻 Tech & AI</span><span class="tag tn">🆕 New</span></div><h3>AI Academic Integrity Policy — ESL Fairness Dispute</h3><p>Policy disproportionately penalizes non-native English speakers per advocacy groups.</p><div class="imeta"><span class="isrc">📚 Academic Senate</span><div class="tbar"><span style="height:3px"></span><span style="height:6px"></span><span style="height:11px"></span><span style="height:18px"></span><span style="height:24px"></span></div></div></div>
+        <div class="icard" style="--cc:#FF6B6B" onclick="issueClick('Food Insecurity Among UMD Undergrads','food security, dining, poverty, access')"><div class="tags"><span class="tag tr">🍎 Food Security</span><span class="tag tg">🔥 Hot</span></div><h3>Food Insecurity Climbs to 28% Among Undergrads</h3><p>Campus pantry usage up 40%; dining plan costs cited as the primary structural barrier.</p><div class="imeta"><span class="isrc">🥗 Dining Services</span><div class="tbar"><span style="height:7px"></span><span style="height:11px"></span><span style="height:14px"></span><span style="height:17px"></span><span style="height:21px"></span></div></div></div>
+        <div class="icard" style="--cc:#0D8A7A" onclick="issueClick('UMD Research Farm land use and urban development pressure','agriculture, land-grant, urban sprawl, research farm')"><div class="tags"><span class="tag tt">🌾 Agriculture</span><span class="tag tb">📈 Emerging</span></div><h3>UMD Research Farm Under Urban Development Pressure</h3><p>College Park expansion threatens the 629-acre research farm; land-grant advocates mobilize.</p><div class="imeta"><span class="isrc">🌾 AGNR College</span><div class="tbar"><span style="height:4px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:15px"></span><span style="height:19px"></span></div></div></div>
+        <div class="icard" style="--cc:#E07B40" onclick="issueClick('Gig economy reliance among UMD undergraduate students','labor, gig economy, student work, tuition, financial stress')"><div class="tags"><span class="tag to">💼 Labor</span><span class="tag tg">📊 New Data</span></div><h3>37% of UMD Undergrads Now Rely on Gig Work to Pay Tuition</h3><p>New financial survey reveals gig dependency is highest among first-generation students.</p><div class="imeta"><span class="isrc">💳 Financial Aid Office</span><div class="tbar"><span style="height:6px"></span><span style="height:10px"></span><span style="height:15px"></span><span style="height:18px"></span><span style="height:20px"></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- PAST DATA PAGE -->
+    <div class="page" id="page-past">
+      <div class="sec-title">📅 Historical Campus Data</div>
+      <p class="sec-sub">From 1856 to present — every era of UMD history, searchable across 15+ categories</p>
+      <div class="sbar" style="margin-bottom:16px;">
+        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search historical issues…"></div>
+        <select class="fsel"><option>All Eras</option><option>2020s</option><option>2010s</option><option>2000s</option><option>1990s</option><option>1980s</option><option>1970s</option><option>1960s</option><option>Pre-1960</option><option>19th Century</option></select>
+        <select class="fsel">
+          <option>All Categories</option><option>Agriculture & Land Use</option><option>Mental Health</option><option>Housing</option><option>Safety & Crime</option><option>Civil Rights / DEI</option><option>Technology & AI</option><option>Public Health</option><option>Environment / Sustainability</option><option>Labor & Worker Rights</option><option>Education Policy</option><option>Food Systems</option><option>Transportation</option><option>War & Conflict Impact</option><option>Gender & Identity</option><option>Immigration & International Students</option><option>Athletics & Campus Culture</option>
+        </select>
+        <button class="tbtn primary" style="padding:7px 13px;font-size:12px;">📊 Trend Report</button>
+        <button class="tbtn outline" style="padding:7px 13px;font-size:12px;">📥 CSV</button>
+      </div>
+      <div class="tlwrap">
+
+        <div class="tlitem fadein"><div class="tldot"></div><div class="tlcard"><div class="tlera">2026 · Mental Health + Technology</div><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tg">💻 AI Anxiety</span></div><h4>Post-AI Job Uncertainty Anxiety Surge Among STEM Students</h4><p>41% of engineering students met clinical anxiety criteria; AI-driven career displacement fears cited as leading stressor — a new category not present in pre-2022 data.</p><div class="tlmet"><div><div class="mn">41%</div><div class="ml">Affected</div></div><div><div class="mn">280</div><div class="ml">Surveyed</div></div><div><div class="mn">3</div><div class="ml">Papers</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020 · Civil Rights + DEI</div><div class="tags"><span class="tag tb">🌍 Civil Rights</span></div><h4>BLM Protests & UMD Diversity Audit — Building Renamings</h4><p>Students demanded removal of names honoring segregationists from campus buildings; UMD commissioned a formal historical audit resulting in 4 building renamings by 2021.</p><div class="tlmet"><div><div class="mn">4</div><div class="ml">Renamed</div></div><div><div class="mn">1</div><div class="ml">New DEI VP</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020–2022 · Public Health</div><div class="tags"><span class="tag tr">🏥 Pandemic</span><span class="tag to">Crisis</span></div><h4>COVID-19 Campus Closure, Food Insecurity Doubling & Broadband Gap</h4><p>UMD closed March 2020; food insecurity doubled to 44%; international student visa crises and broadband inequity became urgent research topics. First remote learning period in UMD's 164-year history.</p><div class="tlmet"><div><div class="mn">40K+</div><div class="ml">Displaced</div></div><div><div class="mn">18 mo</div><div class="ml">Hybrid</div></div><div><div class="mn">-44%</div><div class="ml">Int'l Enrollment</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot"></div><div class="tlcard"><div class="tlera">2017–2018 · Safety + Civil Rights</div><div class="tags"><span class="tag to">🛡️ Safety</span><span class="tag tb">Hate Crime</span></div><h4>Murder of Richard Collins III & Hate Crime Trial</h4><p>Army Lt. Collins stabbed on campus in 2017 in a racially motivated attack; 2018 federal hate crime conviction catalyzed UMD's campus safety and anti-bias taskforce — 12 direct policy changes followed.</p><div class="tlmet"><div><div class="mn">12</div><div class="ml">Policy Changes</div></div><div><div class="mn">1</div><div class="ml">Federal Conviction</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1988 · Agriculture + Environment</div><div class="tags"><span class="tag tn">🌿 Environment</span><span class="tag tt">🌾 Agriculture</span></div><h4>Chesapeake Bay Agricultural Runoff — UMD ENST Landmark Study</h4><p>UMD's Environmental Science dept published foundational data on PG County farm runoff polluting the Chesapeake Bay — still the most-cited regional study in Chesapeake policy today.</p><div class="tlmet"><div><div class="mn">22</div><div class="ml">Farms Studied</div></div><div><div class="mn">3</div><div class="ml">Policy Bills</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1970 · War & Civil Unrest</div><div class="tags"><span class="tag tr">✊ Protest</span><span class="tag tg">War Impact</span></div><h4>UMD Student Strike of 1970 — Kent State Response</h4><p>5,000+ students and faculty struck following Kent State; classes cancelled 2 weeks. Led to creation of UMD's Peace Studies curriculum and permanent faculty senate role in academic policy.</p><div class="tlmet"><div><div class="mn">5,000+</div><div class="ml">Strikers</div></div><div><div class="mn">2 wks</div><div class="ml">Closure</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1954–1961 · Civil Rights</div><div class="tags"><span class="tag tb">🌍 Desegregation</span></div><h4>Desegregation of UMD — Parren Mitchell & NAACP Legal Campaign</h4><p>Parren Mitchell sued UMD in 1950 and was admitted as first Black graduate student in 1954 following federal order. Full undergraduate desegregation followed the 1964 Civil Rights Act. Documentation held in McKeldin Library Special Collections.</p><div class="tlmet"><div><div class="mn">1950</div><div class="ml">Lawsuit Filed</div></div><div><div class="mn">1961</div><div class="ml">Full Integration</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1917–1919 · Public Health + War</div><div class="tags"><span class="tag tr">🏥 Pandemic</span><span class="tag tg">WWI</span></div><h4>Spanish Flu at Maryland Agricultural College — First Campus Health Crisis</h4><p>The college (UMD's predecessor) converted 3 dormitories to infirmaries; enrollment dropped 60% in 1918. First recorded institution-wide emergency health response — a direct historical parallel to COVID-19 closures.</p><div class="tlmet"><div><div class="mn">-60%</div><div class="ml">Enrollment</div></div><div><div class="mn">3</div><div class="ml">Dorms Converted</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1884–1900 · Agriculture + Gender</div><div class="tags"><span class="tag tt">🌾 Agriculture</span><span class="tag tp">Gender</span></div><h4>First Women Enrolled at Maryland Agricultural College — Contested Access</h4><p>Women were admitted to domestic science courses in 1884 but barred from full degree programs until 1916. The agriculture department's gender exclusions mirrored national land-grant patterns and remain an understudied chapter of UMD history.</p><div class="tlmet"><div><div class="mn">1884</div><div class="ml">Partial Admission</div></div><div><div class="mn">1916</div><div class="ml">Full Degree Access</div></div></div></div></div>
+
+        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1856 · Founding · Agriculture & Education Policy</div><div class="tags"><span class="tag tt">🌾 Land-Grant</span><span class="tag tg">Founding Era</span></div><h4>Maryland Agricultural College Founded — Morrill Act Origins</h4><p>Founded 1856 as one of America's first land-grant colleges on 430 acres near Riverdale; an 1876 state financial takeover after a bankruptcy crisis reshaped the public-agriculture-education relationship — a tension still visible in 2026 AGNR funding debates and research farm land use disputes.</p><div class="tlmet"><div><div class="mn">1856</div><div class="ml">Founded</div></div><div><div class="mn">430 ac</div><div class="ml">Original Farm</div></div><div><div class="mn">1862</div><div class="ml">Morrill Act</div></div></div></div></div>
+
+      </div>
+    </div>
+
+    <!-- SOURCES PAGE -->
+    <div class="page" id="page-sources">
+      <div class="sec-title">🔗 External Sources & References</div>
+      <p class="sec-sub">Peer-reviewed journals, local UMD/College Park news, national media, and government reports</p>
+      <div class="sbar" style="margin-bottom:20px;">
+        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search by topic, author, publication…"></div>
+        <div class="chips">
+          <div class="chip on">All</div>
+          <div class="chip">📄 Peer-Reviewed</div>
+          <div class="chip">📰 Local News</div>
+          <div class="chip">🗞️ National</div>
+          <div class="chip">📊 Reports</div>
+          <div class="chip">🏛️ Organizations</div>
+          <div class="chip">🌾 Agriculture</div>
+        </div>
+      </div>
+      <div class="srcgrid">
+        <div class="srccard"><div class="stbadge stl">📰 The Diamondback</div><h4>UMD Housing Crunch: 1,200 Students in Overflow Dorms</h4><p>UMD's independent student newspaper investigative piece on the 2025–26 housing shortage, with Resident Life data and first-person accounts.</p><div class="srcmeta"><span class="srcrel">diamondback.com · Feb 2026</span><span class="stars">★★★★★</span></div><a href="#">→ Read Article</a></div>
+        <div class="srccard"><div class="stbadge stl">📰 Capital Gazette</div><h4>College Park Rent Spike Squeezes Students and Long-Term Residents</h4><p>PG County coverage examining how UMD growth reshapes affordability in College Park — essential geographic context for housing research.</p><div class="srcmeta"><span class="srcrel">capitalgazette.com · Jan 2026</span><span class="stars">★★★★☆</span></div><a href="#">→ Read Article</a></div>
+        <div class="srccard"><div class="stbadge stl">📰 Maryland Today</div><h4>UMD's 2030 Climate Pledge: What the Data Actually Shows</h4><p>UMD's official news outlet examines carbon neutrality progress using Facilities Management data; gaps between pledges and measurements documented.</p><div class="srcmeta"><span class="srcrel">today.umd.edu · Fall 2025</span><span class="stars">★★★★☆</span></div><a href="#">→ Read Article</a></div>
+        <div class="srccard"><div class="stbadge stl">📰 WTOP News</div><h4>UMD Campus Safety Scrutinized After Route 1 Incidents</h4><p>DC-area coverage of UMPD response times and student safety; includes FOIA-obtained incident data from 2024–25 academic year.</p><div class="srcmeta"><span class="srcrel">wtop.com · Oct 2025</span><span class="stars">★★★★☆</span></div><a href="#">→ Read Article</a></div>
+        <div class="srccard"><div class="stbadge stj">Peer-Reviewed</div><h4>Student Mental Health in Higher Education: National Analysis</h4><p>2024 study of anxiety and depression across 120 US universities including Big Ten comparisons directly applicable to UMD.</p><div class="srcmeta"><span class="srcrel">J. of College Student Health · 2024</span><span class="stars">★★★★★</span></div><a href="#">→ UMD Library Access</a></div>
+        <div class="srccard"><div class="stbadge stj">Peer-Reviewed</div><h4>AI Detection Tools & Disparate Burden on Non-Native English Writers</h4><p>Empirical study: false-positive rates for AI detection tools are 3× higher for ESL students — directly relevant to UMD's 2025 AI policy debate.</p><div class="srcmeta"><span class="srcrel">Computers & Composition · 2024</span><span class="stars">★★★★★</span></div><a href="#">→ UMD Library Access</a></div>
+        <div class="srccard"><div class="stbadge stj">Peer-Reviewed</div><h4>Food Insecurity Among College Students: Prevalence & Structural Barriers</h4><p>Meta-analysis of 38 studies including Maryland institutions; benchmarks for comparing UMD-specific dining access data.</p><div class="srcmeta"><span class="srcrel">Am. Journal of Public Health · 2023</span><span class="stars">★★★★★</span></div><a href="#">→ UMD Library Access</a></div>
+        <div class="srccard"><div class="stbadge stj">Peer-Reviewed</div><h4>Urban Expansion & Agricultural Land Loss in the DC-Baltimore Corridor</h4><p>Geospatial analysis mapping encroachment on research farm areas around College Park since 1980 using MD land-use data.</p><div class="srcmeta"><span class="srcrel">Landscape & Urban Planning · 2022</span><span class="stars">★★★★★</span></div><a href="#">→ UMD Library Access</a></div>
+        <div class="srccard"><div class="stbadge stj">Peer-Reviewed</div><h4>Chesapeake Bay Agricultural Runoff: 30-Year Longitudinal Review</h4><p>UMD ENST-authored review of 1988–2018 fertilizer and pesticide runoff data from PG County farms — foundational for agriculture-environment research.</p><div class="srcmeta"><span class="srcrel">Env. Science & Tech · 2020</span><span class="stars">★★★★★</span></div><a href="#">→ UMD Library Access</a></div>
+        <div class="srccard"><div class="stbadge str">Gov Report</div><h4>Prince George's County Annual Equity Report 2025</h4><p>County-level data on housing, food access, transit, and health — essential geographic context for any UMD-adjacent community research.</p><div class="srcmeta"><span class="srcrel">princegeorgescountymd.gov · 2025</span><span class="stars">★★★★☆</span></div><a href="#">→ Download Report</a></div>
+        <div class="srccard"><div class="stbadge stn">National Media</div><h4>The Atlantic: "The Campus Mental Health Crisis Is Getting Worse"</h4><p>Long-form piece documenting systemic underfunding of counseling services at research universities; Big Ten case studies included.</p><div class="srcmeta"><span class="srcrel">theatlantic.com · 2025</span><span class="stars">★★★★☆</span></div><a href="#">→ Read Article</a></div>
+        <div class="srccard"><div class="stbadge sto">Organization</div><h4>Brookings: Campus Safety & Urban University Neighborhoods</h4><p>Research brief on campus policing models and crime rates in mixed-use university zones — useful for UMPD comparative analysis.</p><div class="srcmeta"><span class="srcrel">brookings.edu · 2024</span><span class="stars">★★★★☆</span></div><a href="#">→ Read Brief</a></div>
+      </div>
+    </div>
+
+    <!-- RESEARCH PAGE — content injected by JS based on role -->
+    <div class="page" id="page-research"></div>
+
+    <!-- CONTACTS PAGE -->
+    <div class="page" id="page-contacts">
+      <div class="sec-title">🏛️ Clubs, Offices & Institutions</div>
+      <p class="sec-sub">Key contacts and organizations to support student research across all topic areas</p>
+      <div class="sbar" style="margin-bottom:20px;">
+        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search by name, topic…"></div>
+        <div class="chips"><div class="chip on">All</div><div class="chip">🏛️ University</div><div class="chip">🎓 Student Orgs</div><div class="chip">🌍 External</div><div class="chip">🌾 Agriculture</div><div class="chip">💻 Tech</div></div>
+      </div>
+      <div class="ctgrid">
+        <div class="ctcard"><div class="cth"><div class="ctlogo" style="background:#FFE8EB;">🧠</div><div class="ctinfo"><h4>UMD Counseling Center</h4><p>University Office · Mental Health</p></div></div><div class="ctdet"><div class="ctrow"><span class="ci">📍</span>Shoemaker Building</div><div class="ctrow"><span class="ci">📞</span>(301) 314-7651</div><div class="ctrow"><span class="ci">✉️</span>counseling@umd.edu</div></div><div class="ctact"><button class="cbtn cbe">✉️ Email</button><button class="cbtn cbv">🌐 Website</button></div></div>
+        <div class="ctcard"><div class="cth"><div class="ctlogo" style="background:#D4F5E9;">🌿</div><div class="ctinfo"><h4>Office of Sustainability</h4><p>University Office · Environment</p></div></div><div class="ctdet"><div class="ctrow"><span class="ci">📍</span>Stamp Union Rm 2116</div><div class="ctrow"><span class="ci">📞</span>(301) 405-8268</div><div class="ctrow"><span class="ci">✉️</span>sustainability@umd.edu</div></div><div class="ctact"><button class="cbtn cbe">✉️ Email</button><button class="cbtn cbv">🌐 Website</button></div></div>
+        <div class="ctcard"><div class="cth"><div class="ctlogo" style="background:#EEF3FF;">🎓</div><div class="ctinfo"><h4>Student Government Association</h4><p>Student Org · Policy & Advocacy</p></div></div><div class="ctdet"><div class="ctrow"><span class="ci">📍</span>Stamp Union Rm 1220</div><div class="ctrow"><span class="ci">📞</span>(301) 314-8420</div><div class="ctrow"><span class="ci">✉️</span>sga@umd.edu</div></div><div class="ctact"><button class="cbtn cbe">✉️ Email</button><button class="cbtn cbv">🌐 Website</button></div></div>
+        <div class="ctcard"><div class="cth"><div class="ctlogo" style="background:#FFF8CC;">🌾</div><div class="ctinfo"><h4>College of Agriculture & Natural Resources</h4><p>University College · AGNR</p></div></div><div class="ctdet"><div class="ctrow"><span class="ci">📍</span>Symons Hall</div><div class="ctrow"><span class="ci">📞</span>(301) 405-1369</div><div class="ctrow"><span class="ci">✉️</span>agnr@umd.edu</div></div><div class="ctact"><button class="cbtn cbe">✉️ Email</button><button class="cbtn cbv">🌐 Website</button></div></div>
+        <div class="ctcard"><div class="cth"><div class="ctlogo" style="background:#F0EDFF;">🌍</div><div class="ctinfo"><h4>NAACP UMD Chapter</h4><p>Student Org · Diversity & Equity</p></div></div><div class="ctdet"><div class="ctrow"><span class="ci">📍</span>Nyumburu Cultural Center</div><div class="ctrow"><span class="ci">📞</span>(301) 314-7758</div><div class="ctrow"><span class="ci">✉️</span>naacpumd@umd.edu</div></div><div class="ctact"><button class="cbtn cbe">✉️ Email</button><button class="cbtn cbv">🌐 Website</button></div></div>
+        <div class="ctcard"><div class="cth"><div class="ctlogo" style="background:#E0F8F5;">🏥</div><div class="ctinfo"><h4>Prince George's Health Dept.</h4><p>External Institution · Public Health</p></div></div><div class="ctdet"><div class="ctrow"><span class="ci">📍</span>9314 Piscataway Rd</div><div class="ctrow"><span class="ci">📞</span>(301) 883-7900</div><div class="ctrow"><span class="ci">✉️</span>health@co.pg.md.us</div></div><div class="ctact"><button class="cbtn cbe">✉️ Email</button><button class="cbtn cbv">🌐 Website</button></div></div>
+      </div>
+    </div>
+
+    <!-- EMAILS PAGE -->
+    <div class="page" id="page-emails">
+      <div class="sec-title">📬 Campus Emails & Resources</div>
+      <p class="sec-sub">Official UMD communications, club newsletters, and research opportunities</p>
+      <div class="sbar" style="margin-bottom:20px;"><div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search emails…"></div><div class="chips"><div class="chip on">All</div><div class="chip">📋 Official</div><div class="chip">🎓 SGA</div><div class="chip">🏛️ Clubs</div><div class="chip">📰 Newsletter</div></div></div>
+      <div class="elist">
+        <div class="eitem"><div class="udot"></div><div class="eavatar" style="background:#FFE8EB;color:var(--red);">PS</div><div><div class="efrom">President Pines' Office</div><div class="esub">Spring 2026 Campus Safety Update — New Route 1 Lighting Initiative</div></div><div class="emeta"><div class="edate">Mar 28</div><span class="tag tr" style="margin-top:4px;display:inline-block;">Official</span></div></div>
+        <div class="eitem"><div class="udot"></div><div class="eavatar" style="background:#EEF3FF;color:#4A6CF7;">SG</div><div><div class="efrom">SGA — Student Government</div><div class="esub">Vote Open: DEI Funding Restoration Resolution — Your Input Needed</div></div><div class="emeta"><div class="edate">Mar 27</div><span class="tag tb" style="margin-top:4px;display:inline-block;">SGA</span></div></div>
+        <div class="eitem"><div class="eavatar" style="background:#D4F5E9;color:#1A8C5F;">OS</div><div><div class="efrom">Office of Sustainability</div><div class="esub">Research Opportunity: Carbon Audit Volunteers Needed — Spring 2026</div></div><div class="emeta"><div class="edate">Mar 25</div><span class="tag tn" style="margin-top:4px;display:inline-block;">Resource</span></div></div>
+        <div class="eitem"><div class="udot"></div><div class="eavatar" style="background:#F0EDFF;color:#7B61FF;">CC</div><div><div class="efrom">Counseling Center</div><div class="esub">New Walk-In Hours — Expanded Spring Mental Health Access</div></div><div class="emeta"><div class="edate">Mar 24</div><span class="tag tp" style="margin-top:4px;display:inline-block;">Health</span></div></div>
+        <div class="eitem"><div class="eavatar" style="background:#FFF8CC;color:#B8920A;">AG</div><div><div class="efrom">AGNR College</div><div class="esub">UMD Research Farm Spring Open Day — Student Researchers Welcome</div></div><div class="emeta"><div class="edate">Mar 22</div><span class="tag tt" style="margin-top:4px;display:inline-block;">Agriculture</span></div></div>
+        <div class="eitem"><div class="udot"></div><div class="eavatar" style="background:#FFE8EB;color:var(--red);">RH</div><div><div class="efrom">Resident Life Office</div><div class="esub">Housing Application Deadline — Fall 2026 Priority Assignment</div></div><div class="emeta"><div class="edate">Mar 20</div><span class="tag tr" style="margin-top:4px;display:inline-block;">Official</span></div></div>
+        <div class="eitem"><div class="eavatar" style="background:#EEF3FF;color:#4A6CF7;">AS</div><div><div class="efrom">Academic Senate</div><div class="esub">AI Policy Forum — Open Listening Session April 4th, 3PM Stamp 1202</div></div><div class="emeta"><div class="edate">Mar 19</div><span class="tag tb" style="margin-top:4px;display:inline-block;">Academic</span></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+// ── STATE ──
+let cRole='faculty', cUser='', genQs=[];
+
+// ── LOGIN ──
+function selRole(r){cRole=r;document.getElementById('rb-fac').classList.toggle('sel',r==='faculty');document.getElementById('rb-stu').classList.toggle('sel',r==='student');}
+function qLogin(r){cRole=r;cUser=r==='faculty'?'dramirez':'jsmith123';document.getElementById('lid').value=cUser;launch();}
+function doLogin(){const id=document.getElementById('lid').value.trim();if(!id){alert('Please enter your UMD Directory ID.');return;}cUser=id;launch();}
+function doLogout(){document.getElementById('login-screen').style.display='flex';document.getElementById('app').style.display='none';cUser='';}
+
+function launch(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  setupRole();
+}
+
+function setupRole(){
+  const fac=cRole==='faculty';
+  const ini=cUser.substring(0,2).toUpperCase();
+  document.getElementById('ft-av').textContent=ini;
+  document.getElementById('ft-name').textContent=cUser;
+  document.getElementById('ft-role').textContent=fac?'Faculty · ENG101X':'Student · ENG101X';
+  document.getElementById('sb-role').textContent=fac?'Faculty Dashboard':'Student Dashboard';
+  const rp=document.getElementById('rpill');
+  rp.className='role-pill '+(fac?'rp-fac':'rp-stu');
+  rp.textContent=fac?'🎓 Faculty':'📚 Student';
+  document.getElementById('tb-act').style.display=fac?'flex':'none';
+  buildNav(fac);
+  buildResearchPage(fac);
+}
+
+function buildNav(fac){
+  const n=document.getElementById('sb-nav');
+  n.innerHTML=`
+    <div class="nav-sec">Explore</div>
+    <button class="nav-item active" onclick="nav('issues',this)"><span class="ico">🔥</span>Campus Issues<span class="nbadge">24</span></button>
+    <button class="nav-item" onclick="nav('past',this)"><span class="ico">📅</span>Past Data</button>
+    <button class="nav-item" onclick="nav('sources',this)"><span class="ico">🔗</span>External Sources</button>
+    <div class="nav-sec" style="margin-top:10px;">Research</div>
+    ${fac
+      ?`<button class="nav-item" onclick="nav('research',this)"><span class="ico">✨</span>Create Research Q<span class="fstar">★</span></button>`
+      :`<button class="nav-item" onclick="nav('research',this)"><span class="ico">📋</span>My Assignments</button>`}
+    <button class="nav-item" onclick="nav('contacts',this)"><span class="ico">🏛️</span>Clubs & Resources</button>
+    <button class="nav-item" onclick="nav('emails',this)"><span class="ico">📬</span>Campus Emails<span class="nbadge">7</span></button>`;
+}
+
+// ── NAV ──
+const PT={
+  issues:['Campus Issues','Live tracking of UMD campus issues — updated daily'],
+  past:['Past Data & Archives','Historical UMD issues from 1856 to present — 15+ categories'],
+  sources:['External Sources','Peer-reviewed articles, local news & national reports'],
+  research:['Research Question Creator','AI-powered unique questions for every semester'],
+  contacts:['Clubs & Institutions','Key contacts, organizations, and research resources'],
+  emails:['Campus Emails','Official emails, newsletters, and announcements'],
+};
+function nav(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+  document.getElementById('pt').textContent=PT[id][0];
+  document.getElementById('ps').textContent=PT[id][1];
+}
+
+// ── FILTERS ──
+function tc(el){el.classList.toggle('on');}
+function filterIssues(q){
+  document.querySelectorAll('#igrid .icard').forEach(c=>{c.style.display=(!q||c.textContent.toLowerCase().includes(q.toLowerCase()))?'':'none';});
+}
+function togglePill(el){el.classList.toggle('on');}
+function updateSlider(id,val,opts){document.getElementById(id).textContent=opts[parseInt(val)-1];}
+
+// ── RESEARCH PAGE ──
+function buildResearchPage(fac){
+  const el=document.getElementById('page-research');
+  el.innerHTML=fac?facultyHTML():studentHTML();
+}
+
+function facultyHTML(){return `
+  <div class="sec-title">✨ Research Question Creator</div>
+  <p class="sec-sub">AI-powered — every question is unique, contextual to UMD, and never repeated across semesters</p>
+  <div class="tcol">
+    <div>
+      <div class="panel">
+        <h3>🎛️ Research Parameters</h3>
+        <div class="fg"><label class="fl">Core Topic / Issue Area</label><input class="fi" id="rq-topic" type="text" placeholder="e.g. AI policy, food security, research farm…"></div>
+        <div class="fg"><label class="fl">Semester & Year</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><select class="fi" id="rq-sem"><option>Fall</option><option selected>Spring</option><option>Summer</option></select><select class="fi" id="rq-yr"><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select></div></div>
+        <div class="sgrp"><div class="slr"><span class="slbl">📅 Research Timeline</span><span class="sval" id="sv-tl">1 Semester</span></div><input type="range" min="1" max="5" value="2" oninput="updateSlider('sv-tl',this.value,['2 Weeks','1 Semester','1 Year','2–3 Years','Longitudinal'])"><div class="sticks"><span>2Wks</span><span>1Sem</span><span>1Yr</span><span>2–3Yr</span><span>Long.</span></div></div>
+        <div class="sgrp"><div class="slr"><span class="slbl">⚡ Impact Scope</span><span class="sval" id="sv-sc">Campus-Wide</span></div><input type="range" min="1" max="4" value="2" oninput="updateSlider('sv-sc',this.value,['Individual Student','Campus-Wide','City / Region','National'])"><div class="sticks"><span>Indiv.</span><span>Campus</span><span>Region</span><span>National</span></div></div>
+        <div class="sgrp"><div class="slr"><span class="slbl">📈 Trend Level</span><span class="sval" id="sv-tr">Moderately Trendy</span></div><input type="range" min="1" max="4" value="2" oninput="updateSlider('sv-tr',this.value,['Under-Researched','Moderately Trendy','Very Trendy','Viral / Oversaturated'])"><div class="sticks"><span>Hidden</span><span>Moderate</span><span>Trendy</span><span>Viral</span></div></div>
+        <div class="fg"><label class="fl">👥 Student Audience Perspective</label><div class="pills" id="aud-pills"><div class="pill on" onclick="togglePill(this)">First-Gen</div><div class="pill" onclick="togglePill(this)">International</div><div class="pill" onclick="togglePill(this)">STEM Majors</div><div class="pill" onclick="togglePill(this)">Humanities</div><div class="pill" onclick="togglePill(this)">Commuters</div><div class="pill" onclick="togglePill(this)">Graduate</div></div></div>
+        <div class="fg"><label class="fl">🔬 Research Methodology</label><div class="pills"><div class="pill on" onclick="togglePill(this)">Qualitative</div><div class="pill" onclick="togglePill(this)">Quantitative</div><div class="pill" onclick="togglePill(this)">Mixed Methods</div><div class="pill" onclick="togglePill(this)">Policy Analysis</div><div class="pill" onclick="togglePill(this)">Ethnographic</div><div class="pill" onclick="togglePill(this)">Historical</div></div></div>
+        <div class="fg"><label class="fl">📝 Additional Context (optional)</label><textarea class="fta" id="rq-ctx" placeholder="Specific angle, UMD dept, community focus, constraint…"></textarea></div>
+        <button class="genbtn" id="gbtn" onclick="genRQ()"><span id="glabel">✨ Generate Unique Research Question</span></button>
+      </div>
+    </div>
+    <div>
+      <div class="panel" style="margin-bottom:14px;">
+        <h3>🔮 Trending Topic Suggestions</h3>
+        <p style="font-size:11.5px;color:var(--muted);">Click any card to pre-fill the topic — all are campus-current and under-researched</p>
+        <div class="sugscroll">
+          <div class="sugcard" onclick="useSug('How students navigate AI tools alongside academic integrity policies')"><div class="sh">🔥 VIRAL · Tech+AI</div><p>AI tools vs. academic honesty — the trust gap</p><div class="st">#AIPolicy #ESL</div></div>
+          <div class="sugcard" onclick="useSug('Urban farm erasure and loss of agricultural identity in land-grant universities')"><div class="sh">🌱 EMERGING · Agriculture</div><p>UMD research farm vs. development — land-grant identity crisis</p><div class="st">#AGNR #UrbanSprawl</div></div>
+          <div class="sugcard" onclick="useSug('Commuter student isolation and belonging at a residential university')"><div class="sh">📈 RISING · Mental Health</div><p>The invisible mental health gap — commuter students</p><div class="st">#Belonging #Commuters</div></div>
+          <div class="sugcard" onclick="useSug('Gig economy reliance among UMD undergrads and academic performance')"><div class="sh">💼 TRENDING · Labor</div><p>37% of students work gig jobs — the hidden tuition tax</p><div class="st">#GigEconomy #Labor</div></div>
+          <div class="sugcard" onclick="useSug('DEI budget cuts and STEM faculty diversity pipeline at flagship state university')"><div class="sh">🌍 HOT · DEI+STEM</div><p>Post-DEI cuts: who is leaving UMD's faculty pipeline</p><div class="st">#DEI #FacultyDiversity</div></div>
+          <div class="sugcard" onclick="useSug('Environmental data literacy among students and climate activism effectiveness')"><div class="sh">🌿 MODERATE · Sustainability</div><p>Can students actually read a carbon report?</p><div class="st">#ClimateAction #DataLit</div></div>
+          <div class="sugcard" onclick="useSug('International student food access and campus resource awareness at UMD')"><div class="sh">🍎 UNDER-RESEARCHED · Food</div><p>International students + food insecurity — the invisible subgroup</p><div class="st">#FoodSecurity #IntlStudents</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>💡 Generated Question</h3>
+        <p style="font-size:12px;color:var(--muted);" id="rq-ph">Configure your parameters and click Generate — Claude AI will produce a question unlike any used before.</p>
+        <div class="rbox" id="rbox">
+          <h4 id="rq-out"></h4>
+          <p id="rq-rat" style="margin-top:7px;font-size:12.5px;color:var(--muted);"></p>
+          <div id="rq-hints"></div>
+          <div class="ract">
+            <button class="rbtn s" onclick="nav('contacts',document.querySelectorAll('.nav-item')[4])">🏛️ Find Resources</button>
+            <button class="rbtn o" onclick="nav('sources',document.querySelectorAll('.nav-item')[2])">🔗 Sources</button>
+            <button class="rbtn o" onclick="copyQ()">📋 Copy</button>
+            <button class="rbtn o" onclick="pubToStudents()">📤 Publish to Students</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;}
+
+function studentHTML(){
+  const q=window._publishedQ||'How does the design and enforcement of UMD\'s 2025 AI Academic Integrity Policy differently impact students from non-English-speaking backgrounds compared to native English speakers, and what does this reveal about institutional assumptions embedded in academic writing standards?';
+  return `
+  <div class="sec-title">📋 My Research Assignments</div>
+  <p class="sec-sub">Your professor has assigned the research question below — complete all three essay types in sequence</p>
+  <div class="stuview">
+    <div style="display:flex;align-items:center;gap:9px;margin-bottom:4px;">
+      <span style="font-size:11px;font-weight:800;background:#FFE8EB;color:var(--red);padding:3px 9px;border-radius:20px;">ENG101X · Spring 2026</span>
+      <span style="font-size:11px;color:var(--muted);">Assigned by your professor</span>
+    </div>
+    <h3>Your Research Question</h3>
+    <div class="rqdisplay">"${q}"</div>
+    <p style="font-size:12.5px;color:var(--muted);margin-bottom:15px;">Based on this research question, you must complete <strong>three essays in sequence</strong>. Each builds on the previous one.</p>
+    <div class="egrid">
+      <div class="ecard ecpos">
+        <div class="ecn">Essay 1 of 3</div>
+        <h4>Position Inquiry Essay</h4>
+        <p>Take and defend a clear, evidence-based position on the research question. Conduct primary research (interviews, surveys) and engage at least 3 peer-reviewed sources.</p>
+        <ul><li>1,500–2,000 words</li><li>Primary + secondary sources</li><li>Clear thesis with counterargument</li><li>Due: Week 5</li></ul>
+        <span class="ectag">📝 Position Inquiry</span>
+      </div>
+      <div class="ecard ecrhe">
+        <div class="ecn">Essay 2 of 3</div>
+        <h4>Rhetorical Analysis Essay</h4>
+        <p>Analyze a key document related to your topic (a policy statement, editorial, speech, or report). Evaluate how the author constructs argument using logos, ethos, and pathos.</p>
+        <ul><li>1,200–1,800 words</li><li>Rhetorical framework required</li><li>Connect back to Essay 1 position</li><li>Due: Week 9</li></ul>
+        <span class="ectag">🔍 Rhetorical Analysis</span>
+      </div>
+      <div class="ecard ecrem">
+        <div class="ecn">Essay 3 of 3</div>
+        <h4>Remediation Project</h4>
+        <p>Transform your argument into a new medium — podcast script, infographic, op-ed, community letter, or short video essay. Adapt your rhetorical choices for a new audience.</p>
+        <ul><li>Medium of your choice</li><li>500-word written rationale</li><li>Cite original research</li><li>Due: Week 13</li></ul>
+        <span class="ectag">🎨 Remediation</span>
+      </div>
+    </div>
+    <div style="margin-top:18px;background:var(--blue-soft);border-radius:11px;padding:14px;border:1.5px solid #C8D8FF;">
+      <div style="font-size:12px;font-weight:700;margin-bottom:8px;color:#2B4ECC;">📌 Research Resources for Your Topic</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;">
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="nav('sources',document.querySelectorAll('.nav-item')[2])">🔗 External Sources</button>
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="nav('contacts',document.querySelectorAll('.nav-item')[4])">🏛️ Research Contacts</button>
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="nav('issues',document.querySelectorAll('.nav-item')[0])">🔥 Current Issues</button>
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="nav('past',document.querySelectorAll('.nav-item')[1])">📅 Historical Data</button>
+      </div>
+    </div>
+  </div>`;}
+
+// ── SUGGESTIONS ──
+function useSug(t){const el=document.getElementById('rq-topic');if(el){el.value=t;el.focus();}}
+
+// ── ISSUE CLICK ──
+function issueClick(title,cat){
+  if(cRole!=='faculty'){alert('Research question creation is for faculty and TAs only.\n\nAs a student, check "My Assignments" for questions assigned by your professor.');return;}
+  const el=document.getElementById('rq-topic');if(el)el.value=title;
+  nav('research',document.querySelector('.nav-item[onclick*="research"]'));
+}
+
+// ── AI QUESTION GENERATOR ──
+async function genRQ(){
+  const btn=document.getElementById('gbtn');
+  const lbl=document.getElementById('glabel');
+  const topic=(document.getElementById('rq-topic')?.value||'campus issues at UMD').trim();
+  const ctx=document.getElementById('rq-ctx')?.value||'';
+  const sem=document.getElementById('rq-sem')?.value||'Spring';
+  const yr=document.getElementById('rq-yr')?.value||'2026';
+  const tl=document.getElementById('sv-tl')?.textContent||'1 Semester';
+  const sc=document.getElementById('sv-sc')?.textContent||'Campus-Wide';
+  const tr=document.getElementById('sv-tr')?.textContent||'Moderately Trendy';
+  const aud=[...document.querySelectorAll('#aud-pills .pill.on')].map(p=>p.textContent).join(', ');
+
+  lbl.innerHTML='<span class="spin"></span> Generating unique question…';
+  btn.disabled=true;
+
+  const sys=`You are an expert academic writing instructor at the University of Maryland designing original ENG101X research questions for the Position Inquiry → Rhetorical Analysis → Remediation essay sequence.
+
+RULES:
+1. Every question MUST be completely unique — never repeat, paraphrase, or echo any previously generated question
+2. Every question must be grounded in UMD, College Park MD, or University of Maryland context
+3. Questions must be genuinely researchable by undergraduates in the given semester
+4. Each question should feel fresh in framing, methodology angle, population focus, and rhetorical complexity
+5. Questions should naturally lend themselves to all three essay types: a defensible position, an analyzable document/text, and a remediatable argument
+
+Previously generated questions (do NOT repeat or echo):
+${genQs.length?genQs.join('\n'):'None yet — this is the first generation.'}
+
+Respond ONLY with valid JSON. No markdown fences. No extra text:
+{
+  "question": "Complete researchable question ending in ? — specific to UMD context",
+  "rationale": "2–3 sentences on originality and fit for ENG101X sequence (under 55 words)",
+  "essay1_hint": "One concrete sentence on the position inquiry approach",
+  "essay2_hint": "One concrete sentence naming a specific document/text type to rhetorically analyze",
+  "essay3_hint": "One concrete sentence suggesting the most effective remediation medium and audience"
+}`;
+
+  const usr=`Generate a unique ENG101X research question for ${sem} ${yr} at UMD.
+Topic: ${topic}
+Timeline: ${tl} | Scope: ${sc} | Trend: ${tr}
+Student audience: ${aud||'general undergraduate'}
+Context: ${ctx||'none'}`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:usr}]})});
+    const data=await res.json();
+    const raw=data.content?.[0]?.text||'{}';
+    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    const q=parsed.question||'Generation failed — please try again.';
+    genQs.push(q);
+
+    document.getElementById('rq-ph').style.display='none';
+    const box=document.getElementById('rbox');
+    box.classList.remove('show');void box.offsetWidth;
+    document.getElementById('rq-out').textContent='"'+q+'"';
+    document.getElementById('rq-rat').textContent=parsed.rationale||'';
+
+    const hints=document.getElementById('rq-hints');
+    if(parsed.essay1_hint){
+      hints.innerHTML=`<div class="ehints">
+        <div class="ehint" style="background:#FFF5F7"><div class="en" style="color:var(--red)">Essay 1 · Position</div><p>${parsed.essay1_hint}</p></div>
+        <div class="ehint" style="background:#EEF3FF"><div class="en" style="color:#4A6CF7">Essay 2 · Rhetorical</div><p>${parsed.essay2_hint}</p></div>
+        <div class="ehint" style="background:#D4F5E9"><div class="en" style="color:#1A8C5F">Essay 3 · Remediation</div><p>${parsed.essay3_hint}</p></div>
+      </div>`;
+    }
+    box.classList.add('show');
+  }catch(e){
+    alert('Generation error — check connection and try again.\n'+e.message);
+  }
+  lbl.textContent='✨ Generate Another Unique Question';
+  btn.disabled=false;
+}
+
+function copyQ(){
+  const q=document.getElementById('rq-out')?.textContent;
+  if(q)navigator.clipboard.writeText(q).then(()=>alert('Copied!'));
+}
+
+function pubToStudents(){
+  const q=document.getElementById('rq-out')?.textContent;
+  if(!q||q==='')return;
+  window._publishedQ=q.replace(/^"|"$/g,'');
+  alert('✅ Research question published! Students will see it when they open My Assignments.');
+}
+</script>
+</body>
+</html>
