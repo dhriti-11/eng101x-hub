@@ -909,7 +909,8 @@ window.genRQ = async function() {
   lbl.innerHTML = '<span class="spin"></span> Finding unique question…';
   btn.disabled = true;
 
-  await loadUsedQuestions();
+  // Try to load used questions — if Firestore fails, just use local memory
+  try { await loadUsedQuestions(); } catch(e) { console.warn('Firestore read failed, using local memory:', e); }
 
   // Filter questions not yet used
   let available = QUESTION_BANK.filter(q => !usedQs.includes(q.q));
