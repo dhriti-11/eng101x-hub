@@ -1025,7 +1025,7 @@ window.togglePill = function(el) { el.classList.toggle('on'); };
 window.updateSlider = function(id, v, opts) { const el=document.getElementById(id); if(el) el.textContent=opts[parseInt(v)-1]; };
 
 window.issueClick = function(title, cat) {
-  if (cRole !== 'faculty') { alert('Research question creation is for faculty and TAs only.\n\nAs a student, check the navigation for your assignment.'); return; }
+  if (cRole !== 'faculty') { return; }
   const el = document.getElementById('rq-topic');
   if (el) el.value = title;
   navTo('research', document.querySelector('.nav-item[onclick*="research"]'));
