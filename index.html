@@ -354,12 +354,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
           <option value="impact">⚡ Highest Impact</option>
         </select>
       </div>
-      <div class="srow">
-        <div class="scard"><div class="si2">🔥</div><div class="snum">24</div><div class="slbl">Active Issues</div><div class="sdelta dup">↑ 3 this week</div></div>
-        <div class="scard"><div class="si2">👥</div><div class="snum">8.4K</div><div class="slbl">Students Affected</div><div class="sdelta dup">↑ 12%</div></div>
-        <div class="scard"><div class="si2">💬</div><div class="snum">1,290</div><div class="slbl">Campus Discussions</div><div class="sdelta dup">↑ 8%</div></div>
-        <div class="scard"><div class="si2">📰</div><div class="snum">47</div><div class="slbl">Media Mentions</div><div class="sdelta ddn">↓ 2</div></div>
-      </div>
+     
       <div class="igrid" id="igrid">
         <div class="icard" data-cat="housing" style="--cc:#E21833" onclick="issueClick('Residence Hall Overcrowding & Off-Campus Housing Crisis','housing')"><div class="tags"><span class="tag tr">🏠 Housing</span><span class="tag tg">🔥 Trending</span></div><h3>Residence Hall Overcrowding & Off-Campus Housing Crisis</h3><p>1,200+ students in overflow dorms; College Park rents up 22% YoY as enrollment surges past capacity.</p><div class="imeta"><span class="isrc">📰 The Diamondback</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:13px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
         <div class="icard" data-cat="mental health" style="--cc:#7B61FF" onclick="issueClick('Student Mental Health Services Waitlist Crisis','mental health')"><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tr">🚨 High Impact</span></div><h3>Mental Health Services Waitlist Exceeds 6 Weeks</h3><p>34% of surveyed students report anxiety or burnout; Counseling Center at full capacity.</p><div class="imeta"><span class="isrc">📊 SGA Survey</span><div class="tbar"><span style="height:7px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
@@ -1025,10 +1020,16 @@ window.togglePill = function(el) { el.classList.toggle('on'); };
 window.updateSlider = function(id, v, opts) { const el=document.getElementById(id); if(el) el.textContent=opts[parseInt(v)-1]; };
 
 window.issueClick = function(title, cat) {
-  if (cRole !== 'faculty') { return; }
-  const el = document.getElementById('rq-topic');
-  if (el) el.value = title;
-  navTo('research', document.querySelector('.nav-item[onclick*="research"]'));
+  // Set search term in sources and navigate there
+  const srcInput = document.getElementById('src-search-input');
+  if (srcInput) srcInput.value = cat || title;
+  filterSources(cat || title);
+  navTo('sources', document.querySelector('.nav-item[onclick*="sources"]'));
+  // Faculty also get topic pre-filled in research creator
+  if (cRole === 'faculty') {
+    const el = document.getElementById('rq-topic');
+    if (el) el.value = title;
+  }
 };
 
 // ── GENERATE QUESTION ──
