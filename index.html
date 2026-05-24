@@ -422,9 +422,18 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     <!-- SOURCES -->
     <div class="page" id="page-sources">
       <div class="sec-title">🔗 Sources & References</div>
-      <p class="sec-sub">Peer-reviewed journals, local UMD news, and databases — with automatic APA, MLA, Chicago & Harvard citation generation</p>
+      <p class="sec-sub">Curated sources with citations — search any topic to find unlimited additional sources on Google Scholar, UMD Library, and news sites</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:18px;">
+        <button class="tbtn primary" style="justify-content:center;" onclick="openScholar()">📄 Google Scholar</button>
+        <button class="tbtn outline" onclick="openUMDLib()">📚 UMD Library</button>
+        <button class="tbtn outline" onclick="openJSTOR()">🏛️ JSTOR</button>
+        <button class="tbtn outline" onclick="openPubMed()">🏥 PubMed</button>
+        <button class="tbtn outline" onclick="openDiamondback()">📰 Diamondback</button>
+        <button class="tbtn outline" onclick="openNewsSearch()">🗞️ News Search</button>
+    </div>
       <div class="sbar" style="margin-bottom:20px;">
-        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search by topic, author, publication…" oninput="filterSources(this.value)"></div>
+        <div class="swrap"><span class="si">🔍</span><input type="text" id="src-search-input" placeholder="Search sources — or press Enter for Google Scholar…" oninput="filterSources(this.value)" onkeydown="if(event.key==='Enter') openScholarTopic()"></div>
+          <button class="tbtn primary" onclick="openScholarTopic()" style="white-space:nowrap;">🔍 Find More Sources</button>
         <div class="chips" id="src-chips">
           <div class="chip on" onclick="filterSrcChip('all',this)">All</div>
           <div class="chip" onclick="filterSrcChip('stj',this)">📄 Peer-Reviewed</div>
@@ -1097,7 +1106,33 @@ window.copyQ = function() {
   const q = document.getElementById('rq-out')?.textContent;
   if (q) navigator.clipboard.writeText(q).then(() => alert('Copied!'));
 };
-
+window.openScholarTopic = function() {
+  const q = document.getElementById('src-search-input')?.value || 'University Maryland campus research';
+  window.open('https://scholar.google.com/scholar?q=' + encodeURIComponent(q + ' University Maryland'), '_blank');
+};
+window.openScholar = function() {
+  const q = document.getElementById('src-search-input')?.value || 'University Maryland';
+  window.open('https://scholar.google.com/scholar?q=' + encodeURIComponent(q + ' University Maryland College Park'), '_blank');
+};
+window.openUMDLib = function() {
+  const q = document.getElementById('src-search-input')?.value || '';
+  window.open('https://lib.umd.edu/research/guides', '_blank');
+};
+window.openJSTOR = function() {
+  const q = document.getElementById('src-search-input')?.value || '';
+  window.open('https://www.jstor.org/action/doBasicSearch?Query=' + encodeURIComponent(q || 'University Maryland'), '_blank');
+};
+window.openPubMed = function() {
+  const q = document.getElementById('src-search-input')?.value || 'college student health';
+  window.open('https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(q), '_blank');
+};
+window.openDiamondback = function() {
+  window.open('https://www.diamondback.umd.edu', '_blank');
+};
+window.openNewsSearch = function() {
+  const q = document.getElementById('src-search-input')?.value || 'University Maryland';
+  window.open('https://news.google.com/search?q=' + encodeURIComponent(q + ' University Maryland College Park'), '_blank');
+};
 window.pubToStudents = async function() {
   const q = document.getElementById('rq-out')?.textContent?.replace(/^"|"$/g,'');
   if (!q) return;
