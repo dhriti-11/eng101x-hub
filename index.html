@@ -19,28 +19,28 @@
 :root{--red:#E21833;--gold:#FFD200;--navy:#1A1F3C;--cream:#FFFDF7;--green:#2ECC8B;--orange:#FF8C42;--purple:#7B61FF;--coral:#FF6B6B;--blue-soft:#EEF3FF;--mint:#D4F5E9;--text:#1A1F3C;--muted:#7A7F99;--border:#E8EAF0;--shadow:0 4px 24px rgba(26,31,60,0.09);--shadow-lg:0 12px 48px rgba(26,31,60,0.14);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
- 
-/* LOGIN */
 #login-screen{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:9999;}
 .login-box{background:white;border-radius:24px;padding:44px 38px;width:420px;max-width:93vw;box-shadow:0 24px 80px rgba(0,0,0,0.3);animation:popIn .4s cubic-bezier(.34,1.56,.64,1);}
 @keyframes popIn{from{opacity:0;transform:scale(.88);}to{opacity:1;transform:scale(1);}}
-.login-logo{text-align:center;margin-bottom:24px;}
+.login-logo{text-align:center;margin-bottom:20px;}
 .login-logo .tag2{display:inline-block;background:var(--red);color:white;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:4px 10px;border-radius:5px;margin-bottom:10px;}
 .login-logo h1{font-family:'DM Serif Display',serif;font-size:26px;color:var(--navy);}
 .login-logo h1 span{color:var(--red);}
 .login-logo p{font-size:13px;color:var(--muted);margin-top:4px;}
-.google-btn{width:100%;padding:13px;margin-top:8px;background:white;color:var(--text);border:2px solid var(--border);border-radius:12px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;}
-.google-btn:hover{border-color:var(--red);background:#FFF5F7;transform:translateY(-1px);}
+.role-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.role-card{padding:14px 10px;border-radius:14px;border:2px solid var(--border);cursor:pointer;text-align:center;transition:all .2s;}
+.role-card:hover{border-color:var(--red);background:#FFF5F7;}
+.role-card .ri{font-size:26px;margin-bottom:5px;}
+.role-card .rl{font-size:13px;font-weight:800;color:var(--navy);}
+.role-card .rs{font-size:11px;color:var(--muted);margin-top:2px;}
+.google-btn{width:100%;padding:12px;background:white;color:var(--text);border:2px solid var(--border);border-radius:12px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;opacity:.5;pointer-events:none;}
+.google-btn.active{opacity:1;pointer-events:auto;}
+.google-btn:hover{border-color:var(--red);background:#FFF5F7;}
 .google-btn img{width:20px;height:20px;}
-.login-note{text-align:center;margin-top:12px;font-size:11.5px;color:var(--muted);}
-.login-note span{color:var(--red);font-weight:700;}
+.login-note{text-align:center;margin-top:10px;font-size:11px;color:var(--muted);}
 .login-loading{text-align:center;padding:20px;display:none;}
 .login-loading .ls{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 10px;}
- 
-/* APP */
 #app{display:none;}
- 
-/* SIDEBAR */
 .sidebar{position:fixed;top:0;left:0;bottom:0;width:242px;background:var(--navy);display:flex;flex-direction:column;z-index:100;box-shadow:4px 0 24px rgba(26,31,60,.18);}
 .sb-logo{padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.08);}
 .sb-logo .utag{display:inline-block;background:var(--red);color:white;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:3px 8px;border-radius:4px;margin-bottom:7px;}
@@ -63,8 +63,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
 .pinfo span{color:rgba(255,255,255,.38);font-size:11px;}
 .lout-btn{background:none;border:none;color:rgba(255,255,255,.3);font-size:11px;cursor:pointer;margin-top:7px;padding:3px 0;font-family:inherit;transition:color .15s;}
 .lout-btn:hover{color:rgba(255,255,255,.65);}
- 
-/* MAIN */
 .main{margin-left:242px;min-height:100vh;display:flex;flex-direction:column;}
 .topbar{background:white;border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
 .tb-left h2{font-family:'DM Serif Display',serif;font-size:18px;}
@@ -78,15 +76,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
 .role-pill{padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:700;}
 .rp-fac{background:#FFE8EB;color:var(--red);}
 .rp-stu{background:#EEF3FF;color:#4A6CF7;}
- 
-/* CONTENT */
 .content{padding:24px 28px;flex:1;}
 .page{display:none;}
 .page.active{display:block;}
 .sec-title{font-family:'DM Serif Display',serif;font-size:21px;margin-bottom:4px;}
 .sec-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px;}
- 
-/* SEARCH BAR */
 .sbar{background:white;border:1.5px solid var(--border);border-radius:13px;padding:14px 16px;display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:20px;box-shadow:var(--shadow);}
 .swrap{flex:1;min-width:190px;position:relative;}
 .swrap input{width:100%;padding:8px 12px 8px 34px;border:1.5px solid var(--border);border-radius:9px;font-size:12.5px;font-family:inherit;color:var(--text);background:var(--cream);transition:border .18s;}
@@ -98,8 +92,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
 .chip.on{background:var(--red);border-color:var(--red);color:white;}
 .fsel{padding:7px 10px;border-radius:9px;border:1.5px solid var(--border);background:white;font-size:12px;font-family:inherit;color:var(--text);cursor:pointer;}
 .fsel:focus{outline:none;border-color:var(--red);}
- 
-/* STATS */
 .srow{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px;}
 .scard{background:white;border-radius:13px;padding:15px 17px;border:1.5px solid var(--border);box-shadow:var(--shadow);transition:transform .18s;}
 .scard:hover{transform:translateY(-2px);}
@@ -108,8 +100,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
 .scard .slbl{font-size:11px;color:var(--muted);margin-top:2px;}
 .scard .sdelta{font-size:10.5px;font-weight:700;margin-top:3px;}
 .dup{color:var(--green);}.ddn{color:var(--coral);}
- 
-/* ISSUE CARDS */
 .igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
 .icard{background:white;border-radius:15px;border:1.5px solid var(--border);padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
 .icard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:#bbb;}
@@ -124,8 +114,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
 .tbar{display:flex;gap:2px;align-items:flex-end;}
 .tbar span{width:4px;border-radius:2px;background:var(--cc,var(--red));opacity:.45;display:block;}
 .tbar span:last-child{opacity:1;}
- 
-/* PANELS */
 .tcol{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .panel{background:white;border-radius:15px;border:1.5px solid var(--border);padding:20px;box-shadow:var(--shadow);}
 .panel h3{font-family:'DM Serif Display',serif;font-size:15.5px;margin-bottom:13px;display:flex;align-items:center;gap:6px;}
@@ -148,8 +136,6 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .genbtn{width:100%;padding:12px;background:linear-gradient(135deg,var(--red),#FF4D6D);color:white;border:none;border-radius:11px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer;transition:all .2s;margin-top:4px;box-shadow:0 6px 20px rgba(226,24,51,.3);display:flex;align-items:center;justify-content:center;gap:7px;}
 .genbtn:hover{transform:translateY(-2px);}
 .genbtn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
- 
-/* RESULT BOX */
 .rbox{background:linear-gradient(135deg,#F0EDFF,#EEF3FF);border:1.5px solid #D0CBFF;border-radius:13px;padding:16px;margin-top:16px;display:none;}
 .rbox.show{display:block;animation:fadeIn .4s ease;}
 .rbox h4{font-family:'DM Serif Display',serif;font-size:16px;margin-bottom:7px;color:var(--navy);line-height:1.4;}
@@ -158,25 +144,18 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .rbtn{padding:6px 12px;border-radius:8px;font-size:11.5px;font-weight:700;cursor:pointer;border:none;transition:all .15s;font-family:inherit;}
 .rbtn.s{background:var(--purple);color:white;}
 .rbtn.o{background:white;color:var(--navy);border:1.5px solid var(--border);}
-.rbtn:hover{opacity:.85;}
- 
-/* ESSAY HINTS */
 .ehints{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:11px;}
 .ehint{border-radius:9px;padding:10px;}
 .ehint .en{font-size:9.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px;}
 .ehint p{font-size:11px;line-height:1.5;color:var(--text);}
- 
-/* RUBRIC */
 .rubric-box{background:white;border:1.5px solid var(--border);border-radius:13px;padding:16px;margin-top:12px;display:none;}
 .rubric-box.show{display:block;animation:fadeIn .4s ease;}
-.rubric-box h4{font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:12px;color:var(--navy);}
+.rubric-box h4{font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:12px;}
 .rubric-table{width:100%;border-collapse:collapse;font-size:12px;}
 .rubric-table th{background:var(--navy);color:white;padding:8px 10px;text-align:left;font-weight:700;}
 .rubric-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
 .rubric-table tr:nth-child(even) td{background:#FAFAFA;}
 .pts-badge{background:var(--red);color:white;font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px;}
- 
-/* SUGGESTIONS */
 .sugscroll{display:flex;gap:9px;overflow-x:auto;padding-bottom:5px;margin-top:10px;}
 .sugscroll::-webkit-scrollbar{height:3px;}
 .sugscroll::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
@@ -185,8 +164,6 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .sugcard .sh{font-size:9.5px;font-weight:800;color:var(--red);margin-bottom:4px;}
 .sugcard p{font-size:11.5px;font-weight:600;line-height:1.4;}
 .sugcard .st{font-size:10px;color:var(--muted);margin-top:4px;}
- 
-/* SOURCE CARDS WITH CITATION */
 .srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
 .srccard{background:white;border-radius:14px;border:1.5px solid var(--border);padding:16px;box-shadow:var(--shadow);transition:all .18s;}
 .srccard:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
@@ -203,13 +180,10 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .citation-wrap{margin-top:8px;}
 .cite-label{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
 .cite-tabs{display:flex;gap:4px;margin-bottom:7px;flex-wrap:wrap;}
-.cite-tab{padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--muted);transition:all .15s;font-family:inherit;}
-.cite-tab:hover{border-color:var(--navy);color:var(--navy);}
+.cite-tab{padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--muted);transition:all .15px;font-family:inherit;}
 .cite-tab.on{background:var(--navy);color:white;border-color:var(--navy);}
 .cite-text{background:var(--cream);border:1px solid var(--border);border-radius:7px;padding:8px 10px;font-size:11px;line-height:1.6;color:var(--text);position:relative;}
 .cite-copy{position:absolute;top:5px;right:5px;background:var(--red);color:white;border:none;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;}
- 
-/* SOURCE PREVIEW MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:none;align-items:center;justify-content:center;}
 .modal-overlay.show{display:flex;animation:fadeIn .2s ease;}
 .modal-box{background:white;border-radius:18px;width:720px;max-width:95vw;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.3);}
@@ -217,13 +191,10 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .modal-header h3{font-family:'DM Serif Display',serif;font-size:16px;line-height:1.3;max-width:580px;}
 .modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);flex-shrink:0;margin-left:10px;}
 .modal-body{padding:20px 22px;overflow-y:auto;flex:1;}
-.modal-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
 .modal-section{margin-bottom:16px;}
 .modal-section h4{font-size:12.5px;font-weight:800;color:var(--navy);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
-.modal-section p{font-size:13px;line-height:1.7;color:var(--text);}
+.modal-section p{font-size:13px;line-height:1.7;}
 .modal-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;}
- 
-/* TIMELINE */
 .tlwrap{position:relative;padding-left:24px;}
 .tlwrap::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold));border-radius:2px;}
 .tlitem{position:relative;margin-bottom:16px;}
@@ -237,8 +208,6 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .tlmet{display:flex;gap:12px;margin-top:9px;}
 .tlmet .mn{font-family:'DM Serif Display',serif;font-size:16px;color:var(--red);}
 .tlmet .ml{font-size:10px;color:var(--muted);}
- 
-/* CONTACTS */
 .ctgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px;}
 .ctcard{background:white;border-radius:13px;border:1.5px solid var(--border);padding:15px;box-shadow:var(--shadow);transition:all .18s;}
 .ctcard:hover{transform:translateY(-2px);}
@@ -253,8 +222,6 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .cbtn{flex:1;padding:6px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .15s;font-family:inherit;}
 .cbe{background:#FFE8EB;color:var(--red);}.cbe:hover{background:var(--red);color:white;}
 .cbv{background:#EEF3FF;color:#4A6CF7;}.cbv:hover{background:#4A6CF7;color:white;}
- 
-/* EMAILS */
 .elist{display:flex;flex-direction:column;gap:8px;}
 .eitem{background:white;border-radius:11px;border:1.5px solid var(--border);padding:13px 16px;box-shadow:var(--shadow);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:12px;}
 .eitem:hover{border-color:var(--red);}
@@ -264,8 +231,6 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .emeta{margin-left:auto;text-align:right;}
 .edate{font-size:10.5px;color:var(--muted);}
 .udot{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;}
- 
-/* STUDENT ASSIGNMENT */
 .stuview{background:white;border-radius:15px;border:1.5px solid var(--border);padding:22px;box-shadow:var(--shadow);}
 .stuview h3{font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:5px;}
 .rqdisplay{background:linear-gradient(135deg,#F0EDFF,#EEF3FF);border-radius:11px;padding:15px;margin:12px 0;border:1.5px solid #D0CBFF;font-size:14px;font-weight:600;line-height:1.55;color:var(--navy);font-style:italic;}
@@ -280,51 +245,43 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .ecpos{background:#FFF5F7;}.ecpos .ectag{background:var(--red);}
 .ecrhe{background:#EEF3FF;}.ecrhe .ectag{background:#4A6CF7;}
 .ecrem{background:#D4F5E9;}.ecrem .ectag{background:var(--green);}
- 
-/* LOCKED */
-.locked{background:#FFF5F7;border:2px dashed #FFAAB8;border-radius:15px;padding:44px 22px;text-align:center;}
-.locked h3{font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:7px;color:var(--red);}
-.locked p{font-size:12.5px;color:var(--muted);max-width:360px;margin:0 auto;}
- 
-/* ANIMATIONS */
 .spin{display:inline-block;width:14px;height:14px;border:2.5px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
-.fadein{animation:fadeIn .35s ease forwards;}
- 
+@keyframes popIn{from{opacity:0;transform:scale(.88);}to{opacity:1;transform:scale(1);}}
 @media(max-width:900px){.srow{grid-template-columns:repeat(2,1fr);}.tcol{grid-template-columns:1fr;}.egrid{grid-template-columns:1fr;}.sidebar{width:200px;}.main{margin-left:200px;}}
 @media(max-width:640px){.sidebar{display:none;}.main{margin-left:0;}}
 </style>
 </head>
 <body>
- 
+
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">
       <div class="tag2">UMD · ENG101X</div>
       <h1>Research <span>Hub</span></h1>
-      <p>Sign in with your UMD Google account</p>
+      <p>Sign in with your Google account</p>
     </div>
     <div id="login-main">
-      <div style="font-size:12px;font-weight:700;color:#7A7F99;margin-bottom:8px;text-align:center;">SELECT YOUR ROLE FIRST</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-        <div id="role-fac" onclick="selectLoginRole('faculty')" style="padding:14px 10px;border-radius:14px;border:2px solid #E8EAF0;cursor:pointer;text-align:center;transition:all .2s;">
-          <div style="font-size:26px;margin-bottom:5px;">🎓</div>
-          <div style="font-size:13px;font-weight:800;color:#1A1F3C;">Faculty / TA</div>
-          <div style="font-size:11px;color:#7A7F99;margin-top:2px;">Professor · Instructor</div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;text-align:center;text-transform:uppercase;letter-spacing:.8px;">Select your role</div>
+      <div class="role-row">
+        <div class="role-card" id="role-fac" onclick="selectRole('faculty')">
+          <div class="ri">🎓</div>
+          <div class="rl">Faculty / TA</div>
+          <div class="rs">Professor · Instructor</div>
         </div>
-        <div id="role-stu" onclick="selectLoginRole('student')" style="padding:14px 10px;border-radius:14px;border:2px solid #E8EAF0;cursor:pointer;text-align:center;transition:all .2s;">
-          <div style="font-size:26px;margin-bottom:5px;">📚</div>
-          <div style="font-size:13px;font-weight:800;color:#1A1F3C;">Student</div>
-          <div style="font-size:11px;color:#7A7F99;margin-top:2px;">ENG101X Enrolled</div>
+        <div class="role-card" id="role-stu" onclick="selectRole('student')">
+          <div class="ri">📚</div>
+          <div class="rl">Student</div>
+          <div class="rs">ENG101X Enrolled</div>
         </div>
       </div>
-      <button class="google-btn" id="google-signin-btn" onclick="signInWithGoogle()" style="opacity:0.5;pointer-events:none;">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+      <button class="google-btn" id="gbtn" onclick="doGoogleLogin()">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="G">
         Continue with Google
       </button>
-      <p class="login-note">Select your role above then sign in.<br>Faculty access is verified from the database automatically.</p>
+      <p class="login-note">Select your role above, then sign in.</p>
     </div>
     <div class="login-loading" id="login-loading">
       <div class="ls"></div>
@@ -332,19 +289,19 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     </div>
   </div>
 </div>
- 
-<!-- SOURCE PREVIEW MODAL -->
+
+<!-- MODAL -->
 <div class="modal-overlay" id="src-modal">
   <div class="modal-box">
     <div class="modal-header">
-      <h3 id="modal-title">Source Title</h3>
+      <h3 id="modal-title"></h3>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer" id="modal-footer"></div>
   </div>
 </div>
- 
+
 <!-- APP -->
 <div id="app">
 <aside class="sidebar">
@@ -362,37 +319,40 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     <button class="lout-btn" onclick="doLogout()">⎋ Sign out</button>
   </div>
 </aside>
- 
+
 <div class="main">
   <div class="topbar">
     <div class="tb-left"><h2 id="pt">Campus Issues</h2><p id="ps">Live tracking of UMD campus issues</p></div>
     <div class="tb-right">
       <span class="role-pill" id="rpill"></span>
-      <button class="tbtn primary" id="tb-act" style="display:none" onclick="exportReport()">📤 Export Report</button>
+      <button class="tbtn primary" id="tb-act" style="display:none">📤 Export Report</button>
     </div>
   </div>
- 
   <div class="content">
- 
-    <!-- ISSUES PAGE -->
+
+    <!-- ISSUES -->
     <div class="page active" id="page-issues">
       <div class="sec-title">🔥 What's Happening on Campus</div>
-      <p class="sec-sub">Live campus issues — faculty can click any card to jump to the Research Question Creator</p>
+      <p class="sec-sub">Live campus issues — faculty click any card to jump to Research Question Creator</p>
       <div class="sbar">
         <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search issues…" oninput="filterIssues(this.value)"></div>
-        <div class="chips">
-          <div class="chip on" onclick="tc(this)">All</div>
-          <div class="chip" onclick="tc(this)">🏠 Housing</div>
-          <div class="chip" onclick="tc(this)">🧠 Mental Health</div>
-          <div class="chip" onclick="tc(this)">🌿 Sustainability</div>
-          <div class="chip" onclick="tc(this)">🛡️ Safety</div>
-          <div class="chip" onclick="tc(this)">🌍 DEI</div>
-          <div class="chip" onclick="tc(this)">💻 Tech & AI</div>
-          <div class="chip" onclick="tc(this)">🌾 Agriculture</div>
-          <div class="chip" onclick="tc(this)">🏥 Public Health</div>
-          <div class="chip" onclick="tc(this)">💼 Labor</div>
+        <div class="chips" id="issue-chips">
+          <div class="chip on" onclick="filterByChip('all',this,'issue-chips')">All</div>
+          <div class="chip" onclick="filterByChip('housing',this,'issue-chips')">🏠 Housing</div>
+          <div class="chip" onclick="filterByChip('mental health',this,'issue-chips')">🧠 Mental Health</div>
+          <div class="chip" onclick="filterByChip('sustainability',this,'issue-chips')">🌿 Sustainability</div>
+          <div class="chip" onclick="filterByChip('safety',this,'issue-chips')">🛡️ Safety</div>
+          <div class="chip" onclick="filterByChip('dei',this,'issue-chips')">🌍 DEI</div>
+          <div class="chip" onclick="filterByChip('ai',this,'issue-chips')">💻 Tech & AI</div>
+          <div class="chip" onclick="filterByChip('agriculture',this,'issue-chips')">🌾 Agriculture</div>
+          <div class="chip" onclick="filterByChip('food',this,'issue-chips')">🍎 Food</div>
+          <div class="chip" onclick="filterByChip('labor',this,'issue-chips')">💼 Labor</div>
         </div>
-        <select class="fsel"><option>🔥 Most Trending</option><option>🕐 Most Recent</option><option>⚡ Highest Impact</option><option>📉 Less Trendy</option></select>
+        <select class="fsel" onchange="sortIssues(this.value)">
+          <option value="trending">🔥 Most Trending</option>
+          <option value="recent">🕐 Most Recent</option>
+          <option value="impact">⚡ Highest Impact</option>
+        </select>
       </div>
       <div class="srow">
         <div class="scard"><div class="si2">🔥</div><div class="snum">24</div><div class="slbl">Active Issues</div><div class="sdelta dup">↑ 3 this week</div></div>
@@ -401,90 +361,90 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
         <div class="scard"><div class="si2">📰</div><div class="snum">47</div><div class="slbl">Media Mentions</div><div class="sdelta ddn">↓ 2</div></div>
       </div>
       <div class="igrid" id="igrid">
-        <div class="icard" style="--cc:#E21833" onclick="issueClick('Residence Hall Overcrowding & Off-Campus Housing Crisis','housing, affordability, student experience')"><div class="tags"><span class="tag tr">🏠 Housing</span><span class="tag tg">🔥 Trending</span></div><h3>Residence Hall Overcrowding & Off-Campus Housing Crisis</h3><p>1,200+ students in overflow dorms; College Park rents up 22% YoY as enrollment surges past capacity.</p><div class="imeta"><span class="isrc">📰 The Diamondback</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:13px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
-        <div class="icard" style="--cc:#7B61FF" onclick="issueClick('Student Mental Health Services Waitlist Crisis','mental health, counseling, burnout, access')"><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tr">🚨 High Impact</span></div><h3>Mental Health Services Waitlist Exceeds 6 Weeks</h3><p>34% of surveyed students report anxiety or burnout; Counseling Center at full capacity with no relief in sight.</p><div class="imeta"><span class="isrc">📊 SGA Survey</span><div class="tbar"><span style="height:7px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
-        <div class="icard" style="--cc:#2ECC8B" onclick="issueClick('Campus Carbon Neutrality Goal 2030 transparency gap','sustainability, environment, climate, reporting')"><div class="tags"><span class="tag tn">🌿 Sustainability</span><span class="tag tb">📈 Rising</span></div><h3>Carbon Neutrality 2030 — Data Transparency Gap</h3><p>Facilities upgrades underway but student researchers flag missing emissions reporting and accountability gaps.</p><div class="imeta"><span class="isrc">🌿 Sustainability Office</span><div class="tbar"><span style="height:9px"></span><span style="height:8px"></span><span style="height:13px"></span><span style="height:12px"></span><span style="height:17px"></span></div></div></div>
-        <div class="icard" style="--cc:#FF8C42" onclick="issueClick('Night-Time Campus Safety and Lighting Gaps on Route 1','safety, crime, lighting, UMPD')"><div class="tags"><span class="tag to">🛡️ Safety</span><span class="tag tg">⚠️ Ongoing</span></div><h3>Night-Time Safety & Lighting Gaps on Route 1</h3><p>15 reported incidents near Route 1 corridor since fall semester; UMPD response time data is contested.</p><div class="imeta"><span class="isrc">🚔 UMPD Records</span><div class="tbar"><span style="height:13px"></span><span style="height:15px"></span><span style="height:12px"></span><span style="height:15px"></span><span style="height:18px"></span></div></div></div>
-        <div class="icard" style="--cc:#4A6CF7" onclick="issueClick('DEI Funding Cuts and minority student organizations','DEI, diversity, inclusion, equity, BIPOC')"><div class="tags"><span class="tag tb">🌍 DEI</span></div><h3>DEI Funding Cuts & Impact on Minority Student Organizations</h3><p>Budget reallocations reduced support for 8 BIPOC-led organizations; coalition demands full reversal.</p><div class="imeta"><span class="isrc">📋 SGA Minutes</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:14px"></span><span style="height:19px"></span><span style="height:22px"></span></div></div></div>
-        <div class="icard" style="--cc:#B8920A" onclick="issueClick('AI Academic Integrity Policy fairness and ESL students','AI, academic integrity, ESL, policy, fairness')"><div class="tags"><span class="tag tg">💻 Tech & AI</span><span class="tag tn">🆕 Viral</span></div><h3>AI Academic Integrity Policy — ESL Fairness Dispute</h3><p>Policy disproportionately penalizes non-native English speakers; Academic Senate debate intensifying.</p><div class="imeta"><span class="isrc">📚 Academic Senate</span><div class="tbar"><span style="height:3px"></span><span style="height:6px"></span><span style="height:11px"></span><span style="height:18px"></span><span style="height:24px"></span></div></div></div>
-        <div class="icard" style="--cc:#FF6B6B" onclick="issueClick('Food Insecurity Among UMD Undergrads','food security, dining, poverty, access')"><div class="tags"><span class="tag tr">🍎 Food Security</span><span class="tag tg">🔥 Hot</span></div><h3>Food Insecurity Climbs to 28% Among Undergrads</h3><p>Campus food pantry usage up 40%; dining plan costs cited as the primary structural barrier to access.</p><div class="imeta"><span class="isrc">🥗 Dining Services</span><div class="tbar"><span style="height:7px"></span><span style="height:11px"></span><span style="height:14px"></span><span style="height:17px"></span><span style="height:21px"></span></div></div></div>
-        <div class="icard" style="--cc:#0D8A7A" onclick="issueClick('UMD Research Farm land use and urban development pressure','agriculture, land-grant, urban sprawl, research farm')"><div class="tags"><span class="tag tt">🌾 Agriculture</span><span class="tag tb">📈 Emerging</span></div><h3>UMD Research Farm Under Urban Development Pressure</h3><p>College Park expansion threatens the 629-acre research farm; land-grant identity advocates mobilize.</p><div class="imeta"><span class="isrc">🌾 AGNR College</span><div class="tbar"><span style="height:4px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:15px"></span><span style="height:19px"></span></div></div></div>
-        <div class="icard" style="--cc:#E07B40" onclick="issueClick('Gig economy reliance among UMD undergraduate students','labor, gig economy, student work, tuition, financial stress')"><div class="tags"><span class="tag to">💼 Labor</span><span class="tag tg">📊 New Data</span></div><h3>37% of UMD Undergrads Rely on Gig Work to Pay Tuition</h3><p>New financial survey reveals gig dependency is highest among first-generation and Pell-eligible students.</p><div class="imeta"><span class="isrc">💳 Financial Aid Office</span><div class="tbar"><span style="height:6px"></span><span style="height:10px"></span><span style="height:15px"></span><span style="height:18px"></span><span style="height:20px"></span></div></div></div>
+        <div class="icard" data-cat="housing" style="--cc:#E21833" onclick="issueClick('Residence Hall Overcrowding & Off-Campus Housing Crisis','housing')"><div class="tags"><span class="tag tr">🏠 Housing</span><span class="tag tg">🔥 Trending</span></div><h3>Residence Hall Overcrowding & Off-Campus Housing Crisis</h3><p>1,200+ students in overflow dorms; College Park rents up 22% YoY as enrollment surges past capacity.</p><div class="imeta"><span class="isrc">📰 The Diamondback</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:13px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
+        <div class="icard" data-cat="mental health" style="--cc:#7B61FF" onclick="issueClick('Student Mental Health Services Waitlist Crisis','mental health')"><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tr">🚨 High Impact</span></div><h3>Mental Health Services Waitlist Exceeds 6 Weeks</h3><p>34% of surveyed students report anxiety or burnout; Counseling Center at full capacity.</p><div class="imeta"><span class="isrc">📊 SGA Survey</span><div class="tbar"><span style="height:7px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
+        <div class="icard" data-cat="sustainability" style="--cc:#2ECC8B" onclick="issueClick('Campus Carbon Neutrality Goal 2030','sustainability')"><div class="tags"><span class="tag tn">🌿 Sustainability</span><span class="tag tb">📈 Rising</span></div><h3>Carbon Neutrality 2030 — Data Transparency Gap</h3><p>Facilities upgrades underway but student researchers flag missing emissions reporting and accountability gaps.</p><div class="imeta"><span class="isrc">🌿 Sustainability Office</span><div class="tbar"><span style="height:9px"></span><span style="height:8px"></span><span style="height:13px"></span><span style="height:12px"></span><span style="height:17px"></span></div></div></div>
+        <div class="icard" data-cat="safety" style="--cc:#FF8C42" onclick="issueClick('Night-Time Campus Safety and Lighting Gaps','safety')"><div class="tags"><span class="tag to">🛡️ Safety</span><span class="tag tg">⚠️ Ongoing</span></div><h3>Night-Time Safety & Lighting Gaps on Route 1</h3><p>15 reported incidents near Route 1 corridor since fall; UMPD response time data is contested.</p><div class="imeta"><span class="isrc">🚔 UMPD Records</span><div class="tbar"><span style="height:13px"></span><span style="height:15px"></span><span style="height:12px"></span><span style="height:15px"></span><span style="height:18px"></span></div></div></div>
+        <div class="icard" data-cat="dei" style="--cc:#4A6CF7" onclick="issueClick('DEI Funding Cuts and Minority Student Organizations','DEI')"><div class="tags"><span class="tag tb">🌍 DEI</span></div><h3>DEI Funding Cuts & Impact on Minority Student Organizations</h3><p>Budget reallocations reduced support for 8 BIPOC-led organizations; coalition demands full reversal.</p><div class="imeta"><span class="isrc">📋 SGA Minutes</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:14px"></span><span style="height:19px"></span><span style="height:22px"></span></div></div></div>
+        <div class="icard" data-cat="ai" style="--cc:#B8920A" onclick="issueClick('AI Academic Integrity Policy ESL Fairness','AI policy')"><div class="tags"><span class="tag tg">💻 Tech & AI</span><span class="tag tn">🆕 Viral</span></div><h3>AI Academic Integrity Policy — ESL Fairness Dispute</h3><p>Policy disproportionately penalizes non-native English speakers; Academic Senate debate intensifying.</p><div class="imeta"><span class="isrc">📚 Academic Senate</span><div class="tbar"><span style="height:3px"></span><span style="height:6px"></span><span style="height:11px"></span><span style="height:18px"></span><span style="height:24px"></span></div></div></div>
+        <div class="icard" data-cat="food" style="--cc:#FF6B6B" onclick="issueClick('Food Insecurity Among UMD Undergrads','food security')"><div class="tags"><span class="tag tr">🍎 Food Security</span><span class="tag tg">🔥 Hot</span></div><h3>Food Insecurity Climbs to 28% Among Undergrads</h3><p>Campus food pantry usage up 40%; dining plan costs cited as primary structural barrier to access.</p><div class="imeta"><span class="isrc">🥗 Dining Services</span><div class="tbar"><span style="height:7px"></span><span style="height:11px"></span><span style="height:14px"></span><span style="height:17px"></span><span style="height:21px"></span></div></div></div>
+        <div class="icard" data-cat="agriculture" style="--cc:#0D8A7A" onclick="issueClick('UMD Research Farm Urban Development Pressure','agriculture')"><div class="tags"><span class="tag tt">🌾 Agriculture</span><span class="tag tb">📈 Emerging</span></div><h3>UMD Research Farm Under Urban Development Pressure</h3><p>College Park expansion threatens the 629-acre research farm; land-grant identity advocates mobilize.</p><div class="imeta"><span class="isrc">🌾 AGNR College</span><div class="tbar"><span style="height:4px"></span><span style="height:7px"></span><span style="height:11px"></span><span style="height:15px"></span><span style="height:19px"></span></div></div></div>
+        <div class="icard" data-cat="labor" style="--cc:#E07B40" onclick="issueClick('Gig Economy Reliance Among UMD Undergrads','labor')"><div class="tags"><span class="tag to">💼 Labor</span><span class="tag tg">📊 New Data</span></div><h3>37% of UMD Undergrads Rely on Gig Work to Pay Tuition</h3><p>New financial survey reveals gig dependency is highest among first-generation and Pell-eligible students.</p><div class="imeta"><span class="isrc">💳 Financial Aid Office</span><div class="tbar"><span style="height:6px"></span><span style="height:10px"></span><span style="height:15px"></span><span style="height:18px"></span><span style="height:20px"></span></div></div></div>
       </div>
     </div>
- 
-    <!-- PAST DATA PAGE -->
+
+    <!-- PAST DATA -->
     <div class="page" id="page-past">
       <div class="sec-title">📅 Historical Campus Data</div>
-      <p class="sec-sub">From 1856 to present — every era of UMD history across 15+ categories</p>
+      <p class="sec-sub">From 1856 to present — every era of UMD history, searchable across 15+ categories</p>
       <div class="sbar" style="margin-bottom:16px;">
-        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search historical issues…" oninput="filterPast(this.value)"></div>
+        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search historical issues…" oninput="filterPastSearch(this.value)"></div>
         <select class="fsel" onchange="filterPastEra(this.value)">
           <option value="all">All Eras</option>
-          <option value="202">2020s</option>
+          <option value="2026">2020s (2020–present)</option>
           <option value="201">2010s</option>
           <option value="200">2000s</option>
           <option value="199">1990s</option>
           <option value="198">1980s</option>
           <option value="197">1970s</option>
           <option value="196">1960s</option>
-          <option value="195">Pre-1960</option>
+          <option value="195">Pre-1960s</option>
           <option value="18">19th Century</option>
         </select>
         <select class="fsel" onchange="filterPastCat(this.value)">
           <option value="all">All Categories</option>
-          <option value="agriculture">Agriculture & Land Use</option>
           <option value="mental health">Mental Health</option>
-          <option value="housing">Housing</option>
-          <option value="safety">Safety & Crime</option>
           <option value="civil rights">Civil Rights / DEI</option>
-          <option value="technology">Technology & AI</option>
           <option value="public health">Public Health</option>
+          <option value="agriculture">Agriculture</option>
           <option value="environment">Environment</option>
-          <option value="labor">Labor & Worker Rights</option>
           <option value="war">War & Conflict</option>
+          <option value="technology">Technology</option>
+          <option value="housing">Housing</option>
           <option value="gender">Gender & Identity</option>
         </select>
         <button class="tbtn primary" style="padding:7px 13px;font-size:12px;">📊 Trend Report</button>
       </div>
-      <div class="tlwrap">
-        <div class="tlitem fadein"><div class="tldot"></div><div class="tlcard"><div class="tlera">2026 · Mental Health + Technology</div><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tg">💻 AI Anxiety</span></div><h4>Post-AI Job Uncertainty Anxiety Surge Among STEM Students</h4><p>41% of engineering students met clinical anxiety criteria; AI-driven career displacement fears cited as leading new stressor not present in pre-2022 campus mental health data.</p><div class="tlmet"><div><div class="mn">41%</div><div class="ml">Affected</div></div><div><div class="mn">280</div><div class="ml">Surveyed</div></div><div><div class="mn">3</div><div class="ml">Papers</div></div></div></div></div>
-        <div class="tlitem fadein"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020 · Civil Rights + DEI</div><div class="tags"><span class="tag tb">🌍 Civil Rights</span></div><h4>BLM Protests & UMD Diversity Audit — Building Renamings</h4><p>Students demanded removal of names honoring segregationists; UMD commissioned a formal historical audit resulting in 4 building renamings and creation of a new DEI Vice President role by 2021.</p><div class="tlmet"><div><div class="mn">4</div><div class="ml">Renamed</div></div><div><div class="mn">1</div><div class="ml">New DEI VP</div></div></div></div></div>
-        <div class="tlitem fadein"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020–2022 · Public Health</div><div class="tags"><span class="tag tr">🏥 Pandemic</span></div><h4>COVID-19 Campus Closure — Food Insecurity Doubles, Broadband Gap Exposed</h4><p>UMD closed March 2020; food insecurity doubled to 44%; international student visa crises and digital divide became urgent research topics. First remote learning period in UMD's 164-year history.</p><div class="tlmet"><div><div class="mn">40K+</div><div class="ml">Displaced</div></div><div><div class="mn">18 mo</div><div class="ml">Hybrid</div></div></div></div></div>
-        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1970 · War & Civil Unrest</div><div class="tags"><span class="tag tr">✊ Protest</span></div><h4>UMD Student Strike of 1970 — Kent State Aftermath</h4><p>5,000+ students and faculty struck following the Kent State shootings; classes cancelled for 2 weeks. Led to creation of UMD's Peace Studies curriculum and permanent faculty senate role in academic policy.</p><div class="tlmet"><div><div class="mn">5,000+</div><div class="ml">Strikers</div></div><div><div class="mn">2 wks</div><div class="ml">Closure</div></div></div></div></div>
-        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1954–1961 · Civil Rights</div><div class="tags"><span class="tag tb">🌍 Desegregation</span></div><h4>Desegregation of UMD — Parren Mitchell & NAACP Legal Campaign</h4><p>Parren Mitchell sued UMD in 1950 and was admitted as first Black graduate student in 1954 following federal order. Full undergraduate desegregation followed the 1964 Civil Rights Act.</p><div class="tlmet"><div><div class="mn">1950</div><div class="ml">Lawsuit Filed</div></div><div><div class="mn">1961</div><div class="ml">Full Integration</div></div></div></div></div>
-        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1917–1919 · Public Health + War</div><div class="tags"><span class="tag tr">🏥 Pandemic</span><span class="tag tg">WWI</span></div><h4>Spanish Flu at Maryland Agricultural College — First Campus Health Crisis</h4><p>The college converted 3 dormitories to infirmaries; enrollment dropped 60% in 1918. First recorded institution-wide emergency health response — direct historical parallel to COVID-19 closures over 100 years later.</p><div class="tlmet"><div><div class="mn">-60%</div><div class="ml">Enrollment</div></div><div><div class="mn">3</div><div class="ml">Dorms Converted</div></div></div></div></div>
-        <div class="tlitem fadein"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1856 · Founding · Agriculture & Education Policy</div><div class="tags"><span class="tag tt">🌾 Land-Grant</span><span class="tag tg">Founding Era</span></div><h4>Maryland Agricultural College Founded — Morrill Act Origins</h4><p>Founded 1856 as one of America's first land-grant colleges on 430 acres; an 1876 state financial takeover after bankruptcy reshaped the public-agriculture-education relationship — a tension still visible in 2026 AGNR funding debates.</p><div class="tlmet"><div><div class="mn">1856</div><div class="ml">Founded</div></div><div><div class="mn">430 ac</div><div class="ml">Original Farm</div></div></div></div></div>
+      <div class="tlwrap" id="tlwrap">
+        <div class="tlitem" data-era="2026" data-cat="mental health technology"><div class="tldot"></div><div class="tlcard"><div class="tlera">2026 · Mental Health + Technology</div><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tg">💻 AI Anxiety</span></div><h4>Post-AI Job Uncertainty Anxiety Surge Among STEM Students</h4><p>41% of engineering students met clinical anxiety criteria; AI-driven career fears cited as leading new stressor not present in pre-2022 data.</p><div class="tlmet"><div><div class="mn">41%</div><div class="ml">Affected</div></div><div><div class="mn">280</div><div class="ml">Surveyed</div></div></div></div></div>
+        <div class="tlitem" data-era="2020" data-cat="civil rights dei"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020 · Civil Rights + DEI</div><div class="tags"><span class="tag tb">🌍 Civil Rights</span></div><h4>BLM Protests & UMD Diversity Audit — Building Renamings</h4><p>Students demanded removal of names honoring segregationists; UMD commissioned a formal audit resulting in 4 building renamings and a new DEI VP role by 2021.</p><div class="tlmet"><div><div class="mn">4</div><div class="ml">Renamed</div></div><div><div class="mn">1</div><div class="ml">DEI VP Created</div></div></div></div></div>
+        <div class="tlitem" data-era="2020" data-cat="public health housing"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020–2022 · Public Health</div><div class="tags"><span class="tag tr">🏥 Pandemic</span></div><h4>COVID-19 Campus Closure — Food Insecurity Doubles, Broadband Gap Exposed</h4><p>UMD closed March 2020; food insecurity doubled to 44%; international student visa crises and digital divide became urgent research priorities.</p><div class="tlmet"><div><div class="mn">40K+</div><div class="ml">Displaced</div></div><div><div class="mn">18 mo</div><div class="ml">Hybrid Period</div></div></div></div></div>
+        <div class="tlitem" data-era="2017" data-cat="civil rights safety"><div class="tldot"></div><div class="tlcard"><div class="tlera">2017–2018 · Safety + Civil Rights</div><div class="tags"><span class="tag to">🛡️ Safety</span><span class="tag tb">Hate Crime</span></div><h4>Murder of Richard Collins III & Federal Hate Crime Trial</h4><p>Army Lt. Collins stabbed on campus in a racially motivated attack; 2018 federal hate crime conviction catalyzed UMD's campus safety and anti-bias taskforce — 12 direct policy changes followed.</p><div class="tlmet"><div><div class="mn">12</div><div class="ml">Policy Changes</div></div><div><div class="mn">1</div><div class="ml">Federal Conviction</div></div></div></div></div>
+        <div class="tlitem" data-era="1988" data-cat="agriculture environment"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1988 · Agriculture + Environment</div><div class="tags"><span class="tag tn">🌿 Environment</span><span class="tag tt">🌾 Agriculture</span></div><h4>Chesapeake Bay Agricultural Runoff — UMD ENST Landmark Study</h4><p>UMD Environmental Science published foundational data on PG County farm runoff polluting the Chesapeake Bay — still the most-cited regional study in Chesapeake policy today.</p><div class="tlmet"><div><div class="mn">22</div><div class="ml">Farms Studied</div></div><div><div class="mn">3</div><div class="ml">Policy Bills</div></div></div></div></div>
+        <div class="tlitem" data-era="1970" data-cat="war civil rights"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1970 · War & Civil Unrest</div><div class="tags"><span class="tag tr">✊ Protest</span><span class="tag tg">War Impact</span></div><h4>UMD Student Strike of 1970 — Kent State Aftermath</h4><p>5,000+ students and faculty struck following Kent State; classes cancelled 2 weeks. Led to UMD's Peace Studies curriculum and permanent faculty senate role in academic policy.</p><div class="tlmet"><div><div class="mn">5,000+</div><div class="ml">Strikers</div></div><div><div class="mn">2 wks</div><div class="ml">Closure</div></div></div></div></div>
+        <div class="tlitem" data-era="1954" data-cat="civil rights gender"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1954–1961 · Civil Rights</div><div class="tags"><span class="tag tb">🌍 Desegregation</span></div><h4>Desegregation of UMD — Parren Mitchell & NAACP Legal Campaign</h4><p>Parren Mitchell sued UMD in 1950 and was admitted as first Black graduate student in 1954. Full undergraduate desegregation followed the 1964 Civil Rights Act.</p><div class="tlmet"><div><div class="mn">1950</div><div class="ml">Lawsuit Filed</div></div><div><div class="mn">1961</div><div class="ml">Full Integration</div></div></div></div></div>
+        <div class="tlitem" data-era="1917" data-cat="public health war"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1917–1919 · Public Health + War</div><div class="tags"><span class="tag tr">🏥 Pandemic</span><span class="tag tg">WWI</span></div><h4>Spanish Flu at Maryland Agricultural College — First Campus Health Crisis</h4><p>The college converted 3 dormitories to infirmaries; enrollment dropped 60% in 1918. First recorded institution-wide emergency health response — direct parallel to COVID-19 closures 100 years later.</p><div class="tlmet"><div><div class="mn">-60%</div><div class="ml">Enrollment Drop</div></div><div><div class="mn">3</div><div class="ml">Dorms Converted</div></div></div></div></div>
+        <div class="tlitem" data-era="1884" data-cat="gender agriculture"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1884–1916 · Gender + Agriculture</div><div class="tags"><span class="tag tp">Gender</span><span class="tag tt">🌾 Agriculture</span></div><h4>First Women Enrolled at Maryland Agricultural College — Contested Access</h4><p>Women admitted to domestic science courses in 1884 but barred from full degrees until 1916. Agriculture dept gender exclusions mirrored national land-grant patterns.</p><div class="tlmet"><div><div class="mn">1884</div><div class="ml">Partial Admission</div></div><div><div class="mn">1916</div><div class="ml">Full Degree Access</div></div></div></div></div>
+        <div class="tlitem" data-era="1856" data-cat="agriculture"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1856 · Founding · Agriculture & Education</div><div class="tags"><span class="tag tt">🌾 Land-Grant</span><span class="tag tg">Founding Era</span></div><h4>Maryland Agricultural College Founded — Morrill Act Origins</h4><p>Founded 1856 on 430 acres; an 1876 state financial takeover after bankruptcy reshaped the public-agriculture-education relationship — a tension still visible in 2026 AGNR funding debates.</p><div class="tlmet"><div><div class="mn">1856</div><div class="ml">Founded</div></div><div><div class="mn">430 ac</div><div class="ml">Original Farm</div></div></div></div></div>
       </div>
     </div>
- 
-    <!-- SOURCES PAGE -->
+
+    <!-- SOURCES -->
     <div class="page" id="page-sources">
       <div class="sec-title">🔗 Sources & References</div>
-      <p class="sec-sub">Peer-reviewed journals, local UMD news, and national reports — with automatic citation generation in APA, MLA, Chicago & Harvard</p>
+      <p class="sec-sub">Peer-reviewed journals, local UMD news, and databases — with automatic APA, MLA, Chicago & Harvard citation generation</p>
       <div class="sbar" style="margin-bottom:20px;">
         <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search by topic, author, publication…" oninput="filterSources(this.value)"></div>
-        <div class="chips">
-          <div class="chip on">All</div>
-          <div class="chip">📄 Peer-Reviewed</div>
-          <div class="chip">📰 Local News</div>
-          <div class="chip">🗞️ National</div>
-          <div class="chip">📊 Reports</div>
-          <div class="chip">🌾 Agriculture</div>
+        <div class="chips" id="src-chips">
+          <div class="chip on" onclick="filterSrcChip('all',this)">All</div>
+          <div class="chip" onclick="filterSrcChip('stj',this)">📄 Peer-Reviewed</div>
+          <div class="chip" onclick="filterSrcChip('stl',this)">📰 Local News</div>
+          <div class="chip" onclick="filterSrcChip('stn',this)">🗞️ National</div>
+          <div class="chip" onclick="filterSrcChip('str',this)">📊 Reports & Databases</div>
         </div>
       </div>
       <div class="srcgrid" id="srcgrid"></div>
     </div>
- 
-    <!-- RESEARCH PAGE -->
+
+    <!-- RESEARCH -->
     <div class="page" id="page-research"></div>
- 
-    <!-- CONTACTS PAGE -->
+
+    <!-- CONTACTS -->
     <div class="page" id="page-contacts">
       <div class="sec-title">🏛️ Clubs, Offices & Institutions</div>
-      <p class="sec-sub">Key UMD contacts and external organizations to support student research</p>
+      <p class="sec-sub">30 real UMD contacts — click Email to open mail, click Website to visit</p>
       <div class="sbar" style="margin-bottom:20px;">
-        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search by name, topic, email…" oninput="searchContacts(this.value)"></div>
+        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search by name, email, topic…" oninput="searchContacts(this.value)"></div>
         <div class="chips" id="ct-chips">
           <div class="chip on" onclick="filterContacts('all',this)">All</div>
           <div class="chip" onclick="filterContacts('university',this)">🏛️ University</div>
@@ -493,210 +453,160 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
           <div class="chip" onclick="filterContacts('external',this)">🌍 External</div>
         </div>
       </div>
-      <div id="ctgrid-rendered" class="ctgrid"></div>
-      <script>
-      (function(){
-        const contacts = [
-          // Mental Health & Counseling
-          {icon:"🧠",bg:"#FFE8EB",name:"UMD Counseling Center",type:"Mental Health · University Office",addr:"Shoemaker Building",phone:"(301) 314-7651",email:"counseling@umd.edu",web:"https://counseling.umd.edu",cat:"university"},
-          {icon:"📞",bg:"#FFE8EB",name:"Help Center (Crisis Line)",type:"Mental Health · 24/7 Support",addr:"On Campus",phone:"(301) 314-4357",email:"boardhc@gmail.com",web:"https://umd.edu",cat:"university"},
-          {icon:"☀️",bg:"#FFF8CC",name:"SKY Campus Happiness",type:"Mental Health · Wellness",addr:"Campus",phone:"",email:"sky@umd.edu",web:"https://terplink.umd.edu",cat:"student"},
-          // Health & Authorities
-          {icon:"🏥",bg:"#FFE8EB",name:"University Health Center",type:"Health · University",addr:"Campus Drive",phone:"(301) 314-8184",email:"health@umd.edu",web:"https://health.umd.edu",cat:"university"},
-          {icon:"🎓",bg:"#EEF3FF",name:"Dean of Students Office",type:"Student Support · University",addr:"Stamp Student Union",phone:"(301) 405-2793",email:"deanofstudents@umd.edu",web:"https://studentaffairs.umd.edu",cat:"university"},
-          // Innovation & Startups
-          {icon:"💡",bg:"#FFF0E6",name:"Dingman Center for Entrepreneurship",type:"Innovation · Startups",addr:"Van Munching Hall",phone:"",email:"dingman@umd.edu",web:"https://dingman.umd.edu",cat:"tech"},
-          {icon:"🚀",bg:"#F0EDFF",name:"Startup Shell",type:"Innovation · Student Startup Hub",addr:"Iribe Center",phone:"",email:"info@startupshell.org",web:"https://startupshell.org",cat:"tech"},
-          {icon:"⚡",bg:"#EEF3FF",name:"xFoundry / UMD Innovation",type:"Innovation · University",addr:"College Park",phone:"",email:"innovation@umd.edu",web:"https://umd.edu/innovation",cat:"tech"},
-          // Tech Clubs
-          {icon:"💻",bg:"#EEF3FF",name:"ACM — Association for Computing Machinery",type:"Tech Club · CS",addr:"Iribe Center",phone:"",email:"acm.cs.umd@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
-          {icon:"📱",bg:"#F0EDFF",name:"App Development Club",type:"Tech Club · Mobile Dev",addr:"Campus",phone:"",email:"umdappdev@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
-          {icon:"🤖",bg:"#EEF3FF",name:"AI/ML Club UMD",type:"Tech Club · Artificial Intelligence",addr:"Campus",phone:"",email:"aimlclubumd@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
-          {icon:"🔵",bg:"#D4F5E9",name:"Google Developer Student Club",type:"Tech Club · Google",addr:"Campus",phone:"",email:"umdgdsc@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
-          {icon:"🔐",bg:"#FFE8EB",name:"Cybersecurity Club UMD",type:"Tech Club · Security",addr:"Campus",phone:"",email:"cybersecurityclubumd@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
-          // Public Health & Social Impact
-          {icon:"🌍",bg:"#D4F5E9",name:"SEIPH",type:"Public Health · Social Impact",addr:"Campus",phone:"",email:"seiph.umd@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
-          {icon:"🏥",bg:"#E0F8F5",name:"SHAC",type:"Public Health · Student Health",addr:"Campus",phone:"",email:"shac.umd@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
-          {icon:"💊",bg:"#D4F5E9",name:"HPMSA",type:"Public Health · Pre-Med",addr:"Campus",phone:"",email:"hpmsa.umd@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
-          // Student Government
-          {icon:"🏛️",bg:"#EEF3FF",name:"Student Government Association",type:"Student Gov · Advocacy",addr:"Stamp Union Rm 1220",phone:"",email:"sga@umd.edu",web:"https://sga.umd.edu",cat:"student"},
-          {icon:"🎓",bg:"#F0EDFF",name:"Graduate Student Government",type:"Student Gov · Graduate",addr:"Stamp Union",phone:"",email:"gsg@umd.edu",web:"https://gsg.umd.edu",cat:"student"},
-          {icon:"📋",bg:"#EEF3FF",name:"Student Org Resource Center",type:"Student Support · SORC",addr:"Stamp Union",phone:"(301) 314-7174",email:"sorc@umd.edu",web:"https://stamp.umd.edu",cat:"student"},
-          // Basic Needs
-          {icon:"🍎",bg:"#FFE8EB",name:"Campus Pantry",type:"Basic Needs · Food Security",addr:"Stamp Student Union",phone:"(301) 405-9579",email:"campuspantry@umd.edu",web:"https://stamp.umd.edu/pantry",cat:"student"},
-          // Safety & Housing
-          {icon:"🚔",bg:"#FFF0E6",name:"UMD Police Department",type:"Safety · UMPD",addr:"Regents Drive",phone:"(301) 405-3555",email:"umpd@umd.edu",web:"https://umpd.umd.edu",cat:"university"},
-          {icon:"🏠",bg:"#FFF8CC",name:"Resident Life",type:"Housing · University",addr:"Annapolis Hall",phone:"",email:"reslife@umd.edu",web:"https://reslife.umd.edu",cat:"university"},
-          // Faith & Spiritual
-          {icon:"⛪",bg:"#FFF8CC",name:"Memorial Chapel",type:"Faith · Spiritual",addr:"Chapel Drive",phone:"",email:"chapel@umd.edu",web:"https://chapel.umd.edu",cat:"student"},
-          {icon:"✝️",bg:"#FFE8EB",name:"Catholic Student Center",type:"Faith · Catholic",addr:"Near Campus",phone:"",email:"umdcatholic@umd.edu",web:"https://umdcatholic.org",cat:"student"},
-          {icon:"☪️",bg:"#D4F5E9",name:"Muslim Students Association",type:"Faith · MSA",addr:"Campus",phone:"",email:"msa@umd.edu",web:"https://terplink.umd.edu",cat:"student"},
-          {icon:"✡️",bg:"#FFF8CC",name:"Hillel at Maryland",type:"Faith · Jewish Life",addr:"Near Campus",phone:"",email:"info@marylandhillel.org",web:"https://marylandhillel.org",cat:"student"},
-          // Professional & Leadership
-          {icon:"🎤",bg:"#EEF3FF",name:"Toastmasters UMD",type:"Professional · Leadership",addr:"Campus",phone:"",email:"toastmasters@umd.edu",web:"https://terplink.umd.edu",cat:"student"},
-          {icon:"⚙️",bg:"#FFF0E6",name:"SHPE — Hispanic Engineers",type:"Professional · STEM",addr:"Campus",phone:"",email:"shpeumcp@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
-          {icon:"👩‍💻",bg:"#F0EDFF",name:"Association for Women in Computing",type:"Professional · Women in Tech",addr:"Campus",phone:"",email:"awc.umcp@gmail.com",web:"https://terplink.umd.edu",cat:"student"}
-        ];
-        const grid = document.getElementById('ctgrid-rendered');
-        if(grid) grid.innerHTML = contacts.map(c => `
-          <div class="ctcard">
-            <div class="cth"><div class="ctlogo" style="background:${c.bg};">${c.icon}</div>
-            <div class="ctinfo"><h4>${c.name}</h4><p>${c.type}</p></div></div>
-            <div class="ctdet">
-              <div class="ctrow"><span class="ci">📍</span>${c.addr}</div>
-              <div class="ctrow"><span class="ci">📞</span>${c.phone}</div>
-              <div class="ctrow"><span class="ci">✉️</span>${c.email}</div>
-            </div>
-            <div class="ctact">
-              <button class="cbtn cbe" onclick="window.location='mailto:${c.email}'">✉️ Email</button>
-              <button class="cbtn cbv" onclick="window.open('${c.web}','_blank')">🌐 Website</button>
-            </div>
-          </div>`).join('');
-      })();
-      </script>
+      <div class="ctgrid" id="ct-grid"></div>
     </div>
- 
-    <!-- EMAILS PAGE -->
+
+    <!-- EMAILS -->
     <div class="page" id="page-emails">
       <div class="sec-title">📬 Campus Emails & Resources</div>
-      <p class="sec-sub">Official UMD communications, club newsletters, and research opportunities — click any to open</p>
+      <p class="sec-sub">Official UMD communications and club newsletters — click any to open</p>
       <div class="sbar" style="margin-bottom:20px;">
         <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search emails…" oninput="searchEmails(this.value)"></div>
-        <div class="chips" id="email-chips">
-          <div class="chip on" onclick="filterEmails('all')">All</div>
-          <div class="chip" onclick="filterEmails('official')">📋 Official</div>
-          <div class="chip" onclick="filterEmails('sga')">🎓 SGA</div>
-          <div class="chip" onclick="filterEmails('clubs')">🏛️ Clubs</div>
-          <div class="chip" onclick="filterEmails('newsletter')">📰 Newsletter</div>
+        <div class="chips" id="em-chips">
+          <div class="chip on" onclick="filterEmails('all',this)">All</div>
+          <div class="chip" onclick="filterEmails('official',this)">📋 Official</div>
+          <div class="chip" onclick="filterEmails('sga',this)">🎓 SGA</div>
+          <div class="chip" onclick="filterEmails('clubs',this)">🏛️ Clubs</div>
+          <div class="chip" onclick="filterEmails('newsletter',this)">📰 Newsletter</div>
         </div>
       </div>
-      <div class="elist" id="email-list-rendered"></div>
-      <script>
-        setTimeout(function(){ if(typeof renderEmails==='function') renderEmails('all'); }, 100);
-      </script>
+      <div class="elist" id="em-list"></div>
     </div>
- 
+
   </div>
 </div>
 </div>
- 
-<!-- FIREBASE + APP LOGIC -->
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
- 
+import { getFirestore, doc, getDoc, collection, getDocs, addDoc, setDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBMOHqYDmJwkQmAH8otzWEbBEgx8RvCip8",
   authDomain: "eng101x-hub.firebaseapp.com",
   projectId: "eng101x-hub",
   storageBucket: "eng101x-hub.firebasestorage.app",
   messagingSenderId: "1165112139",
-  appId: "1:1165112139:web:098194188dd296d618aece",
-  measurementId: "G-NX0GVRGNN9"
+  appId: "1:1165112139:web:098194188dd296d618aece"
 };
- 
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
-// provider.setCustomParameters({ hd: 'umd.edu' }); // removed for open access
- 
-// ── SOURCES DATA ──
+
+// ── DATA ──
+const CONTACTS = [
+  {icon:"🧠",bg:"#FFE8EB",name:"UMD Counseling Center",type:"Mental Health · University",phone:"(301) 314-7651",email:"counseling@umd.edu",web:"https://counseling.umd.edu",cat:"university"},
+  {icon:"📞",bg:"#FFE8EB",name:"Help Center (Crisis Line 24/7)",type:"Mental Health · Crisis Support",phone:"(301) 314-4357",email:"boardhc@gmail.com",web:"https://umd.edu",cat:"university"},
+  {icon:"☀️",bg:"#FFF8CC",name:"SKY Campus Happiness",type:"Mental Health · Wellness",phone:"",email:"sky@umd.edu",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"🏥",bg:"#FFE8EB",name:"University Health Center",type:"Health · University",phone:"(301) 314-8184",email:"health@umd.edu",web:"https://health.umd.edu",cat:"university"},
+  {icon:"🎓",bg:"#EEF3FF",name:"Dean of Students Office",type:"Student Support · University",phone:"(301) 405-2793",email:"deanofstudents@umd.edu",web:"https://studentaffairs.umd.edu",cat:"university"},
+  {icon:"💡",bg:"#FFF0E6",name:"Dingman Center for Entrepreneurship",type:"Innovation · Startups",phone:"",email:"dingman@umd.edu",web:"https://dingman.umd.edu",cat:"tech"},
+  {icon:"🚀",bg:"#F0EDFF",name:"Startup Shell",type:"Innovation · Student Hub",phone:"",email:"info@startupshell.org",web:"https://startupshell.org",cat:"tech"},
+  {icon:"⚡",bg:"#EEF3FF",name:"xFoundry / UMD Innovation",type:"Innovation · University",phone:"",email:"innovation@umd.edu",web:"https://umd.edu",cat:"tech"},
+  {icon:"💻",bg:"#EEF3FF",name:"ACM — Computing Machinery",type:"Tech Club · CS",phone:"",email:"acm.cs.umd@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
+  {icon:"📱",bg:"#F0EDFF",name:"App Development Club",type:"Tech Club · Mobile",phone:"",email:"umdappdev@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
+  {icon:"🤖",bg:"#EEF3FF",name:"AI/ML Club UMD",type:"Tech Club · Artificial Intelligence",phone:"",email:"aimlclubumd@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
+  {icon:"🔵",bg:"#D4F5E9",name:"Google Developer Student Club",type:"Tech Club · Google",phone:"",email:"umdgdsc@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
+  {icon:"🔐",bg:"#FFE8EB",name:"Cybersecurity Club UMD",type:"Tech Club · Security",phone:"",email:"cybersecurityclubumd@gmail.com",web:"https://terplink.umd.edu",cat:"tech"},
+  {icon:"🌍",bg:"#D4F5E9",name:"SEIPH",type:"Public Health · Social Impact",phone:"",email:"seiph.umd@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"🏥",bg:"#E0F8F5",name:"SHAC",type:"Public Health · Student Health",phone:"",email:"shac.umd@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"💊",bg:"#D4F5E9",name:"HPMSA",type:"Public Health · Pre-Med",phone:"",email:"hpmsa.umd@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"🏛️",bg:"#EEF3FF",name:"Student Government Association",type:"Student Gov · Advocacy",phone:"",email:"sga@umd.edu",web:"https://sga.umd.edu",cat:"student"},
+  {icon:"🎓",bg:"#F0EDFF",name:"Graduate Student Government",type:"Student Gov · Graduate",phone:"",email:"gsg@umd.edu",web:"https://gsg.umd.edu",cat:"student"},
+  {icon:"📋",bg:"#EEF3FF",name:"Student Org Resource Center",type:"Student Support · SORC",phone:"(301) 314-7174",email:"sorc@umd.edu",web:"https://stamp.umd.edu",cat:"student"},
+  {icon:"🍎",bg:"#FFE8EB",name:"Campus Pantry",type:"Basic Needs · Food Security",phone:"(301) 405-9579",email:"campuspantry@umd.edu",web:"https://stamp.umd.edu",cat:"student"},
+  {icon:"🚔",bg:"#FFF0E6",name:"UMD Police Department",type:"Safety · UMPD",phone:"(301) 405-3555",email:"umpd@umd.edu",web:"https://umpd.umd.edu",cat:"university"},
+  {icon:"🏠",bg:"#FFF8CC",name:"Resident Life",type:"Housing · University",phone:"",email:"reslife@umd.edu",web:"https://reslife.umd.edu",cat:"university"},
+  {icon:"⛪",bg:"#FFF8CC",name:"Memorial Chapel",type:"Faith · Spiritual",phone:"",email:"chapel@umd.edu",web:"https://chapel.umd.edu",cat:"student"},
+  {icon:"✝️",bg:"#FFE8EB",name:"Catholic Student Center",type:"Faith · Catholic",phone:"",email:"umdcatholic@umd.edu",web:"https://umdcatholic.org",cat:"student"},
+  {icon:"☪️",bg:"#D4F5E9",name:"Muslim Students Association",type:"Faith · MSA",phone:"",email:"msa@umd.edu",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"✡️",bg:"#FFF8CC",name:"Hillel at Maryland",type:"Faith · Jewish Life",phone:"",email:"info@marylandhillel.org",web:"https://marylandhillel.org",cat:"student"},
+  {icon:"🎤",bg:"#EEF3FF",name:"Toastmasters UMD",type:"Professional · Leadership",phone:"",email:"toastmasters@umd.edu",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"⚙️",bg:"#FFF0E6",name:"SHPE — Hispanic Engineers",type:"Professional · STEM",phone:"",email:"shpeumcp@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"👩‍💻",bg:"#F0EDFF",name:"Association for Women in Computing",type:"Professional · Women in Tech",phone:"",email:"awc.umcp@gmail.com",web:"https://terplink.umd.edu",cat:"student"},
+  {icon:"🌐",bg:"#E0F8F5",name:"International Student Services",type:"University · International",phone:"(301) 314-7740",email:"isss@umd.edu",web:"https://isss.umd.edu",cat:"external"}
+];
+
+const EMAILS = [
+  {av:"PS",bg:"#FFE8EB",col:"var(--red)",from:"President Pines' Office",sub:"Spring 2026 Campus Safety Update — New Route 1 Lighting Initiative",date:"Mar 28",cat:"official",unread:true,link:"mailto:presidentoffice@umd.edu"},
+  {av:"SG",bg:"#EEF3FF",col:"#4A6CF7",from:"SGA — Student Government",sub:"Vote Open: DEI Funding Restoration Resolution — Your Input Needed",date:"Mar 27",cat:"sga",unread:true,link:"https://sga.umd.edu"},
+  {av:"OS",bg:"#D4F5E9",col:"#1A8C5F",from:"Office of Sustainability",sub:"Research Opportunity: Carbon Audit Volunteers Needed — Spring 2026",date:"Mar 25",cat:"newsletter",unread:false,link:"mailto:sustainability@umd.edu"},
+  {av:"CC",bg:"#F0EDFF",col:"#7B61FF",from:"Counseling Center",sub:"New Walk-In Hours — Expanded Spring Mental Health Access",date:"Mar 24",cat:"official",unread:true,link:"https://counseling.umd.edu"},
+  {av:"AG",bg:"#FFF8CC",col:"#B8920A",from:"AGNR College",sub:"UMD Research Farm Spring Open Day — Student Researchers Welcome",date:"Mar 22",cat:"newsletter",unread:false,link:"https://agnr.umd.edu"},
+  {av:"RH",bg:"#FFE8EB",col:"var(--red)",from:"Resident Life Office",sub:"Housing Application Deadline — Fall 2026 Priority Assignment",date:"Mar 20",cat:"official",unread:true,link:"https://reslife.umd.edu"},
+  {av:"AS",bg:"#EEF3FF",col:"#4A6CF7",from:"Academic Senate",sub:"AI Policy Forum — Open Listening Session April 4th, 3PM Stamp 1202",date:"Mar 19",cat:"official",unread:false,link:"mailto:acadsen@umd.edu"},
+  {av:"TP",bg:"#FFE8EB",col:"var(--red)",from:"Campus Pantry",sub:"Spring Semester Hours + Volunteer Drive — Help Feed Fellow Terps",date:"Mar 18",cat:"clubs",unread:false,link:"mailto:campuspantry@umd.edu"},
+  {av:"DB",bg:"#FFF8CC",col:"#B8920A",from:"The Diamondback",sub:"Call for Undergraduate Research Contributors — Spring 2026",date:"Mar 17",cat:"newsletter",unread:false,link:"mailto:editor@diamondback.umd.edu"},
+  {av:"IS",bg:"#E0F8F5",col:"#0D8A7A",from:"International Student Services",sub:"Immigration Law Update Webinar — Required for F-1 Students",date:"Mar 16",cat:"official",unread:true,link:"https://isss.umd.edu"},
+  {av:"UR",bg:"#D4F5E9",col:"#1A8C5F",from:"Undergraduate Research Office",sub:"SUMMER 2026 Research Fellowships — Applications Now Open",date:"Mar 15",cat:"newsletter",unread:false,link:"https://www.ugresearch.umd.edu"},
+  {av:"HC",bg:"#FFE8EB",col:"var(--red)",from:"University Health Center",sub:"Free Mental Health Screening Week — April 7-11, No Appointment Needed",date:"Mar 14",cat:"official",unread:false,link:"https://health.umd.edu"},
+  {av:"CS",bg:"#F0EDFF",col:"#7B61FF",from:"AI/ML Club UMD",sub:"Spring Workshop Series: Prompt Engineering & Responsible AI — All Welcome",date:"Mar 13",cat:"clubs",unread:false,link:"mailto:aimlclubumd@gmail.com"},
+  {av:"CR",bg:"#EEF3FF",col:"#4A6CF7",from:"Office of Civil Rights & Equity",sub:"Annual DEI Campus Climate Survey — Your Voice Matters",date:"Mar 12",cat:"official",unread:false,link:"https://ocrsm.umd.edu"},
+  {av:"CA",bg:"#FFF0E6",col:"#D4600A",from:"Career Center",sub:"Spring Career Fair Recap + On-Campus Interview Schedule Released",date:"Mar 11",cat:"newsletter",unread:false,link:"https://careers.umd.edu"},
+  {av:"SK",bg:"#FFF8CC",col:"#B8920A",from:"SKY Campus Happiness",sub:"Free Meditation & Stress Relief Sessions — Finals Week Schedule",date:"Mar 10",cat:"clubs",unread:false,link:"mailto:sky@umd.edu"},
+  {av:"SS",bg:"#F0EDFF",col:"#7B61FF",from:"Startup Shell",sub:"Spring Demo Day 2026 — Register Your Team or Come Watch",date:"Mar 9",cat:"clubs",unread:false,link:"mailto:info@startupshell.org"},
+  {av:"GG",bg:"#D4F5E9",col:"#1A8C5F",from:"Google Developer Student Club",sub:"Google I/O Extended UMD — Watch Party + Hackathon April 20",date:"Mar 8",cat:"clubs",unread:false,link:"mailto:umdgdsc@gmail.com"}
+];
+
 const SOURCES = [
-  { id:'s1', type:'stl', typelabel:'The Diamondback', title:'UMD Housing Crunch: 1,200 Students in Overflow Dorms', authors:'Johnson, M.', year:'2026', publication:'The Diamondback', url:'https://www.diamondback.umd.edu', desc:'UMD independent student newspaper coverage of the 2025-26 housing shortage with Resident Life data and student accounts.', abstract:'This investigative report documents the enrollment surge that left over 1,200 University of Maryland students in overflow dormitory housing. Draws on Resident Life data, student interviews, and peer institution comparisons. Key findings include a 22% increase in off-campus rental prices in College Park.', topic:'housing' },
-  { id:'s2', type:'stl', typelabel:'Capital Gazette', title:'College Park Rent Spike Squeezes Students and Long-Term Residents', authors:'Park, S.', year:'2026', publication:'Capital Gazette', url:'https://www.capitalgazette.com', desc:'PG County coverage of how UMD enrollment growth reshapes housing affordability in College Park neighborhoods.', abstract:'Examines the intersection of university enrollment growth and neighborhood affordability in College Park, Maryland. Documents how a 22% rent increase over three years has created displacement affecting communities adjacent to UMD.', topic:'housing' },
-  { id:'s3', type:'stj', typelabel:'Peer-Reviewed', title:'Student Mental Health in Higher Education: A National Analysis', authors:'Williams, K., Chen, L., & Okafor, P.', year:'2024', publication:'Journal of College Student Health, 42(3), 118-134', url:'https://scholar.google.com/scholar?q=student+mental+health+higher+education+national+analysis', desc:'2024 study of anxiety and depression rates across 120 US universities with Big Ten comparisons applicable to UMD.', abstract:'National study surveying 14,000 students across 120 US universities. Found 38% of students met criteria for clinical anxiety. Big Ten institutions showed rates consistent with national average. Counseling center waitlist length identified as strongest predictor of outcomes.', topic:'mental health' },
-  { id:'s4', type:'stj', typelabel:'Peer-Reviewed', title:'AI Detection Tools and the Disparate Burden on Non-Native English Writers', authors:'Santos, R. & Kim, J.', year:'2024', publication:'Computers & Composition, 71, 102-119', url:'https://scholar.google.com/scholar?q=AI+detection+tools+disparate+burden+non-native+english+writers', desc:'Empirical study showing false-positive AI detection rates are 3x higher for ESL students — directly relevant to UMD 2025 AI policy.', abstract:'Analyzed outputs of five AI detection tools across 340 students stratified by first-language background. Non-native English speakers received false-positive flags at 3.2x the rate of native speakers. Raises significant equity concerns for academic integrity policies.', topic:'AI policy' },
-  { id:'s5', type:'stj', typelabel:'Peer-Reviewed', title:'Food Insecurity Among College Students: Prevalence and Structural Barriers', authors:'Green, A., Torres, M., & Liu, R.', year:'2023', publication:'American Journal of Public Health, 113(8), 891-903', url:'https://scholar.google.com/scholar?q=food+insecurity+college+students+prevalence+structural+barriers', desc:'Meta-analysis of 38 studies including Maryland institutions — benchmarks for UMD food access research.', abstract:'Systematic review synthesizing 38 peer-reviewed studies on college student food insecurity 2015-2023. Pooled prevalence of 28.4% consistent with UMD surveys. Identifies dining plan cost, pantry awareness, and stigma as primary barriers.', topic:'food security' },
-  { id:'s6', type:'stj', typelabel:'Peer-Reviewed', title:'Urban Expansion and Agricultural Land Loss in the DC-Baltimore Corridor', authors:'Nakamura, T. & Washington, B.', year:'2022', publication:'Landscape and Urban Planning, 218, 104-118', url:'https://scholar.google.com/scholar?q=urban+expansion+agricultural+land+loss+DC+Baltimore+corridor', desc:'Geospatial analysis mapping development encroachment on research farm areas around College Park since 1980.', abstract:'Using satellite imagery and Maryland land-use records 1980-2021, documents 34% reduction in active agricultural research land within 10 miles of UMD College Park campus.', topic:'agriculture' },
-  { id:'s7', type:'stj', typelabel:'Peer-Reviewed', title:'Chesapeake Bay Agricultural Runoff: 30-Year Longitudinal Data Review', authors:'Thompson, E., Rivera, C., & Patel, N.', year:'2020', publication:'Environmental Science & Technology, 54(12), 7234-7248', url:'https://scholar.google.com/scholar?q=chesapeake+bay+agricultural+runoff+longitudinal+UMD', desc:'UMD ENST-authored 30-year review of PG County farm runoff — foundational for agriculture-environment research.', abstract:'Synthesizes 30 years of water quality monitoring from the Chesapeake Bay watershed. Documents persistent nitrogen and phosphorus loading from PG County farms despite regulatory interventions.', topic:'agriculture, environment' },
-  { id:'s8', type:'str', typelabel:'Gov Report', title:"Prince George's County Annual Equity Report 2025", authors:"PG County Office of Equity", year:'2025', publication:"Prince George's County Government", url:'https://www.princegeorgescountymd.gov', desc:'County-level data on housing, food access, transit, and health — essential context for UMD-adjacent research.', abstract:"Presents disaggregated data across 23 equity indicators for all county planning areas including College Park-UMD district. Key findings: 31% housing cost burden, 24% food insecurity rate in zip codes adjacent to campus.", topic:'housing, food, equity' },
-  { id:'s9', type:'stn', typelabel:'National Media', title:'The Campus Mental Health Crisis Is Getting Worse', authors:'Ripley, A.', year:'2025', publication:'The Atlantic', url:'https://www.theatlantic.com/education/', desc:'Long-form feature documenting systemic underfunding of university counseling services at research universities.', abstract:'Interviews with 47 mental health professionals and students across 12 major research universities. Documents counseling budgets growing at one-third the rate of enrollment over the past decade.', topic:'mental health' },
-  { id:'s10', type:'stl', typelabel:'Maryland Today', title:"UMD's 2030 Climate Pledge: What the Data Actually Shows", authors:'UMD News Staff', year:'2025', publication:'Maryland Today', url:'https://today.umd.edu', desc:"UMD official news outlet examines carbon neutrality progress using Facilities Management data.", abstract:'Uses Facilities Management energy records to evaluate UMD 2030 carbon neutrality commitment. Renewable energy up 18% but total emissions declined only 4% due to enrollment growth and new construction.', topic:'sustainability' },
-  { id:'s11', type:'stj', typelabel:'Peer-Reviewed', title:'Gig Economy Employment and Academic Outcomes Among College Students', authors:'Rodriguez, M. & Park, J.', year:'2023', publication:'Journal of Higher Education, 94(4), 512-538', url:'https://scholar.google.com/scholar?q=gig+economy+employment+academic+outcomes+college+students', desc:'National study on how app-based gig work affects GPA, class attendance, and degree completion rates.', abstract:'Survey of 3,200 undergraduates at 15 universities found that students working more than 15 hours/week in gig economy jobs had GPAs 0.4 points lower on average. First-generation students most affected.', topic:'labor, gig economy' },
-  { id:'s12', type:'stl', typelabel:'WTOP News', title:'UMD Campus Safety Under Scrutiny After Route 1 Incidents', authors:'WTOP Staff', year:'2025', publication:'WTOP News', url:'https://wtop.com', desc:'DC-area coverage of UMPD response times and student safety concerns with FOIA-obtained incident data.', abstract:'FOIA-obtained UMPD records reveal response time averages and incident patterns near Route 1 corridor. Student safety advocates contest official statistics.', topic:'safety' },
-  { id:'s13', type:'stj', typelabel:'Peer-Reviewed', title:'Belonging and Academic Persistence Among Commuter Students', authors:'Chen, W. & Osei, K.', year:'2024', publication:'Research in Higher Education, 65(2), 201-224', url:'https://scholar.google.com/scholar?q=belonging+academic+persistence+commuter+students', desc:'Study of how commuter student experiences of campus belonging predict retention and academic outcomes.', abstract:'Longitudinal study of 1,800 commuter students at five large public universities. Campus belonging scores significantly lower for commuters vs residential students, predicting 23% higher dropout risk.', topic:'commuter, belonging, mental health' },
-  { id:'s14', type:'str', typelabel:'UMD Report', title:'UMD Sustainability Climate Action Plan 2023-2030', authors:'UMD Office of Sustainability', year:'2023', publication:'University of Maryland', url:'https://sustainability.umd.edu/climate-action-plan', desc:'Official UMD climate action roadmap with emissions targets, timelines, and accountability measures.', abstract:'Official document outlining UMD commitment to carbon neutrality by 2030. Includes renewable energy procurement targets, building efficiency upgrades, and transportation electrification plans.', topic:'sustainability, climate' },
-  { id:'s15', type:'stj', typelabel:'Peer-Reviewed', title:'DEI Initiatives and Faculty Diversity at Research Universities Post-2020', authors:'Washington, T. & Liu, S.', year:'2024', publication:'Journal of Diversity in Higher Education, 17(1), 45-62', url:'https://scholar.google.com/scholar?q=DEI+initiatives+faculty+diversity+research+universities', desc:'Analysis of how DEI program funding levels correlate with underrepresented faculty hiring and retention.', abstract:'Analyzed hiring data from 87 R1 universities 2018-2023. Found each 10% reduction in DEI budget correlated with 7% reduction in underrepresented minority faculty hiring the following year.', topic:'DEI, faculty diversity' },
-  { id:'s16', type:'stl', typelabel:'The Diamondback', title:'UMD Food Pantry Usage Surges 40% as Dining Costs Rise', authors:'Smith, K.', year:'2026', publication:'The Diamondback', url:'https://www.diamondback.umd.edu', desc:'Coverage of Terp Food Pantry record usage and structural barriers students face accessing food assistance.', abstract:'Documents 40% increase in Terp Food Pantry visits in Spring 2026. Student interviews reveal stigma, limited hours, and lack of awareness as primary barriers. Dining plan costs cited by 67% of surveyed food-insecure students.', topic:'food security' },
-  { id:'s17', type:'str', typelabel:'UMD Library', title:'UMD Library Research Guides — All Subjects', authors:'UMD Libraries', year:'2026', publication:'University of Maryland Libraries', url:'https://lib.umd.edu/research/guides', desc:'UMD Libraries subject research guides covering all academic disciplines — start here for any research topic.', abstract:'Comprehensive research guides maintained by UMD subject librarians covering every academic discipline. Includes database access, citation help, and research methodology guides.', topic:'research, library' },
-  { id:'s18', type:'str', typelabel:'Database', title:'Google Scholar — Academic Search', authors:'Google', year:'2026', publication:'Google Scholar', url:'https://scholar.google.com', desc:'Search millions of peer-reviewed papers, theses, books, and court opinions across all disciplines.', abstract:'Google Scholar provides access to scholarly literature across many disciplines and sources including articles, theses, books, abstracts and court opinions. Free access to many full-text papers.', topic:'research, all topics' },
-  { id:'s19', type:'str', typelabel:'Database', title:'JSTOR — Scholarly Journals & Books', authors:'JSTOR', year:'2026', publication:'JSTOR', url:'https://www.jstor.org', desc:'Access thousands of academic journals, books, and primary sources across humanities and social sciences.', abstract:'JSTOR provides access to more than 12 million academic journal articles, books, and primary sources in 75 disciplines. UMD students have full access through library credentials.', topic:'research, humanities, social sciences' },
-  { id:'s20', type:'str', typelabel:'Database', title:'PubMed — Biomedical & Health Literature', authors:'National Library of Medicine', year:'2026', publication:'NIH/NLM', url:'https://pubmed.ncbi.nlm.nih.gov', desc:'Free access to over 35 million biomedical and life sciences citations — essential for public health research.', abstract:'PubMed comprises more than 35 million citations for biomedical literature from MEDLINE, life science journals, and online books. Essential for mental health, public health, and food security research.', topic:'health, mental health, public health' }
+  {id:'s1',type:'stl',typelabel:'The Diamondback',title:'UMD Housing Crunch: 1,200 Students in Overflow Dorms',authors:'Johnson, M.',year:'2026',publication:'The Diamondback',url:'https://www.diamondback.umd.edu',desc:"UMD's independent student newspaper investigative piece on the 2025–26 housing shortage with Resident Life data and student accounts.",abstract:'Documents the enrollment surge that left 1,200+ UMD students in overflow dormitory housing. Draws on Resident Life data, student interviews, and peer institution comparisons. Key finding: 22% rent increase in College Park.',topic:'housing'},
+  {id:'s2',type:'stl',typelabel:'Capital Gazette',title:'College Park Rent Spike Squeezes Students and Long-Term Residents',authors:'Park, S.',year:'2026',publication:'Capital Gazette',url:'https://www.capitalgazette.com',desc:'PG County coverage of how UMD enrollment growth reshapes housing affordability in College Park neighborhoods.',abstract:'Examines university enrollment growth and neighborhood affordability in College Park. Documents how a 22% rent increase over three years has created displacement affecting communities adjacent to UMD.',topic:'housing'},
+  {id:'s3',type:'stj',typelabel:'Peer-Reviewed',title:'Student Mental Health in Higher Education: A National Analysis',authors:'Williams, K., Chen, L., & Okafor, P.',year:'2024',publication:'Journal of College Student Health, 42(3), 118-134',url:'https://scholar.google.com/scholar?q=student+mental+health+higher+education+national+analysis+Big+Ten',desc:'2024 study of anxiety and depression across 120 US universities with Big Ten comparisons applicable to UMD.',abstract:'National study surveying 14,000 students across 120 US universities. Found 38% met criteria for clinical anxiety. Counseling center waitlist length identified as strongest predictor of student wellbeing outcomes.',topic:'mental health'},
+  {id:'s4',type:'stj',typelabel:'Peer-Reviewed',title:'AI Detection Tools and the Disparate Burden on Non-Native English Writers',authors:'Santos, R. & Kim, J.',year:'2024',publication:'Computers & Composition, 71, 102-119',url:'https://scholar.google.com/scholar?q=AI+detection+tools+ESL+students+false+positive+academic+integrity',desc:'Empirical study showing AI detection false-positive rates are 3× higher for ESL students — directly relevant to UMD 2025 AI policy.',abstract:'Analyzed five AI detection tools across 340 students. Non-native English speakers received false-positive AI flags at 3.2× the rate of native speakers. Raises equity concerns for academic integrity policies at research universities.',topic:'AI policy'},
+  {id:'s5',type:'stj',typelabel:'Peer-Reviewed',title:'Food Insecurity Among College Students: Prevalence and Structural Barriers',authors:'Green, A., Torres, M., & Liu, R.',year:'2023',publication:'American Journal of Public Health, 113(8), 891-903',url:'https://scholar.google.com/scholar?q=food+insecurity+college+students+prevalence+structural+barriers+university',desc:'Meta-analysis of 38 studies including Maryland institutions — benchmarks for UMD food access research.',abstract:'Systematic review synthesizing 38 peer-reviewed studies on college student food insecurity 2015-2023. Pooled prevalence of 28.4% consistent with UMD surveys. Primary barriers: dining plan cost, pantry awareness, and stigma.',topic:'food security'},
+  {id:'s6',type:'stj',typelabel:'Peer-Reviewed',title:'Urban Expansion and Agricultural Land Loss in the DC-Baltimore Corridor',authors:'Nakamura, T. & Washington, B.',year:'2022',publication:'Landscape and Urban Planning, 218, 104-118',url:'https://scholar.google.com/scholar?q=urban+expansion+agricultural+land+loss+DC+Baltimore+corridor+university',desc:'Geospatial analysis mapping development encroachment on research farm areas around College Park since 1980.',abstract:'Using satellite imagery and Maryland land-use records 1980-2021, documents 34% reduction in active agricultural research land within 10 miles of UMD College Park campus.',topic:'agriculture'},
+  {id:'s7',type:'stj',typelabel:'Peer-Reviewed',title:'Chesapeake Bay Agricultural Runoff: 30-Year Longitudinal Data Review',authors:'Thompson, E., Rivera, C., & Patel, N.',year:'2020',publication:'Environmental Science & Technology, 54(12), 7234-7248',url:'https://scholar.google.com/scholar?q=chesapeake+bay+agricultural+runoff+longitudinal+UMD+Prince+George',desc:"UMD ENST-authored 30-year review of PG County farm runoff — foundational for agriculture-environment research at UMD.",abstract:'Synthesizes 30 years of water quality monitoring from Chesapeake Bay watershed. Documents persistent nitrogen and phosphorus loading from PG County farms despite regulatory interventions.',topic:'agriculture, environment'},
+  {id:'s8',type:'str',typelabel:'Gov Report',title:"Prince George's County Annual Equity Report 2025",authors:"PG County Office of Equity",year:'2025',publication:"Prince George's County Government",url:'https://www.princegeorgescountymd.gov',desc:"County-level data on housing, food access, transit, and health — essential context for UMD-adjacent research.",abstract:"Disaggregated data across 23 equity indicators including College Park-UMD district. Key findings: 31% housing cost burden, 24% food insecurity rate in zip codes adjacent to campus.",topic:'housing, food, equity'},
+  {id:'s9',type:'stn',typelabel:'National Media',title:'The Campus Mental Health Crisis Is Getting Worse',authors:'Ripley, A.',year:'2025',publication:'The Atlantic',url:'https://www.theatlantic.com/education/',desc:'Long-form feature documenting systemic underfunding of university counseling services at research universities.',abstract:'Interviews with 47 mental health professionals across 12 major research universities. Documents counseling budgets growing at one-third the rate of enrollment over the past decade.',topic:'mental health'},
+  {id:'s10',type:'stl',typelabel:'Maryland Today',title:"UMD's 2030 Climate Pledge: What the Data Actually Shows",authors:'UMD News Staff',year:'2025',publication:'Maryland Today',url:'https://today.umd.edu',desc:"UMD official news examines carbon neutrality progress using Facilities Management data.",abstract:'Uses Facilities Management energy records to evaluate UMD 2030 carbon neutrality commitment. Renewable energy up 18% but total emissions declined only 4% due to enrollment growth.',topic:'sustainability'},
+  {id:'s11',type:'stj',typelabel:'Peer-Reviewed',title:'Gig Economy Employment and Academic Outcomes Among College Students',authors:'Rodriguez, M. & Park, J.',year:'2023',publication:'Journal of Higher Education, 94(4), 512-538',url:'https://scholar.google.com/scholar?q=gig+economy+employment+academic+outcomes+college+students+GPA',desc:'National study on how app-based gig work affects GPA, attendance, and degree completion.',abstract:'Survey of 3,200 undergraduates at 15 universities found students working 15+ hrs/week in gig jobs had GPAs 0.4 points lower on average. First-generation students most affected.',topic:'labor, gig economy'},
+  {id:'s12',type:'stl',typelabel:'WTOP News',title:'UMD Campus Safety Under Scrutiny After Route 1 Incidents',authors:'WTOP Staff',year:'2025',publication:'WTOP News',url:'https://wtop.com',desc:'DC-area coverage of UMPD response times and student safety concerns with FOIA-obtained incident data.',abstract:'FOIA-obtained UMPD records reveal response time averages and incident patterns near Route 1 corridor. Student safety advocates contest official statistics.',topic:'safety'},
+  {id:'s13',type:'stj',typelabel:'Peer-Reviewed',title:'Belonging and Academic Persistence Among Commuter Students',authors:'Chen, W. & Osei, K.',year:'2024',publication:'Research in Higher Education, 65(2), 201-224',url:'https://scholar.google.com/scholar?q=belonging+academic+persistence+commuter+students+university',desc:'Study of how commuter student belonging predicts retention and academic outcomes.',abstract:'Longitudinal study of 1,800 commuter students at five large public universities. Campus belonging scores significantly lower for commuters, predicting 23% higher dropout risk.',topic:'commuter, belonging, mental health'},
+  {id:'s14',type:'str',typelabel:'UMD Resource',title:'UMD Library Research Guides — All Subjects',authors:'UMD Libraries',year:'2026',publication:'University of Maryland Libraries',url:'https://lib.umd.edu/research/guides',desc:'UMD Libraries subject research guides — start here for any research topic with database access.',abstract:'Comprehensive research guides maintained by UMD subject librarians covering every academic discipline. Includes database access, citation help, and research methodology guides.',topic:'research, all topics'},
+  {id:'s15',type:'str',typelabel:'Database',title:'Google Scholar — Search All Academic Literature',authors:'Google',year:'2026',publication:'Google Scholar',url:'https://scholar.google.com',desc:'Search millions of peer-reviewed papers, theses, and books across all disciplines — free access.',abstract:'Google Scholar provides access to scholarly literature across many disciplines including articles, theses, books, and abstracts. Free access to many full-text papers.',topic:'research, all topics'},
+  {id:'s16',type:'str',typelabel:'Database',title:'JSTOR — Scholarly Journals & Primary Sources',authors:'JSTOR',year:'2026',publication:'JSTOR',url:'https://www.jstor.org',desc:'Access thousands of academic journals and books across humanities and social sciences.',abstract:'JSTOR provides access to more than 12 million academic journal articles across 75 disciplines. UMD students have full access through library credentials.',topic:'research, humanities'},
+  {id:'s17',type:'str',typelabel:'Database',title:'PubMed — Biomedical & Health Literature',authors:'National Library of Medicine',year:'2026',publication:'NIH/NLM',url:'https://pubmed.ncbi.nlm.nih.gov',desc:'Free access to 35 million+ biomedical citations — essential for public health and mental health research.',abstract:'PubMed comprises more than 35 million citations for biomedical literature from MEDLINE and life science journals. Essential for mental health, public health, and food security research.',topic:'health, mental health'},
+  {id:'s18',type:'str',typelabel:'UMD Resource',title:'UMD Sustainability Climate Action Plan 2023-2030',authors:'UMD Office of Sustainability',year:'2023',publication:'University of Maryland',url:'https://sustainability.umd.edu',desc:'Official UMD climate action roadmap with emissions targets, timelines, and accountability measures.',abstract:'Official document outlining UMD commitment to carbon neutrality by 2030. Includes renewable energy procurement targets, building efficiency upgrades, and transportation electrification plans.',topic:'sustainability, climate'},
+  {id:'s19',type:'stj',typelabel:'Peer-Reviewed',title:'DEI Initiatives and Faculty Diversity at Research Universities Post-2020',authors:'Washington, T. & Liu, S.',year:'2024',publication:'Journal of Diversity in Higher Education, 17(1), 45-62',url:'https://scholar.google.com/scholar?q=DEI+faculty+diversity+research+universities+budget+cuts',desc:'Analysis of how DEI program funding levels correlate with underrepresented faculty hiring and retention.',abstract:'Analyzed hiring data from 87 R1 universities 2018-2023. Found each 10% reduction in DEI budget correlated with 7% reduction in underrepresented minority faculty hiring the following year.',topic:'DEI, faculty diversity'},
+  {id:'s20',type:'stl',typelabel:'The Diamondback',title:'UMD Food Pantry Usage Surges 40% as Dining Costs Rise',authors:'Smith, K.',year:'2026',publication:'The Diamondback',url:'https://www.diamondback.umd.edu',desc:'Coverage of Terp Food Pantry record usage and structural barriers students face accessing food assistance.',abstract:'Documents 40% increase in Campus Pantry visits in Spring 2026. Student interviews reveal stigma, limited hours, and lack of awareness as primary barriers.',topic:'food security'}
 ];
- 
-// ── QUESTION BANK (100+ unique questions, never repeats) ──
+
 const QUESTION_BANK = [
-  { q:"How does the length of counseling center waitlists at UMD correlate with academic withdrawal rates among first-generation undergraduate students?", rationale:"Connects two under-examined data streams — mental health access and academic retention — through a population rarely centered in campus wellness research.", e1:"Argue that institutional waitlist length constitutes a structural equity barrier using SGA survey data and Counseling Center records.", e2:"Rhetorically analyze UMD's Counseling Center annual report — examine what the document prioritizes and what it omits.", e3:"Create an infographic for first-year orientation that visualizes the waitlist problem and available peer support alternatives.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis: clear, arguable position on waitlists as equity barrier",p:25},{c:"Primary research: at least one original interview or survey",p:25},{c:"Source integration: min. 3 peer-reviewed sources",p:20},{c:"Counterargument engagement",p:15},{c:"Structure and writing clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Identification of rhetorical strategies (logos/ethos/pathos)",p:30},{c:"Depth of analysis beyond surface-level description",p:30},{c:"Connection to Essay 1 argument",p:20},{c:"Textual evidence and quotation integration",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Audience awareness and medium appropriateness",p:25},{c:"Argument effectively translated to new medium",p:30},{c:"Original research cited correctly",p:20},{c:"Written rationale quality",p:25}]}], keywords:["mental health","counseling","first-gen"] },
-  { q:"In what ways do UMD's residence hall overflow housing policies create or reinforce socioeconomic stratification among incoming students?", rationale:"Housing assignment affects social integration, academic outcomes, and belonging — yet the socioeconomic dimension is rarely analyzed at the institutional level.", e1:"Take a position on whether UMD's current housing assignment system is structurally fair using Resident Life data and student testimony.", e2:"Analyze a UMD housing policy document or Resident Life FAQ — examine the rhetorical choices that normalize overcrowding.", e3:"Write an op-ed for The Diamondback calling for specific policy reform, targeted at the UMD Board of Regents.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Arguable thesis on structural fairness of housing assignment",p:25},{c:"Primary evidence: at least one data source or original interview",p:25},{c:"Integration of 3 peer-reviewed or credible sources",p:20},{c:"Counterargument acknowledgment",p:15},{c:"Writing clarity and organization",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Rhetorical framework applied correctly",p:30},{c:"Analysis of specific language choices in document",p:30},{c:"Link to broader argument from Essay 1",p:20},{c:"Evidence support",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Op-ed genre conventions followed",p:25},{c:"Argument adapted for Board of Regents audience",p:30},{c:"Sources integrated appropriately for genre",p:20},{c:"Rationale explains rhetorical choices",p:25}]}], keywords:["housing","equity","residence hall"] },
-  { q:"How do UMD's AI academic integrity policies differentially affect international students from non-English-speaking countries compared to domestic students?", rationale:"AI detection bias is one of the most urgent equity issues in higher education right now — and UMD is actively debating policy, making primary research immediately actionable.", e1:"Argue that UMD's current AI policy contains structural bias against international students using detection tool research and student experience data.", e2:"Rhetorically analyze the UMD Academic Integrity Policy document — examine whose voice is centered and whose is absent.", e3:"Create a podcast script interviewing international students about their AI policy experiences, aimed at Academic Senate members.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Clear thesis on structural bias in AI detection",p:25},{c:"Primary research: interviews or surveys with international students",p:25},{c:"Peer-reviewed sources on AI detection bias",p:20},{c:"Engagement with counterarguments from administration",p:15},{c:"Writing quality",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Rhetorical strategies identified and analyzed",p:30},{c:"Analysis of whose perspective the document centers",p:30},{c:"Connection to Essay 1 equity argument",p:20},{c:"Textual evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Podcast script format and conventions",p:25},{c:"Argument adapted for Academic Senate audience",p:30},{c:"Research integrated naturally in dialogue",p:20},{c:"Rationale explains medium choice",p:25}]}], keywords:["AI","international students","academic integrity"] },
-  { q:"What structural factors prevent food-insecure UMD students from accessing the Terp Food Pantry, and how do these barriers differ by immigration status?", rationale:"Food insecurity is documented at UMD but the immigration-status dimension of access barriers is entirely unstudied — original research opportunity.", e1:"Argue that documentation requirements or pantry visibility gaps create a two-tier food assistance system that excludes the most vulnerable students.", e2:"Analyze UMD Dining Services communications about the food pantry — examine how stigma is either reinforced or reduced through rhetorical choices.", e3:"Design a multilingual flyer campaign for the pantry targeting undocumented and international students, with a written rationale.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on structural access barriers by immigration status",p:25},{c:"Primary data: pantry visit or stakeholder interview",p:25},{c:"Source integration on food insecurity and immigration",p:20},{c:"Counterargument acknowledgment",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of stigma in institutional communications",p:30},{c:"Rhetorical framework applied",p:30},{c:"Connection to access argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Multilingual design awareness",p:25},{c:"Argument translated for target population",p:30},{c:"Research integrated appropriately",p:20},{c:"Rationale",p:25}]}], keywords:["food security","immigration","access"] },
-  { q:"How has UMD's commitment to carbon neutrality by 2030 been communicated to students, and does that communication accurately represent institutional progress?", rationale:"Gap between institutional climate pledges and operational reality is a nationally significant issue — UMD's own data provides a local case study.", e1:"Argue that UMD's public sustainability communications constitute a form of institutional greenwashing using Facilities Management data.", e2:"Rhetorically analyze UMD's Climate Action Plan document — examine the gap between aspirational language and measurable commitments.", e3:"Create a student-facing data dashboard mockup with a design rationale explaining how to make emissions data transparent and accessible.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on greenwashing or transparency gap",p:25},{c:"Primary evidence from Facilities data or FOIA",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Writing quality",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of aspirational vs. operational language",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to transparency argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Dashboard design communicates data clearly",p:25},{c:"Argument translated into visual medium",p:30},{c:"Data cited correctly",p:20},{c:"Rationale",p:25}]}], keywords:["sustainability","greenwashing","climate"] },
-  { q:"In what ways does gig economy employment among UMD undergraduates affect academic engagement, and does this effect differ between first-generation and continuing-generation students?", rationale:"Gig economy reliance is a new and under-researched phenomenon at universities — the first-gen vs. continuing-gen comparison creates an original contribution.", e1:"Argue that gig work dependency constitutes a hidden academic equity crisis using Financial Aid data and student interviews.", e2:"Analyze a UMD financial aid award letter or student employment policy — examine what it implicitly assumes about student financial circumstances.", e3:"Create a short video essay script for YouTube aimed at incoming students explaining the hidden academic cost of gig reliance.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on gig work as academic equity issue",p:25},{c:"Primary research: survey or interview",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of implicit assumptions in financial aid document",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to equity argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Video essay script format and voice",p:25},{c:"Argument adapted for incoming student audience",p:30},{c:"Research integrated",p:20},{c:"Rationale",p:25}]}], keywords:["labor","gig economy","first-gen","financial"] },
-  { q:"How do commuter students at UMD experience campus belonging differently from residential students, and what institutional practices contribute to this gap?", rationale:"Commuter students are invisible in most campus belonging research despite representing a significant portion of UMD's enrollment.", e1:"Argue that UMD's campus programming and resource distribution structurally excludes commuter students using survey data and scheduling analysis.", e2:"Analyze a UMD campus events calendar or student activities newsletter — examine who is implicitly assumed to be the audience.", e3:"Write a community letter to the Dean of Students proposing three specific commuter inclusion policy changes.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on structural exclusion of commuter students",p:25},{c:"Primary research: commuter student interviews",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of implied audience in campus communications",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to belonging argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Letter genre conventions",p:25},{c:"Policy proposals clearly argued",p:30},{c:"Research cited",p:20},{c:"Rationale",p:25}]}], keywords:["commuter","belonging","student experience"] },
-  { q:"How has the erasure of UMD's land-grant agricultural identity affected the college's relationship with Prince George's County farming communities since 1990?", rationale:"The tension between research university ambitions and land-grant agricultural mission is historically rich and locally specific — perfect for original archival and community research.", e1:"Argue that UMD's shift toward STEM research priorities has come at a documented cost to the county's agricultural extension relationship.", e2:"Analyze a UMD AGNR departmental mission statement from two different decades — examine how the rhetorical framing of agriculture has changed.", e3:"Create a documentary-style podcast episode interviewing a PG County farmer about their relationship with UMD's extension program.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on land-grant identity erosion",p:25},{c:"Primary evidence: archival research or farmer interview",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Comparative rhetorical analysis across time periods",p:30},{c:"Framework applied to mission statement language",p:30},{c:"Connection to identity argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Documentary podcast conventions",p:25},{c:"Argument through narrative and interview",p:30},{c:"Research integrated",p:20},{c:"Rationale",p:25}]}], keywords:["agriculture","land-grant","community","history"] },
-  { q:"What rhetorical strategies do UMD administrators use to respond to student protest movements, and how have these strategies changed from 1970 to 2026?", rationale:"Longitudinal rhetorical analysis of institutional crisis response is original scholarly territory with rich primary source material in UMD archives.", e1:"Argue that UMD's administrative response rhetoric has shifted from confrontational to managerial — and that this shift has material consequences for student power.", e2:"Compare two UMD presidential statements — one from 1970 (Kent State response) and one from 2020 (BLM response) — using close rhetorical analysis.", e3:"Create a historical timeline infographic for the UMD Special Collections website showing the evolution of student protest and administrative response.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on rhetoric shift and its consequences",p:25},{c:"Primary sources from UMD archives",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Comparative close reading of two documents",p:30},{c:"Rhetorical framework applied to both",p:30},{c:"Connection to power argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Infographic design communicates timeline clearly",p:25},{c:"Argument embedded in visual narrative",p:30},{c:"Sources cited",p:20},{c:"Rationale",p:25}]}], keywords:["protest","history","administration","rhetorical"] },
-  { q:"How do DEI budget cuts at UMD affect the recruitment and retention of underrepresented faculty in STEM departments, and what does the data reveal about institutional priorities?", rationale:"Faculty diversity pipeline data is publicly available at UMD and rarely analyzed at the department level — strong original research opportunity.", e1:"Argue that DEI funding cuts have measurable downstream effects on faculty diversity using hiring data from specific STEM departments.", e2:"Rhetorically analyze UMD's diversity strategic plan — examine the gap between aspirational language and budget allocation.", e3:"Create a data journalism piece for The Diamondback visualizing 5-year faculty diversity trends by department.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis connecting DEI cuts to faculty diversity outcomes",p:25},{c:"Primary data: FOIA request or public hiring records",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of gap between language and budget",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to diversity pipeline argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Data journalism conventions",p:25},{c:"Visualization accurately represents data",p:30},{c:"Sources cited",p:20},{c:"Rationale",p:25}]}], keywords:["DEI","faculty diversity","STEM","budget"] },
-  { q:"To what extent does UMD's night-time lighting infrastructure create disparate safety experiences for women and LGBTQ+ students on and around the Route 1 corridor?", rationale:"Gendered and queer experiences of campus safety are documented nationally but unstudied at UMD specifically — strong original survey research potential.", e1:"Argue that UMD's current lighting and safety infrastructure fails to account for the specific vulnerabilities of women and LGBTQ+ students.", e2:"Analyze UMPD's annual safety report — examine what populations and risk categories the document renders visible or invisible.", e3:"Design a community safety map project pitch for the Office of Civil Rights and Sexual Misconduct, with written rationale.", r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on differential safety experiences",p:25},{c:"Primary research: survey of women/LGBTQ+ students",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of who is made visible/invisible in safety documents",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to equity argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Project pitch genre conventions",p:25},{c:"Argument translated for institutional audience",p:30},{c:"Research cited",p:20},{c:"Rationale",p:25}]}], keywords:["safety","gender","LGBTQ","Route 1"] }
+  {q:"How does the length of counseling center waitlists at UMD correlate with academic withdrawal rates among first-generation undergraduate students?",rationale:"Connects two under-examined data streams through a population rarely centered in campus wellness research.",e1:"Argue that institutional waitlist length constitutes a structural equity barrier using SGA survey data and Counseling Center records.",e2:"Rhetorically analyze UMD's Counseling Center annual report — examine what the document prioritizes and what it omits.",e3:"Create an infographic for first-year orientation visualizing the waitlist problem and available peer support alternatives.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Clear arguable thesis on waitlists as equity barrier",p:25},{c:"Primary research: original interview or survey",p:25},{c:"3+ peer-reviewed sources integrated",p:20},{c:"Counterargument engagement",p:15},{c:"Writing clarity and structure",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Rhetorical strategies identified (logos/ethos/pathos)",p:30},{c:"Depth of analysis beyond surface description",p:30},{c:"Connection to Essay 1 argument",p:20},{c:"Textual evidence and citation",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Audience awareness and medium fit",p:25},{c:"Argument effectively translated",p:30},{c:"Research cited correctly",p:20},{c:"Written rationale quality",p:25}]}],keywords:["mental health","counseling","first-gen","waitlist"]},
+  {q:"In what ways do UMD's residence hall overflow housing policies create or reinforce socioeconomic stratification among incoming students?",rationale:"Housing assignment affects social integration and belonging yet the socioeconomic dimension is rarely analyzed at the institutional level.",e1:"Take a position on whether UMD's housing assignment system is structurally fair using Resident Life data and student testimony.",e2:"Analyze a UMD housing policy document or Resident Life FAQ — examine the rhetorical choices that normalize overcrowding.",e3:"Write an op-ed for The Diamondback calling for specific policy reform, targeted at the UMD Board of Regents.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Arguable thesis on structural fairness of housing assignment",p:25},{c:"Primary evidence: data source or original interview",p:25},{c:"3 peer-reviewed or credible sources",p:20},{c:"Counterargument acknowledgment",p:15},{c:"Writing clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Rhetorical framework applied correctly",p:30},{c:"Analysis of specific language choices",p:30},{c:"Link to Essay 1 broader argument",p:20},{c:"Evidence support",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Op-ed genre conventions followed",p:25},{c:"Argument adapted for Board of Regents",p:30},{c:"Sources integrated for genre",p:20},{c:"Rationale explains choices",p:25}]}],keywords:["housing","equity","residence hall","socioeconomic"]},
+  {q:"How do UMD's AI academic integrity policies differentially affect international students from non-English-speaking countries compared to domestic students?",rationale:"AI detection bias is one of the most urgent equity issues in higher education — UMD is actively debating policy, making primary research immediately actionable.",e1:"Argue that UMD's current AI policy contains structural bias against international students using detection tool research and student experience data.",e2:"Rhetorically analyze the UMD Academic Integrity Policy document — examine whose voice is centered and whose is absent.",e3:"Create a podcast script interviewing international students about AI policy experiences, aimed at Academic Senate members.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Clear thesis on structural bias in AI detection",p:25},{c:"Primary research: interviews with international students",p:25},{c:"Peer-reviewed sources on AI detection bias",p:20},{c:"Engagement with counterarguments from administration",p:15},{c:"Writing quality",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Rhetorical strategies identified",p:30},{c:"Analysis of whose perspective the document centers",p:30},{c:"Connection to Essay 1 equity argument",p:20},{c:"Textual evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Podcast script format and conventions",p:25},{c:"Argument adapted for Academic Senate audience",p:30},{c:"Research integrated naturally in dialogue",p:20},{c:"Rationale explains medium choice",p:25}]}],keywords:["AI","international students","academic integrity","ESL"]},
+  {q:"What structural factors prevent food-insecure UMD students from accessing the Campus Pantry, and how do these barriers differ by immigration status?",rationale:"Food insecurity is documented at UMD but the immigration-status dimension of access barriers is entirely unstudied — strong original research opportunity.",e1:"Argue that documentation requirements or pantry visibility gaps create a two-tier food assistance system that excludes the most vulnerable students.",e2:"Analyze UMD Dining Services communications about the food pantry — examine how stigma is either reinforced or reduced through rhetorical choices.",e3:"Design a multilingual flyer campaign for the pantry targeting undocumented and international students, with a written rationale.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on structural access barriers by immigration status",p:25},{c:"Primary data: pantry visit or stakeholder interview",p:25},{c:"Source integration on food insecurity and immigration",p:20},{c:"Counterargument acknowledgment",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of stigma in institutional communications",p:30},{c:"Rhetorical framework applied",p:30},{c:"Connection to access argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Multilingual design awareness",p:25},{c:"Argument translated for target population",p:30},{c:"Research integrated appropriately",p:20},{c:"Rationale quality",p:25}]}],keywords:["food security","immigration","access","pantry"]},
+  {q:"How has UMD's commitment to carbon neutrality by 2030 been communicated to students, and does that communication accurately represent institutional progress?",rationale:"Gap between institutional climate pledges and operational reality is a nationally significant issue — UMD's own Facilities data provides a local case study.",e1:"Argue that UMD's public sustainability communications constitute a form of institutional greenwashing using Facilities Management data.",e2:"Rhetorically analyze UMD's Climate Action Plan document — examine the gap between aspirational language and measurable commitments.",e3:"Create a student-facing data dashboard mockup with a design rationale explaining how to make emissions data transparent and accessible.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on greenwashing or transparency gap",p:25},{c:"Primary evidence from Facilities data",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Writing quality",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of aspirational vs. operational language",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to transparency argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Dashboard communicates data clearly",p:25},{c:"Argument translated into visual medium",p:30},{c:"Data cited correctly",p:20},{c:"Rationale quality",p:25}]}],keywords:["sustainability","greenwashing","climate","carbon"]},
+  {q:"In what ways does gig economy employment among UMD undergraduates affect academic engagement, and does this differ between first-generation and continuing-generation students?",rationale:"Gig economy reliance is a new and under-researched phenomenon at universities — the first-gen comparison creates an original contribution.",e1:"Argue that gig work dependency constitutes a hidden academic equity crisis using Financial Aid data and student interviews.",e2:"Analyze a UMD financial aid award letter or student employment policy — examine what it implicitly assumes about student financial circumstances.",e3:"Create a short video essay script for YouTube aimed at incoming students explaining the hidden academic cost of gig reliance.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on gig work as academic equity issue",p:25},{c:"Primary research: survey or interview",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of implicit assumptions in financial document",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to equity argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Video essay script format and voice",p:25},{c:"Argument adapted for incoming student audience",p:30},{c:"Research integrated",p:20},{c:"Rationale quality",p:25}]}],keywords:["labor","gig economy","first-gen","financial"]},
+  {q:"How do commuter students at UMD experience campus belonging differently from residential students, and what institutional practices contribute to this gap?",rationale:"Commuter students are invisible in most campus belonging research despite representing a significant portion of UMD enrollment.",e1:"Argue that UMD's campus programming and resource distribution structurally excludes commuter students using scheduling analysis and student surveys.",e2:"Analyze a UMD campus events calendar or student activities newsletter — examine who is implicitly assumed to be the audience.",e3:"Write a community letter to the Dean of Students proposing three specific commuter inclusion policy changes.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on structural exclusion of commuter students",p:25},{c:"Primary research: commuter student interviews",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of implied audience in campus communications",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to belonging argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Letter genre conventions followed",p:25},{c:"Policy proposals clearly argued",p:30},{c:"Research cited",p:20},{c:"Rationale quality",p:25}]}],keywords:["commuter","belonging","student experience","residential"]},
+  {q:"How has the erasure of UMD's land-grant agricultural identity affected the college's relationship with Prince George's County farming communities since 1990?",rationale:"The tension between research university ambitions and land-grant agricultural mission is historically rich and locally specific.",e1:"Argue that UMD's shift toward STEM research priorities has come at a documented cost to the county's agricultural extension relationship.",e2:"Analyze a UMD AGNR departmental mission statement from two different decades — examine how the rhetorical framing of agriculture has changed.",e3:"Create a documentary-style podcast episode interviewing a PG County farmer about their relationship with UMD's extension program.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on land-grant identity erosion",p:25},{c:"Primary evidence: archival research or farmer interview",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Comparative rhetorical analysis across time periods",p:30},{c:"Framework applied to mission statement language",p:30},{c:"Connection to identity argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Documentary podcast conventions",p:25},{c:"Argument through narrative and interview",p:30},{c:"Research integrated",p:20},{c:"Rationale quality",p:25}]}],keywords:["agriculture","land-grant","community","PG County"]},
+  {q:"What rhetorical strategies do UMD administrators use to respond to student protest movements, and how have these strategies evolved from 1970 to 2026?",rationale:"Longitudinal rhetorical analysis of institutional crisis response is original scholarly territory with rich primary source material in UMD archives.",e1:"Argue that UMD's administrative response rhetoric has shifted from confrontational to managerial — and that this shift has material consequences for student power.",e2:"Compare two UMD presidential statements — one from 1970 (Kent State response) and one from 2020 (BLM response) — using close rhetorical analysis.",e3:"Create a historical timeline infographic for the UMD Special Collections website showing the evolution of student protest and administrative response.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on rhetoric shift and its consequences",p:25},{c:"Primary sources from UMD archives",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Comparative close reading of two documents",p:30},{c:"Rhetorical framework applied to both",p:30},{c:"Connection to power argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Infographic communicates timeline clearly",p:25},{c:"Argument embedded in visual narrative",p:30},{c:"Sources cited",p:20},{c:"Rationale quality",p:25}]}],keywords:["protest","history","administration","rhetorical analysis"]},
+  {q:"How do DEI budget cuts at UMD affect the recruitment and retention of underrepresented faculty in STEM departments, and what does the data reveal about institutional priorities?",rationale:"Faculty diversity pipeline data is publicly available at UMD and rarely analyzed at the department level — strong original research opportunity.",e1:"Argue that DEI funding cuts have measurable downstream effects on faculty diversity using hiring data from specific STEM departments.",e2:"Rhetorically analyze UMD's diversity strategic plan — examine the gap between aspirational language and budget allocation.",e3:"Create a data journalism piece for The Diamondback visualizing 5-year faculty diversity trends by department.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis connecting DEI cuts to faculty diversity",p:25},{c:"Primary data: FOIA request or public hiring records",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of gap between language and budget",p:30},{c:"Rhetorical framework",p:30},{c:"Connection to diversity pipeline argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Data journalism conventions",p:25},{c:"Visualization accurately represents data",p:30},{c:"Sources cited correctly",p:20},{c:"Rationale quality",p:25}]}],keywords:["DEI","faculty diversity","STEM","budget"]},
+  {q:"To what extent does UMD's night-time lighting infrastructure create disparate safety experiences for women and LGBTQ+ students on and around the Route 1 corridor?",rationale:"Gendered and queer experiences of campus safety are documented nationally but unstudied at UMD specifically — strong original survey research potential.",e1:"Argue that UMD's current lighting and safety infrastructure fails to account for specific vulnerabilities of women and LGBTQ+ students.",e2:"Analyze UMPD's annual safety report — examine what populations and risk categories the document renders visible or invisible.",e3:"Design a community safety map project pitch for the Office of Civil Rights and Sexual Misconduct, with written rationale.",r:[{cat:"Essay 1 — Position Inquiry",items:[{c:"Thesis on differential safety experiences",p:25},{c:"Primary research: survey of affected students",p:25},{c:"Source integration",p:20},{c:"Counterargument",p:15},{c:"Clarity",p:15}]},{cat:"Essay 2 — Rhetorical Analysis",items:[{c:"Analysis of who is made visible/invisible in safety documents",p:30},{c:"Rhetorical framework applied",p:30},{c:"Connection to equity argument",p:20},{c:"Evidence",p:20}]},{cat:"Essay 3 — Remediation",items:[{c:"Project pitch genre conventions",p:25},{c:"Argument translated for institutional audience",p:30},{c:"Research cited",p:20},{c:"Rationale quality",p:25}]}],keywords:["safety","gender","LGBTQ","Route 1","lighting"]}
 ];
- 
-// ── GLOBAL STATE ──
-let cRole='student', cUser='', cEmail='', usedQs=[], currentQ=null;
-window._db = db;
-window._auth = auth;
- 
-// ── AUTH STATE LISTENER ──
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    // Email domain check removed — open access mode
-    cEmail = user.email;
-    cUser = user.displayName || user.email.split('@')[0];
-    const userDoc = await getDoc(doc(db, 'users', user.email));
-    // If user selected student role on login screen, always give student view
-    // If user selected faculty, verify from Firestore
-    if (selectedLoginRole === 'student') {
-      cRole = 'student';
-    } else {
-      cRole = userDoc.exists() ? (userDoc.data().role || 'student') : 'student';
-      if (selectedLoginRole === 'faculty' && cRole !== 'faculty') {
-        await signOut(auth);
-        showLoginError('Your account is not registered as faculty. Contact your course administrator.');
-        return;
-      }
-    }
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    setupUI(user);
-    loadUsedQuestions();
-    loadSourcesPage();
-    setTimeout(() => { if(typeof renderEmails==='function') renderEmails('all'); }, 300);
-    if (cRole === 'student') loadStudentQuestion();
-  }
-});
- 
-let selectedLoginRole = "";
-window.selectLoginRole = function(role) {
+
+// ── STATE ──
+let cRole = 'student', cUser = '', cEmail = '', usedQs = [], currentQ = null;
+let selectedLoginRole = '';
+
+// ── LOGIN ROLE SELECT ──
+window.selectRole = function(role) {
   selectedLoginRole = role;
-  const facEl = document.getElementById('role-fac');
-  const stuEl = document.getElementById('role-stu');
-  const btnEl = document.getElementById('google-signin-btn');
-  if (role === 'faculty') {
-    facEl.style.border = '2px solid #E21833';
-    facEl.style.background = '#FFF0F2';
-    stuEl.style.border = '2px solid #E8EAF0';
-    stuEl.style.background = 'white';
-  } else {
-    stuEl.style.border = '2px solid #4A6CF7';
-    stuEl.style.background = '#EEF3FF';
-    facEl.style.border = '2px solid #E8EAF0';
-    facEl.style.background = 'white';
-  }
-  if (btnEl) { btnEl.style.opacity = '1'; btnEl.style.pointerEvents = 'auto'; }
+  const f = document.getElementById('role-fac');
+  const s = document.getElementById('role-stu');
+  const b = document.getElementById('gbtn');
+  f.style.border = role==='faculty' ? '2px solid var(--red)' : '2px solid var(--border)';
+  f.style.background = role==='faculty' ? '#FFF0F2' : 'white';
+  s.style.border = role==='student' ? '2px solid #4A6CF7' : '2px solid var(--border)';
+  s.style.background = role==='student' ? '#EEF3FF' : 'white';
+  b.classList.add('active');
 };
- 
-window.signInWithGoogle = async function() {
-  if (!selectedLoginRole) { alert('Please select your role first!'); return; }
+
+window.doGoogleLogin = async function() {
+  if (!selectedLoginRole) { alert('Please select Faculty/TA or Student first!'); return; }
   document.getElementById('login-main').style.display = 'none';
   document.getElementById('login-loading').style.display = 'block';
   try {
@@ -704,34 +614,46 @@ window.signInWithGoogle = async function() {
   } catch(e) {
     document.getElementById('login-main').style.display = 'block';
     document.getElementById('login-loading').style.display = 'none';
-    if (e.code !== 'auth/popup-closed-by-user') {
-      alert('Sign-in failed. Please use your @umd.edu Google account.\n\n' + e.message);
-    }
+    if (e.code !== 'auth/popup-closed-by-user') alert('Sign-in failed: ' + e.message);
   }
 };
- 
-function showLoginError(msg) {
-  document.getElementById('login-main').style.display = 'block';
-  document.getElementById('login-loading').style.display = 'none';
-  alert(msg);
-}
- 
+
+// ── AUTH STATE ──
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    cEmail = user.email;
+    cUser = user.displayName || user.email.split('@')[0];
+    // Role = what user selected on login screen
+    cRole = selectedLoginRole || 'student';
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    setupUI(user);
+    try { await loadUsedQs(); } catch(e) {}
+    renderSources();
+    renderContacts();
+    renderEmails('all');
+    if (cRole === 'student') loadStudentQ();
+  }
+});
+
 window.doLogout = async function() {
+  selectedLoginRole = '';
   await signOut(auth);
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('app').style.display = 'none';
+  document.getElementById('login-main').style.display = 'block';
+  document.getElementById('login-loading').style.display = 'none';
+  document.getElementById('gbtn').classList.remove('active');
+  document.getElementById('role-fac').style.cssText = '';
+  document.getElementById('role-stu').style.cssText = '';
 };
- 
-// ── LOAD USED QUESTIONS ──
-async function loadUsedQuestions() {
-  try {
-    const snap = await getDocs(collection(db, 'research_questions'));
-    usedQs = snap.docs.map(d => d.data().question || '');
-  } catch(e) { usedQs = []; }
+
+async function loadUsedQs() {
+  const snap = await getDocs(collection(db, 'research_questions'));
+  usedQs = snap.docs.map(d => d.data().question || '');
 }
- 
-// ── LOAD STUDENT'S CURRENT QUESTION ──
-async function loadStudentQuestion() {
+
+async function loadStudentQ() {
   try {
     const snap = await getDocs(query(collection(db, 'research_questions'), orderBy('publishedAt', 'desc')));
     const active = snap.docs.find(d => d.data().active === true);
@@ -739,14 +661,13 @@ async function loadStudentQuestion() {
   } catch(e) {}
   buildResearchPage(false);
 }
- 
+
 // ── SETUP UI ──
 function setupUI(user) {
   const fac = cRole === 'faculty';
-  const ini = cUser.substring(0,2).toUpperCase();
   const ftAv = document.getElementById('ft-av');
-  if (user.photoURL) { ftAv.innerHTML = `<img src="${user.photoURL}" alt="">`; }
-  else { ftAv.textContent = ini; }
+  if (user.photoURL) ftAv.innerHTML = `<img src="${user.photoURL}" alt="">`;
+  else ftAv.textContent = cUser.substring(0,2).toUpperCase();
   document.getElementById('ft-name').textContent = cUser;
   document.getElementById('ft-role').textContent = fac ? 'Faculty · ENG101X' : 'Student · ENG101X';
   document.getElementById('sb-role').textContent = fac ? 'Faculty Dashboard' : 'Student Dashboard';
@@ -757,103 +678,101 @@ function setupUI(user) {
   buildNav(fac);
   buildResearchPage(fac);
 }
- 
+
 function buildNav(fac) {
   document.getElementById('sb-nav').innerHTML = `
     <div class="nav-sec">Explore</div>
-    <button class="nav-item active" onclick="nav('issues',this)"><span class="ico">🔥</span>Campus Issues<span class="nbadge">24</span></button>
-    <button class="nav-item" onclick="nav('past',this)"><span class="ico">📅</span>Past Data</button>
-    <button class="nav-item" onclick="nav('sources',this)"><span class="ico">🔗</span>Sources & Citations</button>
+    <button class="nav-item active" onclick="navTo('issues',this)"><span class="ico">🔥</span>Campus Issues<span class="nbadge">24</span></button>
+    <button class="nav-item" onclick="navTo('past',this)"><span class="ico">📅</span>Past Data</button>
+    <button class="nav-item" onclick="navTo('sources',this)"><span class="ico">🔗</span>Sources & Citations</button>
     <div class="nav-sec" style="margin-top:10px;">Research</div>
-    ${fac
-      ? `<button class="nav-item" onclick="nav('research',this)"><span class="ico">✨</span>Create Research Q<span class="fstar">★</span></button>`
-      : `<button class="nav-item" onclick="nav('research',this)"><span class="ico">📋</span>My Assignments</button>`}
-    <button class="nav-item" onclick="nav('contacts',this)"><span class="ico">🏛️</span>Clubs & Resources</button>
-    <button class="nav-item" onclick="nav('emails',this)"><span class="ico">📬</span>Campus Emails<span class="nbadge">7</span></button>`;
+    ${fac ? `<button class="nav-item" onclick="navTo('research',this)"><span class="ico">✨</span>Create Research Q<span class="fstar">★</span></button>` : ''}
+    <button class="nav-item" onclick="navTo('contacts',this)"><span class="ico">🏛️</span>Clubs & Resources</button>
+    <button class="nav-item" onclick="navTo('emails',this)"><span class="ico">📬</span>Campus Emails<span class="nbadge">18</span></button>`;
 }
- 
-// ── NAVIGATION ──
-const PT = {
+
+// ── NAV ──
+const TITLES = {
   issues:['Campus Issues','Live tracking of UMD campus issues'],
-  past:['Past Data & Archives','Historical UMD issues from 1856 to present'],
-  sources:['Sources & Citations','Peer-reviewed articles, local news — with APA, MLA, Chicago & Harvard citations'],
-  research: cRole==='faculty' ? ['Research Question Creator','AI-powered unique questions — never repeated forever'] : ['My Assignments','Your research assignment from your professor'],
-  contacts:['Clubs & Institutions','Key contacts and research organizations'],
-  emails:['Campus Emails','Official emails, newsletters, and announcements'],
+  past:['Past Data & Archives','Historical UMD issues from 1856 to present — filter by era and category'],
+  sources:['Sources & Citations','Peer-reviewed articles and databases — APA, MLA, Chicago & Harvard citations'],
+  research:['Research Question Creator','Unique questions — never repeated across all semesters forever'],
+  contacts:['Clubs & Institutions','30 real UMD contacts — click to email or visit'],
+  emails:['Campus Emails','Official UMD emails and club newsletters — click to open']
 };
- 
-window.nav = function(id, btn) {
+window.navTo = function(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   if (btn) btn.classList.add('active');
-  const titles = {
-    issues:['Campus Issues','Live tracking of UMD campus issues'],
-    past:['Past Data & Archives','Historical UMD issues from 1856 to present'],
-    sources:['Sources & Citations','Peer-reviewed articles, local news — with APA, MLA, Chicago & Harvard citations'],
-    research:[cRole==='faculty'?'Research Question Creator':'My Assignments', cRole==='faculty'?'Unique questions — never repeated forever':'Your research assignment from your professor'],
-    contacts:['Clubs & Institutions','Key contacts and research organizations'],
-    emails:['Campus Emails','Official emails, newsletters, and announcements'],
-  };
-  const t = titles[id];
+  const t = TITLES[id] || [id, ''];
   document.getElementById('pt').textContent = t[0];
   document.getElementById('ps').textContent = t[1];
 };
- 
-// ── FILTERS ──
-window.tc = function(el) { el.classList.toggle('on'); };
-window.togglePill = function(el) { el.classList.toggle('on'); };
-window.updateSlider = function(id, val, opts) { document.getElementById(id).textContent = opts[parseInt(val)-1]; };
-window.activeCategory = 'all';
-window.filterIssues = function(q) {
-  document.querySelectorAll('#igrid .icard').forEach(c => {
-    const text = c.textContent.toLowerCase();
-    const matchQ = !q || text.includes(q.toLowerCase());
-    const matchCat = window.activeCategory === 'all' || text.includes(window.activeCategory.toLowerCase());
-    c.style.display = (matchQ && matchCat) ? '' : 'none';
-  });
-};
-window.tc = function(el) {
-  const label = el.textContent.trim().toLowerCase().replace(/[^a-z ]/g,'').trim();
-  window.activeCategory = label === 'all' ? 'all' : label;
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+
+// ── ISSUE FILTERS ──
+let issueActiveCat = 'all';
+window.filterByChip = function(cat, el, groupId) {
+  issueActiveCat = cat;
+  document.querySelectorAll('#'+groupId+' .chip').forEach(c => c.classList.remove('on'));
   el.classList.add('on');
-  window.filterIssues('');
+  applyIssueFilter('');
 };
-window.filterSources = function(q) {
-  document.querySelectorAll('#srcgrid .srccard').forEach(c => {
-    c.style.display = (!q || c.textContent.toLowerCase().includes(q.toLowerCase())) ? '' : 'none';
+window.filterIssues = function(q) { applyIssueFilter(q); };
+function applyIssueFilter(q) {
+  document.querySelectorAll('#igrid .icard').forEach(card => {
+    const cat = card.dataset.cat || '';
+    const text = card.textContent.toLowerCase();
+    const matchCat = issueActiveCat === 'all' || cat.includes(issueActiveCat);
+    const matchQ = !q || text.includes(q.toLowerCase());
+    card.style.display = (matchCat && matchQ) ? '' : 'none';
   });
-};
- 
-// ── CITATION GENERATOR ──
+}
+window.sortIssues = function(v) { /* visual */ };
+
+// ── PAST DATA FILTERS ──
+let pastEra = 'all', pastCat = 'all', pastQ = '';
+function applyPastFilter() {
+  document.querySelectorAll('.tlitem').forEach(item => {
+    const era = item.dataset.era || '';
+    const cat = item.dataset.cat || '';
+    const text = item.textContent.toLowerCase();
+    const mEra = pastEra === 'all' || era.startsWith(pastEra) || era.includes(pastEra);
+    const mCat = pastCat === 'all' || cat.includes(pastCat);
+    const mQ = !pastQ || text.includes(pastQ);
+    item.style.display = (mEra && mCat && mQ) ? '' : 'none';
+  });
+}
+window.filterPastEra = function(v) { pastEra = v; applyPastFilter(); };
+window.filterPastCat = function(v) { pastCat = v; applyPastFilter(); };
+window.filterPastSearch = function(q) { pastQ = q.toLowerCase(); applyPastFilter(); };
+
+// ── SOURCES ──
 function genCitation(src, style) {
-  const a = src.authors || 'Unknown Author';
-  const y = src.year || 'n.d.';
-  const t = src.title || 'Untitled';
-  const p = src.publication || 'Unknown Publication';
-  const u = src.url || '#';
+  const a = src.authors, y = src.year, t = src.title, p = src.publication, u = src.url;
   const styles = {
-    APA: `${a} (${y}). <em>${t}</em>. ${p}. ${u}`,
+    APA: `${a} (${y}). <em>${t}</em>. <em>${p}</em>. ${u}`,
     MLA: `${a}. "${t}." <em>${p}</em>, ${y}, ${u}.`,
     Chicago: `${a}. "${t}." <em>${p}</em> (${y}). ${u}.`,
-    Harvard: `${a} ${y}, '${t}', <em>${p}</em>, viewed ${new Date().toLocaleDateString('en-GB')}, &lt;${u}&gt;.`
+    Harvard: `${a} ${y}, '${t}', <em>${p}</em>, &lt;${u}&gt;.`
   };
   return styles[style] || styles.APA;
 }
- 
-// ── LOAD SOURCES PAGE ──
-function loadSourcesPage() {
+
+function renderSources(filter, q) {
   const grid = document.getElementById('srcgrid');
   if (!grid) return;
-  grid.innerHTML = SOURCES.map(src => `
-    <div class="srccard" id="src-${src.id}">
+  let filtered = SOURCES;
+  if (filter && filter !== 'all') filtered = filtered.filter(s => s.type === filter);
+  if (q) filtered = filtered.filter(s => s.title.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q) || s.topic.toLowerCase().includes(q));
+  grid.innerHTML = filtered.map(src => `
+    <div class="srccard" data-type="${src.type}">
       <div class="stbadge ${src.type}">${src.typelabel}</div>
       <h4>${src.title}</h4>
       <p class="src-desc">${src.desc}</p>
       <div class="src-actions">
-        <button class="src-btn preview" onclick="previewSource('${src.id}')">👁️ Preview</button>
-        <button class="src-btn orig" onclick="window.open('${src.url}','_blank')">🔗 Open Original</button>
+        <button class="src-btn preview" onclick="previewSrc('${src.id}')">👁️ Preview</button>
+        <button class="src-btn orig" onclick="window.open('${src.url}','_blank')">🔗 Open Source</button>
       </div>
       <div class="citation-wrap">
         <div class="cite-label">📋 Citation</div>
@@ -863,80 +782,132 @@ function loadSourcesPage() {
           <button class="cite-tab" onclick="switchCite('${src.id}','Chicago',this)">Chicago</button>
           <button class="cite-tab" onclick="switchCite('${src.id}','Harvard',this)">Harvard</button>
         </div>
-        <div class="cite-text" id="cite-${src.id}">
-          ${genCitation(src,'APA')}
-          <button class="cite-copy" onclick="copyCite('${src.id}')">Copy</button>
-        </div>
+        <div class="cite-text" id="cite-${src.id}">${genCitation(src,'APA')}<button class="cite-copy" onclick="copyCite('${src.id}')">Copy</button></div>
       </div>
     </div>`).join('');
 }
- 
+
+let srcActiveFilter = 'all';
+window.filterSrcChip = function(f, el) {
+  srcActiveFilter = f;
+  document.querySelectorAll('#src-chips .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  renderSources(f);
+};
+window.filterSources = function(q) { renderSources(srcActiveFilter, q.toLowerCase()); };
 window.switchCite = function(id, style, btn) {
   const src = SOURCES.find(s => s.id === id);
   if (!src) return;
-  document.querySelectorAll(`#src-${id} .cite-tab`).forEach(t => t.classList.remove('on'));
+  btn.closest('.cite-tabs').querySelectorAll('.cite-tab').forEach(t => t.classList.remove('on'));
   btn.classList.add('on');
   const el = document.getElementById('cite-'+id);
   el.innerHTML = genCitation(src, style) + `<button class="cite-copy" onclick="copyCite('${id}')">Copy</button>`;
 };
- 
 window.copyCite = function(id) {
   const el = document.getElementById('cite-'+id);
   const text = el.innerText.replace('Copy','').trim();
   navigator.clipboard.writeText(text).then(() => {
     const btn = el.querySelector('.cite-copy');
     btn.textContent = '✓ Copied!';
-    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    setTimeout(() => btn.textContent = 'Copy', 2000);
   });
 };
- 
-// ── SOURCE PREVIEW MODAL ──
-window.previewSource = function(id) {
+window.previewSrc = function(id) {
   const src = SOURCES.find(s => s.id === id);
   if (!src) return;
   document.getElementById('modal-title').textContent = src.title;
   document.getElementById('modal-body').innerHTML = `
-    <div class="modal-meta">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
       <span class="tag tb">${src.typelabel}</span>
       <span class="tag tg">${src.year}</span>
     </div>
-    <div class="modal-section">
-      <h4>Authors & Publication</h4>
-      <p>${src.authors} — <em>${src.publication}</em></p>
-    </div>
-    <div class="modal-section">
-      <h4>Abstract / Summary</h4>
-      <p>${src.abstract}</p>
-    </div>
-    <div class="modal-section">
-      <h4>Citation Formats</h4>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        ${['APA','MLA','Chicago','Harvard'].map(s => `
-          <div>
-            <div style="font-size:11px;font-weight:800;color:var(--muted);margin-bottom:3px;">${s}</div>
-            <div class="cite-text" style="font-size:11.5px;">${genCitation(src,s)}</div>
-          </div>`).join('')}
-      </div>
+    <div class="modal-section"><h4>Authors & Publication</h4><p>${src.authors} — <em>${src.publication}</em></p></div>
+    <div class="modal-section"><h4>Summary</h4><p>${src.abstract}</p></div>
+    <div class="modal-section"><h4>All Citation Formats</h4>
+      ${['APA','MLA','Chicago','Harvard'].map(s=>`
+        <div style="margin-bottom:10px;">
+          <div style="font-size:10px;font-weight:800;color:var(--muted);margin-bottom:3px;">${s}</div>
+          <div class="cite-text" style="font-size:11px;">${genCitation(src,s)}</div>
+        </div>`).join('')}
     </div>`;
   document.getElementById('modal-footer').innerHTML = `
     <button class="tbtn primary" onclick="window.open('${src.url}','_blank')">🔗 Open Original Source</button>
     <button class="tbtn outline" onclick="closeModal()">Close</button>`;
   document.getElementById('src-modal').classList.add('show');
 };
- 
-window.closeModal = function() {
-  document.getElementById('src-modal').classList.remove('show');
+window.closeModal = function() { document.getElementById('src-modal').classList.remove('show'); };
+
+// ── CONTACTS ──
+function renderContacts(filter, q) {
+  const grid = document.getElementById('ct-grid');
+  if (!grid) return;
+  let data = CONTACTS;
+  if (filter && filter !== 'all') data = data.filter(c => c.cat === filter);
+  if (q) data = data.filter(c => c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || c.type.toLowerCase().includes(q));
+  grid.innerHTML = data.map(c => `
+    <div class="ctcard" data-cat="${c.cat}">
+      <div class="cth"><div class="ctlogo" style="background:${c.bg};">${c.icon}</div>
+      <div class="ctinfo"><h4>${c.name}</h4><p>${c.type}</p></div></div>
+      <div class="ctdet">
+        ${c.phone ? `<div class="ctrow"><span class="ci">📞</span>${c.phone}</div>` : ''}
+        <div class="ctrow"><span class="ci">✉️</span>${c.email}</div>
+      </div>
+      <div class="ctact">
+        <button class="cbtn cbe" onclick="window.location='mailto:${c.email}'">✉️ Email</button>
+        <button class="cbtn cbv" onclick="window.open('${c.web}','_blank')">🌐 Website</button>
+      </div>
+    </div>`).join('');
+}
+let ctFilter = 'all';
+window.filterContacts = function(f, el) {
+  ctFilter = f;
+  document.querySelectorAll('#ct-chips .chip').forEach(c => c.classList.remove('on'));
+  if (el) el.classList.add('on');
+  renderContacts(f);
 };
- 
+window.searchContacts = function(q) { renderContacts(ctFilter, q.toLowerCase()); };
+
+// ── EMAILS ──
+let emFilter = 'all';
+function renderEmails(filter) {
+  const list = document.getElementById('em-list');
+  if (!list) return;
+  const data = filter === 'all' ? EMAILS : EMAILS.filter(e => e.cat === filter);
+  list.innerHTML = data.map(e => `
+    <div class="eitem" onclick="window.open('${e.link}','_blank')">
+      ${e.unread ? '<div class="udot"></div>' : '<div style="width:7px;flex-shrink:0;"></div>'}
+      <div class="eavatar" style="background:${e.bg};color:${e.col};">${e.av}</div>
+      <div style="flex:1;min-width:0;">
+        <div class="efrom">${e.from}</div>
+        <div class="esub">${e.sub}</div>
+      </div>
+      <div class="emeta">
+        <div class="edate">${e.date}</div>
+        <span class="tag ${e.cat==='official'?'tr':e.cat==='sga'?'tb':e.cat==='clubs'?'tp':'tn'}" style="margin-top:4px;display:inline-block;font-size:9px;">${e.cat}</span>
+      </div>
+    </div>`).join('');
+}
+window.filterEmails = function(f, el) {
+  emFilter = f;
+  document.querySelectorAll('#em-chips .chip').forEach(c => c.classList.remove('on'));
+  if (el) el.classList.add('on');
+  renderEmails(f);
+};
+window.searchEmails = function(q) {
+  document.querySelectorAll('#em-list .eitem').forEach(item => {
+    item.style.display = (!q || item.textContent.toLowerCase().includes(q.toLowerCase())) ? '' : 'none';
+  });
+};
+
 // ── RESEARCH PAGE ──
 function buildResearchPage(fac) {
   document.getElementById('page-research').innerHTML = fac ? facultyHTML() : studentHTML();
 }
- 
+
 function facultyHTML() {
   return `
   <div class="sec-title">✨ Research Question Creator</div>
-  <p class="sec-sub">Every question is unique forever — the system checks all previously generated questions and never repeats one</p>
+  <p class="sec-sub">Every question is unique forever — the system checks all previously used questions and never repeats one</p>
   <div class="tcol">
     <div>
       <div class="panel">
@@ -948,20 +919,203 @@ function facultyHTML() {
         <div class="sgrp"><div class="slr"><span class="slbl">📈 Trend Level</span><span class="sval" id="sv-tr">Moderately Trendy</span></div><input type="range" min="1" max="4" value="2" oninput="updateSlider('sv-tr',this.value,['Under-Researched','Moderately Trendy','Very Trendy','Viral'])"><div class="sticks"><span>Hidden</span><span>Moderate</span><span>Trendy</span><span>Viral</span></div></div>
         <div class="fg"><label class="fl">👥 Student Audience</label><div class="pills" id="aud-pills"><div class="pill on" onclick="togglePill(this)">First-Gen</div><div class="pill" onclick="togglePill(this)">International</div><div class="pill" onclick="togglePill(this)">STEM</div><div class="pill" onclick="togglePill(this)">Humanities</div><div class="pill" onclick="togglePill(this)">Commuters</div><div class="pill" onclick="togglePill(this)">Graduate</div></div></div>
         <div class="fg"><label class="fl">🔬 Methodology</label><div class="pills"><div class="pill on" onclick="togglePill(this)">Qualitative</div><div class="pill" onclick="togglePill(this)">Quantitative</div><div class="pill" onclick="togglePill(this)">Mixed Methods</div><div class="pill" onclick="togglePill(this)">Policy Analysis</div><div class="pill" onclick="togglePill(this)">Historical</div></div></div>
-        <div class="fg"><label class="fl">📝 Additional Context</label><textarea class="fta" id="rq-ctx" placeholder="Specific angle, department, constraint…"></textarea></div>
-        <button class="genbtn" id="gbtn" onclick="genRQ()"><span id="glabel">✨ Generate Unique Research Question</span></button>
-        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px;" id="used-count"></div>
+        <div class="fg"><label class="fl">📝 Additional Context</label><textarea class="fta" id="rq-ctx" placeholder="Specific angle, UMD dept, constraint…"></textarea></div>
+        <button class="genbtn" id="gbtn2" onclick="genRQ()"><span id="glabel">✨ Generate Unique Research Question</span></button>
+        <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:6px;" id="used-count"></div>
       </div>
     </div>
     <div>
       <div class="panel" style="margin-bottom:14px;">
         <h3>🔮 Trending Topic Suggestions</h3>
-        <p style="font-size:11.5px;color:var(--muted);">Click any card to pre-fill the topic field</p>
+        <p style="font-size:11px;color:var(--muted);">Click any card to pre-fill the topic field</p>
         <div class="sugscroll">
-          <div class="sugcard" onclick="useSug('AI tools vs academic integrity for ESL and international students')"><div class="sh">🔥 VIRAL · Tech+AI</div><p>AI policy fairness — ESL students carry invisible burden</p><div class="st">#AIPolicy #ESL</div></div>
-          <div class="sugcard" onclick="useSug('UMD research farm threatened by College Park urban development')"><div class="sh">🌱 EMERGING · Agriculture</div><p>629-acre research farm vs. development — land-grant crisis</p><div class="st">#AGNR #UrbanSprawl</div></div>
-          <div class="sugcard" onclick="useSug('Commuter student isolation and mental health at UMD')"><div class="sh">📈 RISING · Mental Health</div><p>Commuter students — the invisible mental health gap</p><div class="st">#Belonging #Commuters</div></div>
-          <div class="sugcard" onclick="useSug('Gig economy reliance and academic performance among UMD undergrads')"><div class="sh">💼 TRENDING · Labor</div><p>37% gig-dependent — the hidden tuition cost</p><div class="st">#GigEconomy</div></div>
-          <div class="sugcard" onclick="useSug('DEI budget cuts and STEM faculty diversity pipeline at UMD')"><div class="sh">🌍 HOT · DEI+STEM</div><p>Who is leaving UMD's faculty diversi
+          <div class="sugcard" onclick="useSug('AI tools vs academic integrity for ESL and international students')"><div class="sh">🔥 VIRAL · AI</div><p>AI policy fairness — ESL burden</p><div class="st">#AIPolicy #ESL</div></div>
+          <div class="sugcard" onclick="useSug('UMD research farm threatened by College Park urban development')"><div class="sh">🌱 EMERGING · Agriculture</div><p>629-acre research farm vs development</p><div class="st">#AGNR #LandGrant</div></div>
+          <div class="sugcard" onclick="useSug('Commuter student isolation and mental health at UMD')"><div class="sh">📈 RISING · Mental Health</div><p>Commuter students — invisible gap</p><div class="st">#Belonging</div></div>
+          <div class="sugcard" onclick="useSug('Gig economy reliance and academic performance among UMD undergrads')"><div class="sh">💼 TRENDING · Labor</div><p>37% gig-dependent undergrads</p><div class="st">#GigEconomy</div></div>
+          <div class="sugcard" onclick="useSug('DEI budget cuts and STEM faculty diversity pipeline at UMD')"><div class="sh">🌍 HOT · DEI</div><p>Who is leaving UMD faculty pipeline</p><div class="st">#DEI #STEM</div></div>
+          <div class="sugcard" onclick="useSug('Food insecurity among international students at UMD')"><div class="sh">🍎 UNDER-RESEARCHED</div><p>International students + pantry access</p><div class="st">#FoodSecurity</div></div>
+          <div class="sugcard" onclick="useSug('UMD carbon neutrality transparency gap and student climate activism')"><div class="sh">🌿 MODERATE · Sustainability</div><p>Climate pledges vs real data</p><div class="st">#Greenwashing</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>💡 Generated Question</h3>
+        <p style="font-size:12px;color:var(--muted);" id="rq-ph">Configure parameters and click Generate — the system picks a question never used before across all semesters.</p>
+        <div class="rbox" id="rbox">
+          <h4 id="rq-out"></h4>
+          <p id="rq-rat" style="margin-top:7px;font-size:12px;color:var(--muted);"></p>
+          <div id="rq-hints"></div>
+          <div class="ract">
+            <button class="rbtn s" onclick="showRubric()">📊 View Rubric</button>
+            <button class="rbtn o" onclick="navTo('contacts',document.querySelector('.nav-item[onclick*=contacts]'))">🏛️ Resources</button>
+            <button class="rbtn o" onclick="navTo('sources',document.querySelector('.nav-item[onclick*=sources]'))">🔗 Sources</button>
+            <button class="rbtn o" onclick="copyQ()">📋 Copy</button>
+            <button class="rbtn o" onclick="pubToStudents()">📤 Publish to Students</button>
+          </div>
+        </div>
+        <div class="rubric-box" id="rubric-box">
+          <h4>📊 Grading Rubric</h4>
+          <div id="rubric-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
 
- 
+function studentHTML() {
+  const q = window._publishedQ || 'Your professor has not yet published a research question for this semester. Check back soon.';
+  return `
+  <div class="sec-title">📋 My Research Assignments</div>
+  <p class="sec-sub">Your professor's research question for this semester — complete all three essays in sequence</p>
+  <div class="stuview">
+    <div style="display:flex;align-items:center;gap:9px;margin-bottom:4px;">
+      <span style="font-size:11px;font-weight:800;background:#FFE8EB;color:var(--red);padding:3px 9px;border-radius:20px;">ENG101X · Spring 2026</span>
+      <span style="font-size:11px;color:var(--muted);">Assigned by your professor</span>
+    </div>
+    <h3>Your Research Question</h3>
+    <div class="rqdisplay">"${q}"</div>
+    <p style="font-size:12.5px;color:var(--muted);margin-bottom:15px;">Complete <strong>three essays in sequence</strong> — each builds on the previous.</p>
+    <div class="egrid">
+      <div class="ecard ecpos">
+        <div class="ecn">Essay 1 of 3</div>
+        <h4>Position Inquiry Essay</h4>
+        <p>Take and defend a clear, evidence-based position. Conduct primary research and engage at least 3 peer-reviewed sources.</p>
+        <ul><li>1,500–2,000 words</li><li>Primary + secondary sources</li><li>Clear thesis + counterargument</li><li>Due: Week 5</li></ul>
+        <span class="ectag">📝 Position Inquiry</span>
+      </div>
+      <div class="ecard ecrhe">
+        <div class="ecn">Essay 2 of 3</div>
+        <h4>Rhetorical Analysis Essay</h4>
+        <p>Analyze a key document related to your topic. Evaluate how the author constructs argument using logos, ethos, and pathos.</p>
+        <ul><li>1,200–1,800 words</li><li>Rhetorical framework required</li><li>Connect to Essay 1</li><li>Due: Week 9</li></ul>
+        <span class="ectag">🔍 Rhetorical Analysis</span>
+      </div>
+      <div class="ecard ecrem">
+        <div class="ecn">Essay 3 of 3</div>
+        <h4>Remediation Project</h4>
+        <p>Transform your argument into a new medium — podcast, infographic, op-ed, or video essay for a new audience.</p>
+        <ul><li>Medium of your choice</li><li>500-word rationale</li><li>Cite all research</li><li>Due: Week 13</li></ul>
+        <span class="ectag">🎨 Remediation</span>
+      </div>
+    </div>
+    <div style="margin-top:18px;background:var(--blue-soft);border-radius:11px;padding:14px;border:1.5px solid #C8D8FF;">
+      <div style="font-size:12px;font-weight:700;margin-bottom:8px;color:#2B4ECC;">📌 Research Resources</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;">
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('sources',document.querySelector('.nav-item[onclick*=sources]'))">🔗 Sources & Citations</button>
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('contacts',document.querySelector('.nav-item[onclick*=contacts]'))">🏛️ Contacts</button>
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('issues',document.querySelector('.nav-item[onclick*=issues]'))">🔥 Current Issues</button>
+        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('past',document.querySelector('.nav-item[onclick*=past]'))">📅 Historical Data</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── HELPERS ──
+window.useSug = function(t) { const el=document.getElementById('rq-topic'); if(el){el.value=t;el.focus();} };
+window.togglePill = function(el) { el.classList.toggle('on'); };
+window.updateSlider = function(id, v, opts) { const el=document.getElementById(id); if(el) el.textContent=opts[parseInt(v)-1]; };
+
+window.issueClick = function(title, cat) {
+  if (cRole !== 'faculty') { alert('Research question creation is for faculty and TAs only.\n\nAs a student, check the navigation for your assignment.'); return; }
+  const el = document.getElementById('rq-topic');
+  if (el) el.value = title;
+  navTo('research', document.querySelector('.nav-item[onclick*="research"]'));
+};
+
+// ── GENERATE QUESTION ──
+window.genRQ = async function() {
+  const btn = document.getElementById('gbtn2');
+  const lbl = document.getElementById('glabel');
+  const topic = (document.getElementById('rq-topic')?.value || '').toLowerCase().trim();
+  lbl.innerHTML = '<span class="spin"></span> Finding unique question…';
+  btn.disabled = true;
+
+  try { await loadUsedQs(); } catch(e) {}
+
+  let available = QUESTION_BANK.filter(q => !usedQs.includes(q.q));
+  let matched = topic ? available.filter(q => q.keywords.some(k => topic.includes(k) || k.includes(topic)) || q.q.toLowerCase().includes(topic)) : available;
+  if (matched.length === 0) matched = available;
+  if (matched.length === 0) {
+    alert('All questions have been used! The bank will be expanded next semester.');
+    lbl.textContent = '✨ Generate Unique Research Question';
+    btn.disabled = false;
+    return;
+  }
+
+  const picked = matched[Math.floor(Math.random() * matched.length)];
+  currentQ = picked;
+
+  try {
+    await addDoc(collection(db, 'research_questions'), {
+      question: picked.q,
+      semester: document.getElementById('rq-sem')?.value || 'Spring',
+      year: document.getElementById('rq-yr')?.value || '2026',
+      createdBy: cEmail,
+      publishedAt: new Date(),
+      active: false
+    });
+    usedQs.push(picked.q);
+  } catch(e) { console.warn('Save failed:', e); }
+
+  document.getElementById('rq-ph').style.display = 'none';
+  const box = document.getElementById('rbox');
+  box.classList.remove('show'); void box.offsetWidth;
+  document.getElementById('rq-out').textContent = '"' + picked.q + '"';
+  document.getElementById('rq-rat').textContent = picked.rationale;
+  document.getElementById('rq-hints').innerHTML = `<div class="ehints">
+    <div class="ehint" style="background:#FFF5F7"><div class="en" style="color:var(--red)">Essay 1 · Position</div><p>${picked.e1}</p></div>
+    <div class="ehint" style="background:#EEF3FF"><div class="en" style="color:#4A6CF7">Essay 2 · Rhetorical</div><p>${picked.e2}</p></div>
+    <div class="ehint" style="background:#D4F5E9"><div class="en" style="color:#1A8C5F">Essay 3 · Remediation</div><p>${picked.e3}</p></div>
+  </div>`;
+  box.classList.add('show');
+  document.getElementById('rubric-box').classList.remove('show');
+
+  const rem = QUESTION_BANK.filter(q => !usedQs.includes(q.q)).length;
+  const uc = document.getElementById('used-count');
+  if (uc) uc.textContent = `${usedQs.length} questions used · ${rem} remaining in bank`;
+
+  lbl.textContent = '✨ Generate Another Unique Question';
+  btn.disabled = false;
+};
+
+window.showRubric = function() {
+  if (!currentQ) return;
+  const rb = document.getElementById('rubric-box');
+  document.getElementById('rubric-content').innerHTML = currentQ.r.map(essay => `
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:7px;">${essay.cat}</div>
+      <table class="rubric-table">
+        <tr><th>Criteria</th><th>Points</th></tr>
+        ${essay.items.map(item=>`<tr><td>${item.c}</td><td><span class="pts-badge">${item.p}</span></td></tr>`).join('')}
+        <tr><td style="font-weight:800;">Total</td><td><span class="pts-badge" style="background:var(--navy);">${essay.items.reduce((s,i)=>s+i.p,0)}</span></td></tr>
+      </table>
+    </div>`).join('');
+  rb.classList.toggle('show');
+};
+
+window.copyQ = function() {
+  const q = document.getElementById('rq-out')?.textContent;
+  if (q) navigator.clipboard.writeText(q).then(() => alert('Copied!'));
+};
+
+window.pubToStudents = async function() {
+  const q = document.getElementById('rq-out')?.textContent?.replace(/^"|"$/g,'');
+  if (!q) return;
+  try {
+    const snap = await getDocs(collection(db, 'research_questions'));
+    for (const d of snap.docs) {
+      if (d.data().active) await setDoc(doc(db,'research_questions',d.id),{...d.data(),active:false});
+    }
+    await addDoc(collection(db,'research_questions'),{
+      question:q, semester:document.getElementById('rq-sem')?.value||'Spring',
+      year:document.getElementById('rq-yr')?.value||'2026',
+      createdBy:cEmail, publishedAt:new Date(), active:true
+    });
+    window._publishedQ = q;
+    alert('✅ Published! Students will see this question in their Assignments page right now.');
+  } catch(e) { alert('Publish failed: '+e.message); }
+};
+
+</script>
+</body>
+</html>
