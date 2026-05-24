@@ -722,7 +722,7 @@ window.navTo = function(id, btn) {
 // ── ISSUE FILTERS ──
 let issueActiveCat = 'all';
 window.filterByChip = function(cat, el, groupId) {
-  issueActiveCat = cat;
+  issueActiveCat = cat === 'all' ? 'all' : cat.toLowerCase().replace(/[^a-z ]/g,'').trim();
   document.querySelectorAll('#'+groupId+' .chip').forEach(c => c.classList.remove('on'));
   el.classList.add('on');
   applyIssueFilter('');
@@ -732,7 +732,7 @@ function applyIssueFilter(q) {
   document.querySelectorAll('#igrid .icard').forEach(card => {
     const cat = card.dataset.cat || '';
     const text = card.textContent.toLowerCase();
-    const matchCat = issueActiveCat === 'all' || cat.includes(issueActiveCat);
+    const matchCat = issueActiveCat === 'all' || cat === issueActiveCat || cat.includes(issueActiveCat);
     const matchQ = !q || text.includes(q.toLowerCase());
     card.style.display = (matchCat && matchQ) ? '' : 'none';
   });
@@ -781,7 +781,7 @@ function renderSources(filter, q) {
       <p class="src-desc">${src.desc}</p>
       <div class="src-actions">
         <button class="src-btn preview" onclick="previewSrc('${src.id}')">👁️ Preview</button>
-        <button class="src-btn orig" onclick="window.open('${src.url}','_blank')">🔗 Open Source</button>
+        window.closeModal = function() { document.getElementById('src-modal').classList.remove('show'); };
       </div>
       <div class="citation-wrap">
         <div class="cite-label">📋 Citation</div>
