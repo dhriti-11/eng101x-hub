@@ -335,7 +335,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     <!-- ISSUES -->
     <div class="page active" id="page-issues">
       <div class="sec-title">🔥 What's Happening on Campus</div>
-      <p class="sec-sub">Live campus issues — faculty click any card to jump to Research Question Creator</p>
+      <p class="sec-sub">Curated from <a href="https://www.diamondback.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">The Diamondback</a>, <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> &amp; <a href="https://sga.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">SGA reports</a> — click any card to find related sources</p>
       <div class="sbar">
         <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search issues…" oninput="filterIssues(this.value)"></div>
         <div class="chips" id="issue-chips">
@@ -448,7 +448,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     <!-- CONTACTS -->
     <div class="page" id="page-contacts">
       <div class="sec-title">🏛️ Clubs, Offices & Institutions</div>
-      <p class="sec-sub">30 real UMD contacts — click Email to open mail, click Website to visit</p>
+      <p class="sec-sub">Real UMD contacts — click Email or Website to connect. <a href="https://terplink.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">🔗 Find more clubs on TerpLink →</a></p>
       <div class="sbar" style="margin-bottom:20px;">
         <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search by name, email, topic…" oninput="searchContacts(this.value)"></div>
         <div class="chips" id="ct-chips">
@@ -725,7 +725,7 @@ function buildNav(fac) {
     <div class="nav-sec" style="margin-top:10px;">Research</div>
     ${fac ? `<button class="nav-item" onclick="navTo('research',this)"><span class="ico">✨</span>Create Research Q<span class="fstar">★</span></button>` : ''}
     <button class="nav-item" onclick="navTo('contacts',this)"><span class="ico">🏛️</span>Clubs & Resources</button>
-    <button class="nav-item" onclick="navTo('emails',this)"><span class="ico">📬</span>Campus Emails<span class="nbadge">18</span></button>`;
+`;
 }
 
 // ── NAV ──
@@ -745,6 +745,36 @@ window.navTo = function(id, btn) {
   const t = TITLES[id] || [id, ''];
   document.getElementById('pt').textContent = t[0];
   document.getElementById('ps').textContent = t[1];
+  // Reset page states on navigate
+  if (id === 'issues') { issueActiveCat = 'all'; document.querySelectorAll('#igrid .icard').forEach(c=>c.style.display=''); document.querySelectorAll('#issue-chips .chip').forEach((c,i)=>{c.classList.toggle('on',i===0);}); }
+  if (id === 'sources') { renderSources(srcActiveFilter); }
+  if (id === 'contacts') { renderContacts(ctFilter); }
+};
+
+window.goToSourcesWithTopic = function() {
+  const q = document.getElementById('rq-out')?.textContent?.replace(/^"|"$/g,'') || '';
+  const words = q.split(' ').slice(0,6).join(' ');
+  const srcInput = document.getElementById('src-search-input');
+  if (srcInput && words) { srcInput.value = words; }
+  renderSources('all', words.toLowerCase());
+  srcActiveFilter = 'all';
+  document.querySelectorAll('#src-chips .chip').forEach((c,i)=>c.classList.toggle('on',i===0));
+  navTo('sources', document.querySelector('.nav-item[onclick*="sources"]'));
+};
+
+window.viewPastQuestions = async function() {
+  try {
+    const snap = await getDocs(query(collection(db,'research_questions'), orderBy('publishedAt','desc')));
+    const qs = snap.docs.map(d => d.data());
+    if (qs.length === 0) { alert('No questions generated yet.'); return; }
+    const list = qs.slice(0,20).map((q,i) => (i+1)+'. ['+(q.semester||'')+ ' '+(q.year||'')+'] '+(q.active?'✅ ACTIVE
+':'') + q.question).join('
+
+');
+    alert('All Generated Questions (most recent first):
+
+' + list);
+  } catch(e) { alert('Could not load past questions: '+e.message); }
 };
 
 // ── ISSUE FILTERS ──
@@ -985,9 +1015,10 @@ function facultyHTML() {
           <div class="ract">
             <button class="rbtn s" onclick="showRubric()">📊 View Rubric</button>
             <button class="rbtn o" onclick="navTo('contacts',document.querySelector('.nav-item[onclick*=contacts]'))">🏛️ Resources</button>
-            <button class="rbtn o" onclick="navTo('sources',document.querySelector('.nav-item[onclick*=sources]'))">🔗 Sources</button>
+            <button class="rbtn o" onclick="goToSourcesWithTopic()">🔗 Sources</button>
             <button class="rbtn o" onclick="copyQ()">📋 Copy</button>
             <button class="rbtn o" onclick="pubToStudents()">📤 Publish to Students</button>
+            <button class="rbtn o" onclick="viewPastQuestions()">📋 Past Questions</button>
           </div>
         </div>
         <div class="rubric-box" id="rubric-box">
