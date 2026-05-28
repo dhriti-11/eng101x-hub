@@ -767,13 +767,8 @@ window.viewPastQuestions = async function() {
     const snap = await getDocs(query(collection(db,'research_questions'), orderBy('publishedAt','desc')));
     const qs = snap.docs.map(d => d.data());
     if (qs.length === 0) { alert('No questions generated yet.'); return; }
-    const list = qs.slice(0,20).map((q,i) => (i+1)+'. ['+(q.semester||'')+ ' '+(q.year||'')+'] '+(q.active?'✅ ACTIVE
-':'') + q.question).join('
-
-');
-    alert('All Generated Questions (most recent first):
-
-' + list);
+    const list = qs.slice(0,20).map((q,i) => (i+1)+'. ['+(q.semester||'')+' '+(q.year||'')+'] '+(q.active?'✅ ACTIVE\n':'')+q.question).join('\n\n');
+    alert('All Generated Questions (most recent first):\n\n' + list);
   } catch(e) { alert('Could not load past questions: '+e.message); }
 };
 
