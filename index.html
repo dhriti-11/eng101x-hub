@@ -839,7 +839,7 @@ async function loadLiveIssues() {
       card.className = 'icard';
       card.dataset.cat = c.cat;
       card.style.setProperty('--cc', c.color);
-      card.onclick = () => issueClick(item.title, c.cat);
+      card.onclick = () => issueClick(item.title, c.cat, item.link);
       card.innerHTML = `
         <div class="tags">
           <span class="tag ${c.tagClass}">${c.emoji} ${c.cat}</span>
@@ -1144,7 +1144,22 @@ window.useSug = function(t) { const el=document.getElementById('rq-topic'); if(e
 window.togglePill = function(el) { el.classList.toggle('on'); };
 window.updateSlider = function(id, v, opts) { const el=document.getElementById(id); if(el) el.textContent=opts[parseInt(v)-1]; };
 
-window.issueClick = function(title, cat) {
+window.issueClick = function(title, cat, url) {
+  if (url) {
+    window.open(url, '_blank');
+    return;
+  }
+  const srcInput = document.getElementById('src-search-input');
+  if (srcInput) srcInput.value = cat || title;
+  renderSources('all', (cat || title).toLowerCase());
+  srcActiveFilter = 'all';
+  document.querySelectorAll('#src-chips .chip').forEach((c,i) => c.classList.toggle('on', i===0));
+  navTo('sources', document.querySelector('.nav-item[onclick*="sources"]'));
+  if (cRole === 'faculty') {
+    const el = document.getElementById('rq-topic');
+    if (el) el.value = title;
+  }
+};
   const srcInput = document.getElementById('src-search-input');
   if (srcInput) srcInput.value = cat || title;
   filterSources(cat || title);
