@@ -1160,15 +1160,7 @@ window.issueClick = function(title, cat, url) {
     if (el) el.value = title;
   }
 };
-  const srcInput = document.getElementById('src-search-input');
-  if (srcInput) srcInput.value = cat || title;
-  filterSources(cat || title);
-  navTo('sources', document.querySelector('.nav-item[onclick*="sources"]'));
-  if (cRole === 'faculty') {
-    const el = document.getElementById('rq-topic');
-    if (el) el.value = title;
-  }
-};
+
 
 // ── GENERATE QUESTION ──
 window.genRQ = async function() {
