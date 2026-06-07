@@ -357,10 +357,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
         </select>
       </div>
 
-      <div id="rss-loading" style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);">
-  <div style="width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:sp .8s linear infinite;margin:0 auto 12px;"></div>
-  <p>Loading latest campus issues…</p>
-</div>
+      <div class="igrid" id="igrid">
         <div class="icard" data-cat="housing" style="--cc:#E21833" onclick="issueClick('Residence Hall Overcrowding & Off-Campus Housing Crisis','housing')"><div class="tags"><span class="tag tr">🏠 Housing</span><span class="tag tg">🔥 Trending</span></div><h3>Residence Hall Overcrowding & Off-Campus Housing Crisis</h3><p>1,200+ students in overflow dorms; College Park rents up 22% YoY as enrollment surges past capacity.</p><div class="imeta"><span class="isrc">📰 The Diamondback</span><div class="tbar"><span style="height:5px"></span><span style="height:9px"></span><span style="height:13px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
         <div class="icard" data-cat="mental health" style="--cc:#7B61FF" onclick="issueClick('Student Mental Health Services Waitlist Crisis','mental health')"><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tr">🚨 High Impact</span></div><h3>Mental Health Services Waitlist Exceeds 6 Weeks</h3><p>34% of surveyed students report anxiety or burnout; Counseling Center at full capacity.</p><div class="imeta"><span class="isrc">📊 SGA Survey</span><div class="tbar"><span style="height:7px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:18px"></span><span style="height:22px"></span></div></div></div>
         <div class="icard" data-cat="sustainability" style="--cc:#2ECC8B" onclick="issueClick('Campus Carbon Neutrality Goal 2030','sustainability')"><div class="tags"><span class="tag tn">🌿 Sustainability</span><span class="tag tb">📈 Rising</span></div><h3>Carbon Neutrality 2030 — Data Transparency Gap</h3><p>Facilities upgrades underway but student researchers flag missing emissions reporting and accountability gaps.</p><div class="imeta"><span class="isrc">🌿 Sustainability Office</span><div class="tbar"><span style="height:9px"></span><span style="height:8px"></span><span style="height:13px"></span><span style="height:12px"></span><span style="height:17px"></span></div></div></div>
@@ -771,7 +768,7 @@ window.viewPastQuestions = async function() {
     const snap = await getDocs(query(collection(db,'research_questions'), orderBy('publishedAt','desc')));
     const qs = snap.docs.map(d => d.data());
     if (qs.length === 0) { alert('No questions generated yet.'); return; }
-    const list = qs.slice(0,20).map((q,i) => (i+1)+'. ['+(q.semester||'')+' '+(q.year||'')+'] '+(q.active?'✅ ACTIVE\n':'')+q.question).join('\n\n');
+    const list = qs.slice(0,20).map((q,i) => (i+1)+'. ['+(q.semester||'')+' '+(q.year||'')+'] '+(q.active?'ACTIVE: ':'')+q.question).join('\n\n');
     alert('All Generated Questions (most recent first):\n\n' + list);
   } catch(e) { alert('Could not load past questions: '+e.message); }
 };
@@ -779,7 +776,7 @@ window.viewPastQuestions = async function() {
 // ── ISSUE FILTERS ──
 let issueActiveCat = 'all';
 window.filterByChip = function(cat, el, groupId) {
-  issueActiveCat = cat === 'all' ? 'all' : cat.toLowerCase().replace(/[^\w ]/g,'').trim();
+  issueActiveCat = cat === 'all' ? 'all' : cat.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim();
   document.querySelectorAll('#'+groupId+' .chip').forEach(c => c.classList.remove('on'));
   el.classList.add('on');
   applyIssueFilter('');
@@ -795,30 +792,33 @@ function applyIssueFilter(q) {
   });
 }
 window.sortIssues = function(v) { /* visual */ };
-// ── RSS AUTO-FETCH ──
+
+// ── RSS LIVE ISSUES ──
 async function fetchRSS(url) {
-  const api = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(url) + '&count=5';
-  const res = await fetch(api);
-  const data = await res.json();
-  return data.items || [];
+  try {
+    const api = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(url) + '&count=5';
+    const res = await fetch(api);
+    const data = await res.json();
+    return data.items || [];
+  } catch(e) { return []; }
 }
 
 function getCat(title, desc) {
   const text = (title + ' ' + desc).toLowerCase();
-  if (text.includes('mental health') || text.includes('counseling') || text.includes('anxiety')) return {cat:'mental health', color:'#7B61FF', tagClass:'tp', emoji:'🧠'};
-  if (text.includes('housing') || text.includes('rent') || text.includes('dorm')) return {cat:'housing', color:'#E21833', tagClass:'tr', emoji:'🏠'};
-  if (text.includes('food') || text.includes('dining') || text.includes('pantry')) return {cat:'food', color:'#FF6B6B', tagClass:'tr', emoji:'🍎'};
-  if (text.includes('safety') || text.includes('crime') || text.includes('police')) return {cat:'safety', color:'#FF8C42', tagClass:'to', emoji:'🛡️'};
-  if (text.includes('sustain') || text.includes('climate') || text.includes('environment')) return {cat:'sustainability', color:'#2ECC8B', tagClass:'tn', emoji:'🌿'};
-  if (text.includes('dei') || text.includes('diversity') || text.includes('equity') || text.includes('inclusion')) return {cat:'dei', color:'#4A6CF7', tagClass:'tb', emoji:'🌍'};
-  if (text.includes('ai') || text.includes('technology') || text.includes('cyber')) return {cat:'ai', color:'#B8920A', tagClass:'tg', emoji:'💻'};
-  if (text.includes('farm') || text.includes('agriculture') || text.includes('agnr')) return {cat:'agriculture', color:'#0D8A7A', tagClass:'tt', emoji:'🌾'};
-  if (text.includes('labor') || text.includes('work') || text.includes('job') || text.includes('gig')) return {cat:'labor', color:'#E07B40', tagClass:'to', emoji:'💼'};
-  return {cat:'campus', color:'#E21833', tagClass:'tr', emoji:'📰'};
+  if (text.includes('mental health') || text.includes('counseling') || text.includes('anxiety')) return {cat:'mental health',color:'#7B61FF',tagClass:'tp',emoji:'🧠'};
+  if (text.includes('housing') || text.includes('rent') || text.includes('dorm')) return {cat:'housing',color:'#E21833',tagClass:'tr',emoji:'🏠'};
+  if (text.includes('food') || text.includes('dining') || text.includes('pantry')) return {cat:'food',color:'#FF6B6B',tagClass:'tr',emoji:'🍎'};
+  if (text.includes('safety') || text.includes('crime') || text.includes('police')) return {cat:'safety',color:'#FF8C42',tagClass:'to',emoji:'🛡️'};
+  if (text.includes('sustain') || text.includes('climate') || text.includes('environment')) return {cat:'sustainability',color:'#2ECC8B',tagClass:'tn',emoji:'🌿'};
+  if (text.includes('dei') || text.includes('diversity') || text.includes('equity')) return {cat:'dei',color:'#4A6CF7',tagClass:'tb',emoji:'🌍'};
+  if (text.includes('ai') || text.includes('technology') || text.includes('cyber')) return {cat:'ai',color:'#B8920A',tagClass:'tg',emoji:'💻'};
+  if (text.includes('farm') || text.includes('agriculture') || text.includes('agnr')) return {cat:'agriculture',color:'#0D8A7A',tagClass:'tt',emoji:'🌾'};
+  return {cat:'campus',color:'#E21833',tagClass:'tr',emoji:'📰'};
 }
 
 async function loadLiveIssues() {
   const grid = document.getElementById('igrid');
+  if (!grid) return;
   const loading = document.getElementById('rss-loading');
   try {
     const [db_items, md_items] = await Promise.all([
@@ -827,13 +827,13 @@ async function loadLiveIssues() {
     ]);
     const all = [...db_items, ...md_items].slice(0, 9);
     if (loading) loading.remove();
-    if (all.length === 0) { if (loading) loading.innerHTML = '<p>Could not load live issues. Check back soon.</p>'; return; }
-    // Remove existing hardcoded cards
+    if (all.length === 0) return; // keep hardcoded cards
+    // Remove hardcoded cards, show live ones
     grid.querySelectorAll('.icard').forEach(c => c.remove());
     all.forEach(item => {
-      const c = getCat(item.title, item.description || '');
+      const c = getCat(item.title || '', item.description || '');
       const desc = (item.description || '').replace(/<[^>]+>/g,'').substring(0, 120) + '…';
-      const source = item.link?.includes('diamondback') ? '📰 The Diamondback' : '📰 Maryland Today';
+      const source = (item.link||'').includes('diamondback') ? '📰 The Diamondback' : '📰 Maryland Today';
       const date = item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '';
       const card = document.createElement('div');
       card.className = 'icard';
@@ -845,7 +845,7 @@ async function loadLiveIssues() {
           <span class="tag ${c.tagClass}">${c.emoji} ${c.cat}</span>
           <span class="tag tg">🔴 Live</span>
         </div>
-        <h3>${item.title}</h3>
+        <h3>${item.title || 'Untitled'}</h3>
         <p>${desc}</p>
         <div class="imeta">
           <span class="isrc">${source} · ${date}</span>
@@ -854,7 +854,8 @@ async function loadLiveIssues() {
       grid.appendChild(card);
     });
   } catch(e) {
-    if (loading) loading.innerHTML = '<p style="color:var(--muted);">Could not load live feed. <a href="https://www.diamondback.umd.edu" target="_blank" style="color:var(--red);">Visit Diamondback →</a></p>';
+    if (loading) loading.remove();
+    // keep hardcoded cards on error
   }
 }
 
@@ -1145,10 +1146,7 @@ window.togglePill = function(el) { el.classList.toggle('on'); };
 window.updateSlider = function(id, v, opts) { const el=document.getElementById(id); if(el) el.textContent=opts[parseInt(v)-1]; };
 
 window.issueClick = function(title, cat, url) {
-  if (url) {
-    window.open(url, '_blank');
-    return;
-  }
+  if (url) { window.open(url, '_blank'); return; }
   const srcInput = document.getElementById('src-search-input');
   if (srcInput) srcInput.value = cat || title;
   renderSources('all', (cat || title).toLowerCase());
@@ -1160,7 +1158,6 @@ window.issueClick = function(title, cat, url) {
     if (el) el.value = title;
   }
 };
-
 
 // ── GENERATE QUESTION ──
 window.genRQ = async function() {
