@@ -335,7 +335,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     <!-- ISSUES -->
     <div class="page active" id="page-issues">
       <div class="sec-title">🔥 What's Happening on Campus</div>
-      <p class="sec-sub">Curated from <a href="https://www.diamondback.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">The Diamondback</a>, <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> &amp; <a href="https://sga.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">SGA reports</a> — click any card to find related sources</p>
+      <p class="sec-sub">Sources: <a href="https://dbknews.com" target="_blank" style="color:var(--red);font-weight:700;">The Diamondback</a> · <a href="https://www.instagram.com/thedbk/" target="_blank" style="color:var(--red);font-weight:700;">📸 @thedbk</a> · <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> · <a href="https://sga.umd.edu/minutes" target="_blank" style="color:var(--red);font-weight:700;">SGA Minutes</a> · <a href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank" style="color:var(--red);font-weight:700;">📚 UMD Archives</a></p> target="_blank" style="color:var(--red);font-weight:700;">The Diamondback</a>, <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> &amp; <a href="https://sga.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">SGA reports</a> — click any card to find related sources</p>
       <div class="sbar">
         <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search issues…" oninput="filterIssues(this.value)"></div>
         <div class="chips" id="issue-chips">
@@ -370,51 +370,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
       </div>
     </div>
 
-    <!-- PAST DATA -->
-    <div class="page" id="page-past">
-      <div class="sec-title">📅 Historical Campus Data</div>
-      <p class="sec-sub">From 1856 to present — every era of UMD history. <a href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank" style="color:var(--red);font-weight:700;">📚 Access full UMD Archives →</a></p>
-      <div class="sbar" style="margin-bottom:16px;">
-        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search historical issues…" oninput="filterPastSearch(this.value)"></div>
-        <select class="fsel" onchange="filterPastEra(this.value)">
-          <option value="all">All Eras</option>
-          <option value="2026">2020s (2020–present)</option>
-          <option value="201">2010s</option>
-          <option value="200">2000s</option>
-          <option value="199">1990s</option>
-          <option value="198">1980s</option>
-          <option value="197">1970s</option>
-          <option value="196">1960s</option>
-          <option value="195">Pre-1960s</option>
-          <option value="18">19th Century</option>
-        </select>
-        <select class="fsel" onchange="filterPastCat(this.value)">
-          <option value="all">All Categories</option>
-          <option value="mental health">Mental Health</option>
-          <option value="civil rights">Civil Rights / DEI</option>
-          <option value="public health">Public Health</option>
-          <option value="agriculture">Agriculture</option>
-          <option value="environment">Environment</option>
-          <option value="war">War & Conflict</option>
-          <option value="technology">Technology</option>
-          <option value="housing">Housing</option>
-          <option value="gender">Gender & Identity</option>
-        </select>
-        <button class="tbtn primary" style="padding:7px 13px;font-size:12px;" onclick="window.open('https://www.lib.umd.edu/collections/university-archives/UMD-history','_blank')">📚 UMD Archives</button>
-      </div>
-      <div class="tlwrap" id="tlwrap">
-        <div class="tlitem" data-era="2026" data-cat="mental health technology"><div class="tldot"></div><div class="tlcard"><div class="tlera">2026 · Mental Health + Technology</div><div class="tags"><span class="tag tp">🧠 Mental Health</span><span class="tag tg">💻 AI Anxiety</span></div><h4>Post-AI Job Uncertainty Anxiety Surge Among STEM Students</h4><p>41% of engineering students met clinical anxiety criteria; AI-driven career fears cited as leading new stressor not present in pre-2022 data.</p><div class="tlmet"><div><div class="mn">41%</div><div class="ml">Affected</div></div><div><div class="mn">280</div><div class="ml">Surveyed<a class="tl-source-btn" href="https://counseling.umd.edu/about/annual-reports" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="2020" data-cat="civil rights dei"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020 · Civil Rights + DEI</div><div class="tags"><span class="tag tb">🌍 Civil Rights</span></div><h4>BLM Protests & UMD Diversity Audit — Building Renamings</h4><p>Students demanded removal of names honoring segregationists; UMD commissioned a formal audit resulting in 4 building renamings and a new DEI VP role by 2021.</p><div class="tlmet"><div><div class="mn">4</div><div class="ml">Renamed</div></div><div><div class="mn">1</div><div class="ml">DEI VP Created<a class="tl-source-btn" href="https://diversity.umd.edu" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="2020" data-cat="public health housing"><div class="tldot"></div><div class="tlcard"><div class="tlera">2020–2022 · Public Health</div><div class="tags"><span class="tag tr">🏥 Pandemic</span></div><h4>COVID-19 Campus Closure — Food Insecurity Doubles, Broadband Gap Exposed</h4><p>UMD closed March 2020; food insecurity doubled to 44%; international student visa crises and digital divide became urgent research priorities.</p><div class="tlmet"><div><div class="mn">40K+</div><div class="ml">Displaced</div></div><div><div class="mn">18 mo</div><div class="ml">Hybrid Period<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="2017" data-cat="civil rights safety"><div class="tldot"></div><div class="tlcard"><div class="tlera">2017–2018 · Safety + Civil Rights</div><div class="tags"><span class="tag to">🛡️ Safety</span><span class="tag tb">Hate Crime</span></div><h4>Murder of Richard Collins III & Federal Hate Crime Trial</h4><p>Army Lt. Collins stabbed on campus in a racially motivated attack; 2018 federal hate crime conviction catalyzed UMD's campus safety and anti-bias taskforce — 12 direct policy changes followed.</p><div class="tlmet"><div><div class="mn">12</div><div class="ml">Policy Changes</div></div><div><div class="mn">1</div><div class="ml">Federal Conviction<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="1988" data-cat="agriculture environment"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1988 · Agriculture + Environment</div><div class="tags"><span class="tag tn">🌿 Environment</span><span class="tag tt">🌾 Agriculture</span></div><h4>Chesapeake Bay Agricultural Runoff — UMD ENST Landmark Study</h4><p>UMD Environmental Science published foundational data on PG County farm runoff polluting the Chesapeake Bay — still the most-cited regional study in Chesapeake policy today.</p><div class="tlmet"><div><div class="mn">22</div><div class="ml">Farms Studied</div></div><div><div class="mn">3</div><div class="ml">Policy Bills<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="1970" data-cat="war civil rights"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1970 · War & Civil Unrest</div><div class="tags"><span class="tag tr">✊ Protest</span><span class="tag tg">War Impact</span></div><h4>UMD Student Strike of 1970 — Kent State Aftermath</h4><p>5,000+ students and faculty struck following Kent State; classes cancelled 2 weeks. Led to UMD's Peace Studies curriculum and permanent faculty senate role in academic policy.</p><div class="tlmet"><div><div class="mn">5,000+</div><div class="ml">Strikers</div></div><div><div class="mn">2 wks</div><div class="ml">Closure<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="1954" data-cat="civil rights gender"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1954–1961 · Civil Rights</div><div class="tags"><span class="tag tb">🌍 Desegregation</span></div><h4>Desegregation of UMD — Parren Mitchell & NAACP Legal Campaign</h4><p>Parren Mitchell sued UMD in 1950 and was admitted as first Black graduate student in 1954. Full undergraduate desegregation followed the 1964 Civil Rights Act.</p><div class="tlmet"><div><div class="mn">1950</div><div class="ml">Lawsuit Filed</div></div><div><div class="mn">1961</div><div class="ml">Full Integration<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="1917" data-cat="public health war"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1917–1919 · Public Health + War</div><div class="tags"><span class="tag tr">🏥 Pandemic</span><span class="tag tg">WWI</span></div><h4>Spanish Flu at Maryland Agricultural College — First Campus Health Crisis</h4><p>The college converted 3 dormitories to infirmaries; enrollment dropped 60% in 1918. First recorded institution-wide emergency health response — direct parallel to COVID-19 closures 100 years later.</p><div class="tlmet"><div><div class="mn">-60%</div><div class="ml">Enrollment Drop</div></div><div><div class="mn">3</div><div class="ml">Dorms Converted<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="1884" data-cat="gender agriculture"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1884–1916 · Gender + Agriculture</div><div class="tags"><span class="tag tp">Gender</span><span class="tag tt">🌾 Agriculture</span></div><h4>First Women Enrolled at Maryland Agricultural College — Contested Access</h4><p>Women admitted to domestic science courses in 1884 but barred from full degrees until 1916. Agriculture dept gender exclusions mirrored national land-grant patterns.</p><div class="tlmet"><div><div class="mn">1884</div><div class="ml">Partial Admission</div></div><div><div class="mn">1916</div><div class="ml">Full Degree Access<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-        <div class="tlitem" data-era="1856" data-cat="agriculture"><div class="tldot old"></div><div class="tlcard"><div class="tlera">1856 · Founding · Agriculture & Education</div><div class="tags"><span class="tag tt">🌾 Land-Grant</span><span class="tag tg">Founding Era</span></div><h4>Maryland Agricultural College Founded — Morrill Act Origins</h4><p>Founded 1856 on 430 acres; an 1876 state financial takeover after bankruptcy reshaped the public-agriculture-education relationship — a tension still visible in 2026 AGNR funding debates.</p><div class="tlmet"><div><div class="mn">1856</div><div class="ml">Founded</div></div><div><div class="mn">430 ac</div><div class="ml">Original Farm<a class="tl-source-btn" href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank">📄 View Source →</a></div></div></div></div></div>
-      </div>
-    </div>
+
 
     <!-- SOURCES -->
     <div class="page" id="page-sources">
@@ -721,7 +677,7 @@ function buildNav(fac) {
   document.getElementById('sb-nav').innerHTML = `
     <div class="nav-sec">Explore</div>
     <button class="nav-item active" onclick="navTo('issues',this)"><span class="ico">🔥</span>Campus Issues<span class="nbadge">24</span></button>
-    <button class="nav-item" onclick="navTo('past',this)"><span class="ico">📅</span>Past Data</button>
+    
     <button class="nav-item" onclick="navTo('sources',this)"><span class="ico">🔗</span>Sources & Citations</button>
     <div class="nav-sec" style="margin-top:10px;">Research</div>
     ${fac ? `<button class="nav-item" onclick="navTo('research',this)"><span class="ico">✨</span>Create Research Q<span class="fstar">★</span></button>` : ''}
@@ -1196,7 +1152,7 @@ function studentHTML() {
         <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('sources',document.querySelector('.nav-item[onclick*=sources]'))">🔗 Sources & Citations</button>
         <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('contacts',document.querySelector('.nav-item[onclick*=contacts]'))">🏛️ Contacts</button>
         <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('issues',document.querySelector('.nav-item[onclick*=issues]'))">🔥 Current Issues</button>
-        <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('past',document.querySelector('.nav-item[onclick*=past]'))">📅 Historical Data</button>
+      
       </div>
     </div>
   </div>`;
