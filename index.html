@@ -252,7 +252,26 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
 @keyframes popIn{from{opacity:0;transform:scale(.88);}to{opacity:1;transform:scale(1);}}
 @media(max-width:900px){.srow{grid-template-columns:repeat(2,1fr);}.tcol{grid-template-columns:1fr;}.egrid{grid-template-columns:1fr;}.sidebar{width:200px;}.main{margin-left:200px;}}
-@media(max-width:640px){.sidebar{display:none;}.main{margin-left:0;}}
+@media(max-width:640px){
+  .sidebar{display:none;}
+  .main{margin-left:0;padding-bottom:70px;}
+  .mobile-nav{display:flex !important;}
+}
+.mobile-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--navy);border-top:1px solid rgba(255,255,255,.1);
+  display:none;z-index:200;
+  justify-content:space-around;align-items:center;
+  padding:8px 0 12px;
+}
+.mob-btn{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:none;border:none;color:rgba(255,255,255,.55);
+  font-size:9px;font-weight:600;font-family:inherit;cursor:pointer;
+  padding:4px 10px;border-radius:8px;transition:all .2s;
+}
+.mob-btn .mi{font-size:20px;line-height:1;}
+.mob-btn.active{color:var(--gold);}
 </style>
 </head>
 <body>
@@ -321,6 +340,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     <button class="lout-btn" onclick="doLogout()">⎋ Sign out</button>
   </div>
 </aside>
+<div class="mobile-nav" id="mobile-nav"></div>
 
 <div class="main">
   <div class="topbar">
@@ -693,6 +713,10 @@ const TITLES = {
   research:['Research Question Creator','Unique questions — never repeated across all semesters forever'],
   contacts:['Clubs & Institutions','30 real UMD contacts — click to email or visit'],
   emails:['Campus Emails','Official UMD emails and club newsletters — click to open']
+};
+window.mobActive = function(el) {
+  document.querySelectorAll('.mob-btn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
 };
 window.navTo = function(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
