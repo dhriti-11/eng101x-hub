@@ -703,6 +703,14 @@ function buildNav(fac) {
     ${fac ? `<button class="nav-item" onclick="navTo('research',this)"><span class="ico">✨</span>Create Research Q<span class="fstar">★</span></button>` : ''}
     <button class="nav-item" onclick="navTo('contacts',this)"><span class="ico">🏛️</span>Clubs & Resources</button>
 `;
+  const mob = document.getElementById('mobile-nav');
+  if (mob) {
+    mob.innerHTML = \`
+      <button class="mob-btn active" onclick="navTo('issues',null);mobActive(this)"><span class="mi">🔥</span>Issues</button>
+      <button class="mob-btn" onclick="navTo('sources',null);mobActive(this)"><span class="mi">🔗</span>Sources</button>
+      \${fac ? \`<button class="mob-btn" onclick="navTo('research',null);mobActive(this)"><span class="mi">✨</span>Research</button>\` : ''}
+      <button class="mob-btn" onclick="navTo('contacts',null);mobActive(this)"><span class="mi">🏛️</span>Clubs</button>\`;
+  }
 }
 
 // ── NAV ──
@@ -1096,10 +1104,6 @@ function facultyHTML() {
       </div>
     </div>
     <div>
-      <div class="panel" style="margin-bottom:14px;">
-        <h3>🔮 Trending Topic Suggestions</h3>
-        <p style="font-size:11px;color:var(--muted);">Click any card to pre-fill the topic field</p>
-        <div class="sugscroll">
           <div class="sugcard" onclick="useSug('AI tools vs academic integrity for ESL and international students')"><div class="sh">🔥 VIRAL · AI</div><p>AI policy fairness — ESL burden</p><div class="st">#AIPolicy #ESL</div></div>
           <div class="sugcard" onclick="useSug('UMD research farm threatened by College Park urban development')"><div class="sh">🌱 EMERGING · Agriculture</div><p>629-acre research farm vs development</p><div class="st">#AGNR #LandGrant</div></div>
           <div class="sugcard" onclick="useSug('Commuter student isolation and mental health at UMD')"><div class="sh">📈 RISING · Mental Health</div><p>Commuter students — invisible gap</p><div class="st">#Belonging</div></div>
