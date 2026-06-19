@@ -256,22 +256,17 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
   .sidebar{display:none;}
   .main{margin-left:0;padding-bottom:70px;}
   .mobile-nav{display:flex !important;}
+  .content{padding:16px;}
+  .tcol{grid-template-columns:1fr;}
+  .egrid{grid-template-columns:1fr;}
+  .ehints{grid-template-columns:1fr;}
+  .topbar{padding:0 16px;}
 }
-.mobile-nav{
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--navy);border-top:1px solid rgba(255,255,255,.1);
-  display:none;z-index:200;
-  justify-content:space-around;align-items:center;
-  padding:8px 0 12px;
-}
-.mob-btn{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  background:none;border:none;color:rgba(255,255,255,.55);
-  font-size:9px;font-weight:600;font-family:inherit;cursor:pointer;
-  padding:4px 10px;border-radius:8px;transition:all .2s;
-}
+.mobile-nav{position:fixed;bottom:0;left:0;right:0;background:var(--navy);border-top:1px solid rgba(255,255,255,.1);display:none;z-index:200;justify-content:space-around;align-items:center;padding:8px 0 12px;}
+.mob-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:rgba(255,255,255,.55);font-size:9px;font-weight:600;font-family:inherit;cursor:pointer;padding:4px 10px;border-radius:8px;transition:all .2s;}
 .mob-btn .mi{font-size:20px;line-height:1;}
 .mob-btn.active{color:var(--gold);}
+.cite-text{word-break:break-word;overflow-wrap:break-word;max-width:100%;}
 </style>
 </head>
 <body>
@@ -355,7 +350,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
     <!-- ISSUES -->
     <div class="page active" id="page-issues">
       <div class="sec-title">🔥 What's Happening on Campus</div>
-      <p class="sec-sub">Sources: <a href="https://dbknews.com" target="_blank" style="color:var(--red);font-weight:700;">The Diamondback</a> · <a href="https://www.instagram.com/thedbk/" target="_blank" style="color:var(--red);font-weight:700;">📸 @thedbk</a> · <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> · <a href="https://sga.umd.edu/minutes" target="_blank" style="color:var(--red);font-weight:700;">SGA Minutes</a> · <a href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank" style="color:var(--red);font-weight:700;">📚 UMD Archives</a></p> 
+      <p class="sec-sub">Sources: <a href="https://dbknews.com" target="_blank" style="color:var(--red);font-weight:700;">The Diamondback</a> · <a href="https://www.instagram.com/thedbk/" target="_blank" style="color:var(--red);font-weight:700;">📸 @thedbk</a> · <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> · <a href="https://sga.umd.edu/minutes" target="_blank" style="color:var(--red);font-weight:700;">SGA Minutes</a> · <a href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank" style="color:var(--red);font-weight:700;">📚 UMD Archives</a></p>
       <div class="sbar">
         <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search issues…" oninput="filterIssues(this.value)"></div>
         <div class="chips" id="issue-chips">
@@ -389,8 +384,6 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
         <div class="icard" data-cat="labor" style="--cc:#E07B40" onclick="issueClick('Gig Economy Reliance Among UMD Undergrads','labor','https://www.diamondback.umd.edu/?s=gig+economy')"><div class="tags"><span class="tag to">💼 Labor</span><span class="tag tg">📊 New Data</span></div><h3>37% of UMD Undergrads Rely on Gig Work to Pay Tuition</h3><p>New financial survey reveals gig dependency is highest among first-generation and Pell-eligible students.</p><div class="imeta"><span class="isrc">💳 Financial Aid Office</span><div class="tbar"><span style="height:6px"></span><span style="height:10px"></span><span style="height:15px"></span><span style="height:18px"></span><span style="height:20px"></span></div></div></div>
       </div>
     </div>
-
-
 
     <!-- SOURCES -->
     <div class="page" id="page-sources">
@@ -697,26 +690,25 @@ function buildNav(fac) {
   document.getElementById('sb-nav').innerHTML = `
     <div class="nav-sec">Explore</div>
     <button class="nav-item active" onclick="navTo('issues',this)"><span class="ico">🔥</span>Campus Issues<span class="nbadge">24</span></button>
-    
+
     <button class="nav-item" onclick="navTo('sources',this)"><span class="ico">🔗</span>Sources & Citations</button>
     <div class="nav-sec" style="margin-top:10px;">Research</div>
     ${fac ? `<button class="nav-item" onclick="navTo('research',this)"><span class="ico">✨</span>Create Research Q<span class="fstar">★</span></button>` : ''}
     <button class="nav-item" onclick="navTo('contacts',this)"><span class="ico">🏛️</span>Clubs & Resources</button>
-`;
+\`;
   const mob = document.getElementById('mobile-nav');
   if (mob) {
-    mob.innerHTML = \`
-      <button class="mob-btn active" onclick="navTo('issues',null);mobActive(this)"><span class="mi">🔥</span>Issues</button>
-      <button class="mob-btn" onclick="navTo('sources',null);mobActive(this)"><span class="mi">🔗</span>Sources</button>
-      \${fac ? \`<button class="mob-btn" onclick="navTo('research',null);mobActive(this)"><span class="mi">✨</span>Research</button>\` : ''}
-      <button class="mob-btn" onclick="navTo('contacts',null);mobActive(this)"><span class="mi">🏛️</span>Clubs</button>\`;
+    mob.innerHTML = '<button class="mob-btn active" onclick="navTo(\'issues\',null);mobActive(this)"><span class="mi">🔥</span>Issues</button>'
+      + '<button class="mob-btn" onclick="navTo(\'sources\',null);mobActive(this)"><span class="mi">🔗</span>Sources</button>'
+      + (fac ? '<button class="mob-btn" onclick="navTo(\'research\',null);mobActive(this)"><span class="mi">✨</span>Research</button>' : '')
+      + '<button class="mob-btn" onclick="navTo(\'contacts\',null);mobActive(this)"><span class="mi">🏛️</span>Clubs</button>';
   }
 }
 
 // ── NAV ──
 const TITLES = {
   issues:['Campus Issues','Live tracking of UMD campus issues'],
-  past:['Past Data & Archives','Historical UMD issues from 1856 to present — filter by era and category'],
+
   sources:['Sources & Citations','Peer-reviewed articles and databases — APA, MLA, Chicago & Harvard citations'],
   research:['Research Question Creator','Unique questions — never repeated across all semesters forever'],
   contacts:['Clubs & Institutions','30 real UMD contacts — click to email or visit'],
@@ -726,6 +718,7 @@ window.mobActive = function(el) {
   document.querySelectorAll('.mob-btn').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
 };
+
 window.navTo = function(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -742,10 +735,9 @@ window.navTo = function(id, btn) {
 
 window.goToSourcesWithTopic = function() {
   const q = document.getElementById('rq-out')?.textContent?.replace(/^"|"$/g,'') || '';
-  const words = q.split(' ').slice(0,6).join(' ');
   const srcInput = document.getElementById('src-search-input');
-  if (srcInput && words) { srcInput.value = words; }
-  renderSources('all', words.toLowerCase());
+  if (srcInput && q) { srcInput.value = q; }
+  renderSources('all', q.toLowerCase());
   srcActiveFilter = 'all';
   document.querySelectorAll('#src-chips .chip').forEach((c,i)=>c.classList.toggle('on',i===0));
   navTo('sources', document.querySelector('.nav-item[onclick*="sources"]'));
@@ -883,48 +875,6 @@ async function loadLiveIssues() {
   // Refresh every 60 minutes automatically
   setTimeout(loadLiveIssues, 60 * 60 * 1000);
 }
-
-// ── PAST DATA FILTERS ──
-let pastEra = 'all', pastCat = 'all', pastQ = '';
-function applyPastFilter() {
-  let visibleCount = 0;
-  document.querySelectorAll('.tlitem').forEach(item => {
-    const era = item.dataset.era || '';
-    const cat = item.dataset.cat || '';
-    const text = item.textContent.toLowerCase();
-    const mEra = pastEra === 'all' || era.startsWith(pastEra) || era.includes(pastEra);
-    const mCat = pastCat === 'all' || cat.includes(pastCat);
-    const mQ = !pastQ || text.includes(pastQ);
-    const show = mEra && mCat && mQ;
-    item.style.display = show ? '' : 'none';
-    if (show) visibleCount++;
-  });
-  // Show no-results message with archive links
-  let noRes = document.getElementById('past-no-results');
-  if (visibleCount === 0) {
-    if (!noRes) {
-      noRes = document.createElement('div');
-      noRes.id = 'past-no-results';
-      noRes.style.cssText = 'background:white;border-radius:13px;border:1.5px solid var(--border);padding:24px;text-align:center;box-shadow:var(--shadow);';
-      noRes.innerHTML = `<div style="font-size:32px;margin-bottom:10px;">🔍</div>
-        <div style="font-family:DM Serif Display,serif;font-size:16px;margin-bottom:8px;">No results found for this filter</div>
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:14px;">Search the UMD Archives directly for this topic:</p>
-        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-          <a href="https://www.lib.umd.edu/collections/university-archives/UMD-history" target="_blank" class="tbtn primary" style="text-decoration:none;padding:8px 16px;">📚 UMD Archives</a>
-          <a href="https://www.diamondback.umd.edu" target="_blank" class="tbtn outline" style="text-decoration:none;padding:8px 16px;">📰 The Diamondback</a>
-          <a href="https://today.umd.edu" target="_blank" class="tbtn outline" style="text-decoration:none;padding:8px 16px;">📰 Maryland Today</a>
-          <a href="https://scholar.google.com/scholar?q=University+Maryland+history" target="_blank" class="tbtn outline" style="text-decoration:none;padding:8px 16px;">🎓 Google Scholar</a>
-        </div>`;
-      document.getElementById('tlwrap').appendChild(noRes);
-    }
-    noRes.style.display = '';
-  } else {
-    if (noRes) noRes.style.display = 'none';
-  }
-}
-window.filterPastEra = function(v) { pastEra = v; applyPastFilter(); };
-window.filterPastCat = function(v) { pastCat = v; applyPastFilter(); };
-window.filterPastSearch = function(q) { pastQ = q.toLowerCase(); applyPastFilter(); };
 
 // ── SOURCES ──
 function genCitation(src, style) {
@@ -1104,15 +1054,6 @@ function facultyHTML() {
       </div>
     </div>
     <div>
-          <div class="sugcard" onclick="useSug('AI tools vs academic integrity for ESL and international students')"><div class="sh">🔥 VIRAL · AI</div><p>AI policy fairness — ESL burden</p><div class="st">#AIPolicy #ESL</div></div>
-          <div class="sugcard" onclick="useSug('UMD research farm threatened by College Park urban development')"><div class="sh">🌱 EMERGING · Agriculture</div><p>629-acre research farm vs development</p><div class="st">#AGNR #LandGrant</div></div>
-          <div class="sugcard" onclick="useSug('Commuter student isolation and mental health at UMD')"><div class="sh">📈 RISING · Mental Health</div><p>Commuter students — invisible gap</p><div class="st">#Belonging</div></div>
-          <div class="sugcard" onclick="useSug('Gig economy reliance and academic performance among UMD undergrads')"><div class="sh">💼 TRENDING · Labor</div><p>37% gig-dependent undergrads</p><div class="st">#GigEconomy</div></div>
-          <div class="sugcard" onclick="useSug('DEI budget cuts and STEM faculty diversity pipeline at UMD')"><div class="sh">🌍 HOT · DEI</div><p>Who is leaving UMD faculty pipeline</p><div class="st">#DEI #STEM</div></div>
-          <div class="sugcard" onclick="useSug('Food insecurity among international students at UMD')"><div class="sh">🍎 UNDER-RESEARCHED</div><p>International students + pantry access</p><div class="st">#FoodSecurity</div></div>
-          <div class="sugcard" onclick="useSug('UMD carbon neutrality transparency gap and student climate activism')"><div class="sh">🌿 MODERATE · Sustainability</div><p>Climate pledges vs real data</p><div class="st">#Greenwashing</div></div>
-        </div>
-      </div>
       <div class="panel">
         <h3>💡 Generated Question</h3>
         <p style="font-size:12px;color:var(--muted);" id="rq-ph">Configure parameters and click Generate — the system picks a question never used before across all semesters.</p>
@@ -1180,7 +1121,7 @@ function studentHTML() {
         <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('sources',document.querySelector('.nav-item[onclick*=sources]'))">🔗 Sources & Citations</button>
         <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('contacts',document.querySelector('.nav-item[onclick*=contacts]'))">🏛️ Contacts</button>
         <button class="tbtn outline" style="font-size:11.5px;padding:6px 11px;" onclick="navTo('issues',document.querySelector('.nav-item[onclick*=issues]'))">🔥 Current Issues</button>
-      
+        
       </div>
     </div>
   </div>`;
@@ -1216,6 +1157,7 @@ window.genRQ = async function() {
   try { await loadUsedQs(); } catch(e) {}
 
   let available = QUESTION_BANK.filter(q => !usedQs.includes(q.q));
+  if (available.length === 0) available = [...QUESTION_BANK];
   let matched = topic ? available.filter(q => q.keywords.some(k => topic.includes(k) || k.includes(topic)) || q.q.toLowerCase().includes(topic)) : available;
   if (matched.length === 0) matched = available;
   if (matched.length === 0) {
@@ -1253,9 +1195,8 @@ window.genRQ = async function() {
   box.classList.add('show');
   document.getElementById('rubric-box').classList.remove('show');
 
-  const rem = QUESTION_BANK.filter(q => !usedQs.includes(q.q)).length;
   const uc = document.getElementById('used-count');
-  if (uc) uc.textContent = `${usedQs.length} questions used · ${rem} remaining in bank`;
+  if (uc) uc.textContent = '';
 
   lbl.textContent = '✨ Generate Another Unique Question';
   btn.disabled = false;
