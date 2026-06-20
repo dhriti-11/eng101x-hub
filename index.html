@@ -788,8 +788,8 @@ const LIVE_FEEDS = [
 
 async function fetchGoogleNews(query) {
   // Use allorigins.win — free CORS proxy, no account, no rate limit concerns
-  const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
-  const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`;
+  const rssUrl = 'https://news.google.com/rss/search?q=' + encodeURIComponent(query) + '&hl=en-US&gl=US&ceid=US:en';
+  const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl);
   const res = await fetch(proxy, {signal: AbortSignal.timeout(5000)});
   const data = await res.json();
   const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
@@ -831,7 +831,7 @@ async function loadLiveIssues() {
         card.className = 'icard';
         card.dataset.cat = feed.cat;
         card.style.setProperty('--cc', feed.color);
-        const searchUrl = `https://news.google.com/search?q=${encodeURIComponent(feed.q)}&hl=en-US&gl=US&ceid=US:en`;
+        const searchUrl = 'https://news.google.com/search?q=' + encodeURIComponent(feed.q) + '&hl=en-US&gl=US&ceid=US:en`;
         card.onclick = () => window.open(searchUrl, '_blank');
         card.innerHTML = `
           <div class="tags"><span class="tag ${feed.tagClass}">${feed.emoji} ${feed.cat}</span><span class="tag tg">📡 Live</span></div>
@@ -860,22 +860,36 @@ async function loadLiveIssues() {
           </div>`;
         grid.appendChild(card);
         added++;
-      });
-    });
+try {
+  // your code here
 
-    // Update badge count
-    const badge = document.querySelector('.nbadge');
-    if (badge && added > 0) badge.textContent = added;
-
-  } catch(e) {
-    if (loading) loading.remove();
-    // Keep hardcoded cards silently on total failure
-  }
-
-  // Refresh every 60 minutes automatically
-  setTimeout(loadLiveIssues, 60 * 60 * 1000);
+} catch (e) {
+  if (loading) loading.remove();
+  // Keep hardcoded cards silently on total failure
 }
 
+// Refresh every 60 minutes automatically
+setTimeout(loadLiveIssues, 60 * 60 * 1000);
+try {
+  // your code here
+
+} catch (e) {
+  if (loading) loading.remove();
+  // Keep hardcoded cards silently on total failure
+}
+
+// Refresh every 60 minutes automatically
+setTimeout(loadLiveIssues, 60 * 60 * 1000);
+try {
+  // your code here
+
+} catch (e) {
+  if (loading) loading.remove();
+  // Keep hardcoded cards silently on total failure
+}
+
+// Refresh every 60 minutes automatically
+setTimeout(loadLiveIssues, 60 * 60 * 1000);
 // ── SOURCES ──
 function genCitation(src, style) {
   const a = src.authors, y = src.year, t = src.title, p = src.publication, u = src.url;
