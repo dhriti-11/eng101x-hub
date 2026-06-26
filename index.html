@@ -65,6 +65,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
 .nbadge{margin-left:auto;background:var(--gold);color:var(--navy);font-size:10px;font-weight:800;padding:1px 7px;border-radius:20px;}
 .fstar{margin-left:auto;color:var(--gold);font-size:11px;}
 .sb-foot{padding:13px 17px;border-top:1px solid rgba(255,255,255,.08);}
+@media(max-width:640px){
+  .sb-foot{padding-bottom:calc(13px + 76px + env(safe-area-inset-bottom,16px));}
+  .sb-nav{padding-bottom:10px;}
+}
 .pcard{display:flex;align-items:center;gap:9px;}
 .pavatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:800;color:white;font-size:12px;flex-shrink:0;overflow:hidden;}
 .pavatar img{width:100%;height:100%;object-fit:cover;}
@@ -310,7 +314,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
   :root{--sidebar-w:242px;}
   .sidebar{transform:translateX(-100%);}
   .sidebar.open{transform:translateX(0);}
-  .main{margin-left:0;padding-bottom:70px;}
+  .main{margin-left:0;padding-bottom:90px;}
   .mobile-nav{display:flex !important;}
   .tb-hamburger{display:block;}
   .content{padding:14px 14px;}
@@ -435,7 +439,11 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
           <div class="chip" onclick="filterByChip('food',this,'issue-chips')">🍎 Food</div>
           <div class="chip" onclick="filterByChip('labor',this,'issue-chips')">💼 Labor</div>
         </div>
-
+        <select class="fsel" onchange="sortIssues(this.value)">
+          <option value="trending">🔥 Trending</option>
+          <option value="recent">🕐 Recent</option>
+          <option value="impact">⚡ High Impact</option>
+        </select>
       </div>
       <div id="rss-status" style="font-size:12px;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px;">
         <div class="spin" style="border-top-color:var(--red);border-color:var(--border);"></div> Loading live news from Google News RSS…
@@ -1093,7 +1101,7 @@ function buildResearchPage(fac) {
 function facultyHTML() {
   return `
   <div class="sec-title">✨ Research Question Creator</div>
-  <p class="sec-sub">Every question is unique forever — the system checks all previously used questions and never repeats one</p>
+  <p class="sec-sub">AI-generated using Claude — every question is unique, never repeated. The AI reads all past questions from Firestore before generating so it never duplicates.</p>
   <div class="tcol">
     <div>
       <div class="panel">
@@ -1106,14 +1114,14 @@ function facultyHTML() {
         <div class="fg"><label class="fl">👥 Student Audience</label><div class="pills" id="aud-pills"><div class="pill on" onclick="togglePill(this)">First-Gen</div><div class="pill" onclick="togglePill(this)">International</div><div class="pill" onclick="togglePill(this)">STEM</div><div class="pill" onclick="togglePill(this)">Humanities</div><div class="pill" onclick="togglePill(this)">Commuters</div><div class="pill" onclick="togglePill(this)">Graduate</div></div></div>
         <div class="fg"><label class="fl">🔬 Methodology</label><div class="pills"><div class="pill on" onclick="togglePill(this)">Qualitative</div><div class="pill" onclick="togglePill(this)">Quantitative</div><div class="pill" onclick="togglePill(this)">Mixed Methods</div><div class="pill" onclick="togglePill(this)">Policy Analysis</div><div class="pill" onclick="togglePill(this)">Historical</div></div></div>
         <div class="fg"><label class="fl">📝 Additional Context</label><textarea class="fta" id="rq-ctx" placeholder="Specific angle, UMD dept, constraint…"></textarea></div>
-        <button class="genbtn" id="gbtn2" onclick="genRQ()"><span id="glabel">✨ Generate Unique Research Question</span></button>
+        <button class="genbtn" id="gbtn2" onclick="genRQ()"><span id="glabel">✨ Generate AI Research Question</span></button>
         <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:6px;" id="used-count"></div>
       </div>
     </div>
     <div>
       <div class="panel">
         <h3>💡 Generated Question</h3>
-        <p style="font-size:12px;color:var(--muted);" id="rq-ph">Configure parameters and click Generate — the system picks a question never used before across all semesters.</p>
+        <p style="font-size:12px;color:var(--muted);" id="rq-ph">Set your parameters and click Generate — Claude AI will write a brand-new question it has never generated before for this course.</p>
         <div class="rbox" id="rbox">
           <h4 id="rq-out"></h4>
           <p id="rq-rat" style="margin-top:7px;font-size:12px;color:var(--muted);"></p>
@@ -1124,12 +1132,23 @@ function facultyHTML() {
             <button class="rbtn o" onclick="goToSourcesWithTopic()">🔗 Sources</button>
             <button class="rbtn o" onclick="copyQ()">📋 Copy</button>
             <button class="rbtn o" onclick="pubToStudents()">📤 Publish</button>
-            <button class="rbtn o" onclick="viewPastQuestions()">📋 Past Qs</button>
           </div>
         </div>
         <div class="rubric-box" id="rubric-box">
           <h4>📊 Grading Rubric</h4>
           <div id="rubric-content"></div>
+        </div>
+      </div>
+
+      <!-- PAST QUESTIONS PANEL -->
+      <div class="panel" style="margin-top:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0;">
+          <h3 style="margin-bottom:0;">📋 Past Generated Questions</h3>
+          <button onclick="viewPastQuestions()" style="padding:6px 13px;border-radius:8px;background:var(--navy);color:white;border:none;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;">↺ Load / Refresh</button>
+        </div>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:6px;margin-bottom:12px;">Every question ever generated is stored here. Click <strong>↩ Use This</strong> to restore one, or <strong>✅ Set Active</strong> to publish it to students.</p>
+        <div id="pq-panel" style="border-radius:11px;overflow:hidden;">
+          <p style="font-size:12px;color:var(--muted);text-align:center;padding:20px;">Click <strong>↺ Load / Refresh</strong> to view all past questions.</p>
         </div>
       </div>
     </div>
@@ -1229,60 +1248,208 @@ window.openNewsSearch = function() {
   window.open('https://news.google.com/search?q=' + encodeURIComponent(q + ' University Maryland College Park'), '_blank');
 };
 
-// ── GENERATE QUESTION ──
+// ── GENERATE QUESTION (AI-powered via Anthropic API) ──
 window.genRQ = async function() {
   const btn = document.getElementById('gbtn2');
   const lbl = document.getElementById('glabel');
-  const topic = (document.getElementById('rq-topic')?.value || '').toLowerCase().trim();
-  lbl.innerHTML = '<span class="spin"></span> Finding unique question…';
+  const topic = (document.getElementById('rq-topic')?.value || '').trim();
+  const sem = document.getElementById('rq-sem')?.value || 'Spring';
+  const yr = document.getElementById('rq-yr')?.value || '2026';
+  const ctx = document.getElementById('rq-ctx')?.value || '';
+  const audience = [...document.querySelectorAll('#aud-pills .pill.on')].map(p => p.textContent).join(', ') || 'general students';
+  const methodology = [...document.querySelectorAll('.pills .pill.on')].map(p => p.textContent).join(', ') || 'mixed methods';
+
+  lbl.innerHTML = '<span class="spin"></span> AI is generating a unique question…';
   btn.disabled = true;
 
+  // Load all previously used questions so AI never repeats one
   try { await loadUsedQs(); } catch(e) {}
+  const usedList = usedQs.length > 0
+    ? 'NEVER generate any of these previously used questions:\n' + usedQs.map((q, i) => `${i+1}. ${q}`).join('\n')
+    : 'No questions have been used yet.';
 
-  let available = QUESTION_BANK.filter(q => !usedQs.includes(q.q));
-  if (available.length === 0) available = [...QUESTION_BANK];
-  let matched = topic
-    ? available.filter(q => q.keywords.some(k => topic.includes(k) || k.includes(topic)) || q.q.toLowerCase().includes(topic))
-    : available;
-  if (matched.length === 0) matched = available;
-  if (matched.length === 0) {
-    alert('All questions have been used! The bank will be expanded next semester.');
-    lbl.textContent = '✨ Generate Unique Research Question';
-    btn.disabled = false;
-    return;
-  }
+  const prompt = `You are an expert writing professor at the University of Maryland designing research questions for ENG101X, a first-year writing course. 
 
-  const picked = matched[Math.floor(Math.random() * matched.length)];
-  currentQ = picked;
+Generate ONE completely unique, original research question for ${sem} ${yr} on the topic: "${topic || 'a current UMD campus issue'}".
+
+Requirements:
+- Must be specific to University of Maryland, College Park campus
+- Must be researchable by undergraduate students in one semester
+- Audience: ${audience}
+- Methodology: ${methodology}
+- Additional context: ${ctx || 'none'}
+- The question must be complex enough to support three essays: (1) Position Inquiry, (2) Rhetorical Analysis, (3) Remediation Project
+- Must NOT be a yes/no question — must require nuanced analysis
+- Should connect to real, current campus or local community issues
+
+${usedList}
+
+Respond ONLY with a valid JSON object, no markdown, no backticks, exactly this structure:
+{
+  "question": "the full research question here",
+  "rationale": "2-3 sentences explaining why this question is original and valuable for ENG101X students",
+  "e1": "specific Essay 1 prompt (Position Inquiry) for this question",
+  "e2": "specific Essay 2 prompt (Rhetorical Analysis) for this question",
+  "e3": "specific Essay 3 prompt (Remediation Project) for this question"
+}`;
 
   try {
-    await addDoc(collection(db, 'research_questions'), {
-      question: picked.q,
-      semester: document.getElementById('rq-sem')?.value || 'Spring',
-      year: document.getElementById('rq-yr')?.value || '2026',
-      createdBy: cEmail,
-      publishedAt: new Date(),
-      active: false
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
     });
-    usedQs.push(picked.q);
-  } catch(e) { console.warn('Save failed:', e); }
 
+    if (!res.ok) throw new Error('API error ' + res.status);
+    const data = await res.json();
+    const raw = data.content.map(c => c.text || '').join('').trim();
+    const clean = raw.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+
+    currentQ = {
+      q: parsed.question,
+      rationale: parsed.rationale,
+      e1: parsed.e1,
+      e2: parsed.e2,
+      e3: parsed.e3,
+      r: [
+        {cat:'Essay 1 — Position Inquiry',items:[{c:'Clear arguable thesis',p:25},{c:'Primary research conducted',p:25},{c:'3+ peer-reviewed sources integrated',p:20},{c:'Counterargument engagement',p:15},{c:'Writing clarity and structure',p:15}]},
+        {cat:'Essay 2 — Rhetorical Analysis',items:[{c:'Rhetorical strategies identified',p:30},{c:'Depth of analysis beyond surface',p:30},{c:'Connection to Essay 1 argument',p:20},{c:'Textual evidence and citation',p:20}]},
+        {cat:'Essay 3 — Remediation',items:[{c:'Audience awareness and medium fit',p:25},{c:'Argument effectively translated',p:30},{c:'Research cited correctly',p:20},{c:'Written rationale quality',p:25}]}
+      ]
+    };
+
+    // Save to Firestore
+    try {
+      await addDoc(collection(db, 'research_questions'), {
+        question: parsed.question,
+        rationale: parsed.rationale,
+        e1: parsed.e1, e2: parsed.e2, e3: parsed.e3,
+        topic: topic || 'general',
+        audience, methodology,
+        semester: sem, year: yr,
+        createdBy: cEmail,
+        publishedAt: new Date(),
+        active: false
+      });
+      usedQs.push(parsed.question);
+    } catch(e) { console.warn('Firestore save failed:', e); }
+
+    // Display result
+    document.getElementById('rq-ph').style.display = 'none';
+    const box = document.getElementById('rbox');
+    box.classList.remove('show');
+    void box.offsetWidth;
+    document.getElementById('rq-out').textContent = '"' + parsed.question + '"';
+    document.getElementById('rq-rat').textContent = parsed.rationale;
+    document.getElementById('rq-hints').innerHTML = `<div class="ehints">
+      <div class="ehint" style="background:#FFF5F7"><div class="en" style="color:var(--red)">Essay 1 · Position</div><p>${parsed.e1}</p></div>
+      <div class="ehint" style="background:#EEF3FF"><div class="en" style="color:#4A6CF7">Essay 2 · Rhetorical</div><p>${parsed.e2}</p></div>
+      <div class="ehint" style="background:#D4F5E9"><div class="en" style="color:#1A8C5F">Essay 3 · Remediation</div><p>${parsed.e3}</p></div>
+    </div>`;
+    box.classList.add('show');
+    document.getElementById('rubric-box').classList.remove('show');
+    lbl.textContent = '✨ Generate Another AI Question';
+    btn.disabled = false;
+
+    // Auto-refresh past questions panel after generation
+    loadPastQuestions();
+
+  } catch(err) {
+    console.error(err);
+    lbl.textContent = '✨ Generate Unique Research Question';
+    btn.disabled = false;
+    alert('Generation failed: ' + err.message + '\n\nMake sure you are connected to the internet.');
+  }
+};
+
+// ── PAST QUESTIONS PANEL ──
+window.viewPastQuestions = async function() {
+  const panel = document.getElementById('pq-panel');
+  if (!panel) return;
+  panel.innerHTML = '<div style="text-align:center;padding:20px;"><div class="spin" style="border-top-color:var(--red);border-color:var(--border);width:20px;height:20px;margin:0 auto;"></div><p style="font-size:12px;color:var(--muted);margin-top:8px;">Loading past questions…</p></div>';
+  await loadPastQuestions();
+};
+
+async function loadPastQuestions() {
+  const panel = document.getElementById('pq-panel');
+  if (!panel) return;
+  try {
+    const snap = await getDocs(query(collection(db, 'research_questions'), orderBy('publishedAt', 'desc')));
+    const qs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (qs.length === 0) {
+      panel.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:16px;text-align:center;">No questions generated yet. Generate your first one above!</p>';
+      return;
+    }
+    panel.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div style="font-size:14px;font-weight:800;color:var(--navy);">📋 All Past Questions <span style="background:#EEF3FF;color:#4A6CF7;font-size:11px;padding:2px 8px;border-radius:20px;margin-left:6px;">${qs.length} total</span></div>
+        <button onclick="document.getElementById('pq-panel').innerHTML='<p style=\'font-size:12px;color:var(--muted);text-align:center;padding:20px;\'>Cleared. Click ↺ Load / Refresh to reload.</p>'" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);">✕</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        ${qs.map((q, i) => `
+          <div style="background:${q.active ? 'linear-gradient(135deg,#D4F5E9,#EEF3FF)' : 'white'};border:1.5px solid ${q.active ? '#2ECC8B' : 'var(--border)'};border-radius:12px;padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+              <div style="display:flex;gap:5px;flex-wrap:wrap;">
+                <span style="font-size:10px;font-weight:800;background:#EEF3FF;color:#4A6CF7;padding:2px 8px;border-radius:20px;">#${qs.length - i}</span>
+                ${q.active ? '<span style="font-size:10px;font-weight:800;background:#D4F5E9;color:#1A8C5F;padding:2px 8px;border-radius:20px;">✅ ACTIVE</span>' : ''}
+                <span style="font-size:10px;color:var(--muted);">${q.semester || ''} ${q.year || ''}</span>
+                ${q.topic ? `<span style="font-size:10px;font-weight:700;background:#FFE8EB;color:var(--red);padding:2px 8px;border-radius:20px;">${q.topic}</span>` : ''}
+              </div>
+              <span style="font-size:10px;color:var(--muted);white-space:nowrap;">${q.publishedAt?.toDate ? q.publishedAt.toDate().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : 'Recently'}</span>
+            </div>
+            <p style="font-size:12.5px;font-weight:600;color:var(--navy);line-height:1.5;margin-bottom:10px;font-style:italic;">"${q.question}"</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button onclick="reuseQuestion(${JSON.stringify(q).replace(/"/g,'&quot;')})" style="padding:5px 10px;border-radius:7px;background:#EEF3FF;color:#4A6CF7;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">↩ Use This</button>
+              <button onclick="navigator.clipboard.writeText('${q.question.replace(/'/g,"\\'")}').then(()=>alert('Copied!'))" style="padding:5px 10px;border-radius:7px;background:#F0EDFF;color:#7B61FF;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">📋 Copy</button>
+              ${!q.active ? `<button onclick="activateQuestion('${q.id}')" style="padding:5px 10px;border-radius:7px;background:#D4F5E9;color:#1A8C5F;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">✅ Set Active</button>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>`;
+  } catch(e) {
+    panel.innerHTML = '<p style="font-size:12px;color:var(--coral);padding:16px;">Failed to load: ' + e.message + '</p>';
+  }
+}
+
+window.reuseQuestion = function(q) {
+  currentQ = { q: q.question, rationale: q.rationale || '', e1: q.e1 || '', e2: q.e2 || '', e3: q.e3 || '',
+    r:[{cat:'Essay 1 — Position Inquiry',items:[{c:'Clear arguable thesis',p:25},{c:'Primary research',p:25},{c:'3+ sources',p:20},{c:'Counterargument',p:15},{c:'Clarity',p:15}]},
+       {cat:'Essay 2 — Rhetorical Analysis',items:[{c:'Rhetorical strategies identified',p:30},{c:'Depth of analysis',p:30},{c:'Connection to Essay 1',p:20},{c:'Evidence',p:20}]},
+       {cat:'Essay 3 — Remediation',items:[{c:'Audience awareness',p:25},{c:'Argument translated',p:30},{c:'Research cited',p:20},{c:'Rationale quality',p:25}]}]};
   document.getElementById('rq-ph').style.display = 'none';
+  document.getElementById('rq-out').textContent = '"' + q.question + '"';
+  document.getElementById('rq-rat').textContent = q.rationale || '';
+  document.getElementById('rq-hints').innerHTML = q.e1 ? `<div class="ehints">
+    <div class="ehint" style="background:#FFF5F7"><div class="en" style="color:var(--red)">Essay 1 · Position</div><p>${q.e1}</p></div>
+    <div class="ehint" style="background:#EEF3FF"><div class="en" style="color:#4A6CF7">Essay 2 · Rhetorical</div><p>${q.e2}</p></div>
+    <div class="ehint" style="background:#D4F5E9"><div class="en" style="color:#1A8C5F">Essay 3 · Remediation</div><p>${q.e3}</p></div>
+  </div>` : '';
   const box = document.getElementById('rbox');
   box.classList.remove('show');
   void box.offsetWidth;
-  document.getElementById('rq-out').textContent = '"' + picked.q + '"';
-  document.getElementById('rq-rat').textContent = picked.rationale;
-  document.getElementById('rq-hints').innerHTML = `<div class="ehints">
-    <div class="ehint" style="background:#FFF5F7"><div class="en" style="color:var(--red)">Essay 1 · Position</div><p>${picked.e1}</p></div>
-    <div class="ehint" style="background:#EEF3FF"><div class="en" style="color:#4A6CF7">Essay 2 · Rhetorical</div><p>${picked.e2}</p></div>
-    <div class="ehint" style="background:#D4F5E9"><div class="en" style="color:#1A8C5F">Essay 3 · Remediation</div><p>${picked.e3}</p></div>
-  </div>`;
   box.classList.add('show');
+  document.getElementById('pq-panel').innerHTML = '<p style="font-size:12px;color:var(--muted);text-align:center;padding:20px;">Question loaded above. Click ↺ Load / Refresh to view all past questions again.</p>';
   document.getElementById('rubric-box').classList.remove('show');
+};
 
-  lbl.textContent = '✨ Generate Another Unique Question';
-  btn.disabled = false;
+window.activateQuestion = async function(docId) {
+  try {
+    const snap = await getDocs(collection(db, 'research_questions'));
+    for (const d of snap.docs) {
+      if (d.data().active) await setDoc(doc(db, 'research_questions', d.id), { ...d.data(), active: false });
+    }
+    const target = snap.docs.find(d => d.id === docId);
+    if (target) {
+      await setDoc(doc(db, 'research_questions', docId), { ...target.data(), active: true });
+      window._publishedQ = target.data().question;
+    }
+    await loadPastQuestions();
+    alert('✅ Question set as active! Students will see this question.');
+  } catch(e) { alert('Failed: ' + e.message); }
 };
 
 window.showRubric = function() {
