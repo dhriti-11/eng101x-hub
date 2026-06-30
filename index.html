@@ -564,7 +564,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
         <button class="tbtn outline" onclick="openNewsSearch()">🗞️ News Search</button>
       </div>
       <div class="sbar" style="margin-bottom:20px;">
-        <div class="swrap"><span class="si">🔍</span><input type="text" id="src-search-input" placeholder="Search sources — or Enter to search Scholar…" oninput="filterSources(this.value)" onkeydown="if(event.key==='Enter') openScholarTopic()"></div>
+        <div class="swrap"><span class="si">🔍</span><input type="text" id="src-search-input" placeholder="Search your source" oninput="filterSources(this.value)" onkeydown="if(event.key==='Enter') openScholarTopic()"></div>
         <button class="tbtn primary" onclick="openScholarTopic()" style="white-space:nowrap;">🔍 More Sources</button>
         <div class="chips" id="src-chips">
           <div class="chip on" onclick="filterSrcChip('all',this)">All</div>
@@ -1040,15 +1040,15 @@ window.sortIssues = function() {};
 
 // ── LIVE NEWS FROM GOOGLE NEWS RSS ──
 const LIVE_FEEDS = [
-  {q:'university maryland campus students site:today.umd.edu',cat:'campus',color:'#E21833',tagClass:'tr',emoji:'🏫'},
-  {q:'university maryland mental health counseling students',cat:'mental health',color:'#7B61FF',tagClass:'tp',emoji:'🧠'},
-  {q:'university maryland housing college park rent',cat:'housing',color:'#E21833',tagClass:'tr',emoji:'🏠'},
-  {q:'university maryland sustainability climate carbon',cat:'sustainability',color:'#2ECC8B',tagClass:'tn',emoji:'🌿'},
-  {q:'university maryland safety crime UMPD route 1',cat:'safety',color:'#FF8C42',tagClass:'to',emoji:'🛡️'},
-  {q:'university maryland diversity equity inclusion DEI',cat:'DEI',color:'#4A6CF7',tagClass:'tb',emoji:'🌍'},
-  {q:'university maryland AI technology academic integrity',cat:'ai',color:'#B8920A',tagClass:'tg',emoji:'💻'},
-  {q:'university maryland food insecurity dining campus pantry',cat:'food',color:'#FF6B6B',tagClass:'tr',emoji:'🍎'},
-  {q:'university maryland agriculture research farm AGNR',cat:'agriculture',color:'#0D8A7A',tagClass:'tt',emoji:'🌾'},
+  {q:'University Maryland campus students site:today.umd.edu',cat:'Campus',color:'#E21833',tagClass:'tr',emoji:'🏫'},
+  {q:'University Maryland mental health counseling students',cat:'Mental Health',color:'#7B61FF',tagClass:'tp',emoji:'🧠'},
+  {q:'University Maryland housing college park rent',cat:'Housing',color:'#E21833',tagClass:'tr',emoji:'🏠'},
+  {q:'University Maryland sustainability climate carbon',cat:'Sustainability',color:'#2ECC8B',tagClass:'tn',emoji:'🌿'},
+  {q:'University Maryland safety crime UMPD route 1',cat:'Safety',color:'#FF8C42',tagClass:'to',emoji:'🛡️'},
+  {q:'University Maryland diversity equity inclusion DEI',cat:'DEI',color:'#4A6CF7',tagClass:'tb',emoji:'🌍'},
+  {q:'University Maryland AI technology academic integrity',cat:'AI',color:'#B8920A',tagClass:'tg',emoji:'💻'},
+  {q:'University Maryland food insecurity dining campus pantry',cat:'Food',color:'#FF6B6B',tagClass:'tr',emoji:'🍎'},
+  {q:'University Maryland agriculture research farm AGNR',cat:'Agriculture',color:'#0D8A7A',tagClass:'tt',emoji:'🌾'},
 ];
 
 async function fetchGoogleNews(searchQuery) {
