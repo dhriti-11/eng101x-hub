@@ -1393,7 +1393,10 @@ Respond ONLY with a valid JSON object, no markdown, no backticks, exactly this s
       })
     });
 
-    if (!res.ok) throw new Error('API error ' + res.status);
+    if (!res.ok) {
+    const errData = await res.json().catch(() => ({}));
+    throw new Error('API error ' + res.status + ': ' + JSON.stringify(errData));
+}
     const data = await res.json();
     const raw = data.content.map(c => c.text || '').join('').trim();
     const clean = raw.replace(/```json|```/g, '').trim();
