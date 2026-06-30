@@ -426,7 +426,8 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
       <div class="sec-title">🔥 What's Happening on Campus</div>
       <p class="sec-sub">Sources: <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> · <a href="https://sga.umd.edu/minutes" target="_blank" style="color:var(--red);font-weight:700;">SGA Minutes</a> · Live Google News RSS</p>
       <div class="sbar">
-        <div class="swrap"><span class="si">🔍</span><input type="text" placeholder="Search issues…" oninput="filterIssues(this.value)"></div>
+        <div class="swrap"><span class="si">🔍</span><input type="text" id="issue-search-input" placeholder="Search topic — e.g. food insecurity…" oninput="filterIssues(this.value)" onkeydown="if(event.key==='Enter') searchLiveIssue()"></div>
+<button class="tbtn primary" onclick="searchLiveIssue()" style="white-space:nowrap;">🔍 Open in Google News</button>
         <div class="chips" id="issue-chips">
           <div class="chip on" onclick="filterByChip('all',this,'issue-chips')">All</div>
           <div class="chip" onclick="filterByChip('housing',this,'issue-chips')">🏠 Housing</div>
@@ -1019,6 +1020,16 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+// ── SEARCH LIVE NEWS (typed query → redirect to Google News RSS site) ──
+window.searchLiveIssue = function() {
+  const input = document.getElementById('issue-search-input');
+  const q = (input?.value || '').trim();
+  if (!q) { alert('Type a topic to search, e.g. "food insecurity"'); return; }
+
+  const searchQuery = q + ' University Maryland';
+  const googleNewsUrl = 'https://news.google.com/search?q=' + encodeURIComponent(searchQuery) + '&hl=en-US&gl=US&ceid=US:en';
+  window.open(googleNewsUrl, '_blank');
+};
 
 // ── SOURCES ──
 function genCitation(src, style) {
