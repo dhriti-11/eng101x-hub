@@ -246,7 +246,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .genbtn:hover{transform:translateY(-2px);}
 .genbtn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
 .rbox{background:linear-gradient(135deg,#F0EDFF,#EEF3FF);border:1.5px solid #D0CBFF;border-radius:13px;padding:16px;margin-top:16px;display:none;}
-.rbox.show{display:block;animation:fadeIn .4s ease;}
+.rbox.show{display:block;animation:faDEIn .4s ease;}
 .rbox h4{font-family:'DM Serif Display',serif;font-size:16px;margin-bottom:7px;color:var(--navy);line-height:1.4;}
 .rbox p{font-size:12.5px;line-height:1.7;}
 .ract{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap;}
@@ -258,7 +258,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 .ehint .en{font-size:9.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px;}
 .ehint p{font-size:11px;line-height:1.5;color:var(--text);}
 .rubric-box{background:white;border:1.5px solid var(--border);border-radius:13px;padding:16px;margin-top:12px;display:none;}
-.rubric-box.show{display:block;animation:fadeIn .4s ease;}
+.rubric-box.show{display:block;animation:faDEIn .4s ease;}
 .rubric-box h4{font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:12px;}
 .rubric-table{width:100%;border-collapse:collapse;font-size:12px;}
 .rubric-table th{background:var(--navy);color:white;padding:8px 10px;text-align:left;font-weight:700;}
@@ -298,7 +298,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 
 /* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px;}
-.modal-overlay.show{display:flex;animation:fadeIn .2s ease;}
+.modal-overlay.show{display:flex;animation:faDEIn .2s ease;}
 .modal-box{background:white;border-radius:18px;width:720px;max-width:100%;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.3);}
 .modal-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;}
 .modal-header h3{font-family:'DM Serif Display',serif;font-size:16px;line-height:1.3;max-width:580px;}
@@ -382,7 +382,7 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
 /* ── ANIMATIONS ── */
 .spin{display:inline-block;width:14px;height:14px;border:2.5px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg);}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
+@keyframes faDEIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
 @keyframes popIn{from{opacity:0;transform:scale(.88);}to{opacity:1;transform:scale(1);}}
 
 /* ── RESPONSIVE ── */
@@ -525,19 +525,19 @@ input[type=range]{width:100%;accent-color:var(--red);cursor:pointer;}
       <div class="sec-title">🔥 What's Happening on Campus</div>
       <p class="sec-sub">Sources: <a href="https://today.umd.edu" target="_blank" style="color:var(--red);font-weight:700;">Maryland Today</a> · <a href="https://sga.umd.edu/minutes" target="_blank" style="color:var(--red);font-weight:700;">SGA Minutes</a> · Live Google News RSS</p>
       <div class="sbar">
-        <div class="swrap"><span class="si">🔍</span><input type="text" id="issue-search-input" placeholder="Search topic — e.g. food insecurity…" oninput="filterIssues(this.value)" onkeydown="if(event.key==='Enter') searchLiveIssue()"></div>
+        <div class="swrap"><span class="si">🔍</span><input type="text" id="issue-search-input" placeholder="What Are You Tinkering About ?" oninput="filterIssues(this.value)" onkeydown="if(event.key==='Enter') searchLiveIssue()"></div>
 <button class="tbtn primary" onclick="searchLiveIssue()" style="white-space:nowrap;">🔍 Open in Google News</button>
         <div class="chips" id="issue-chips">
-          <div class="chip on" onclick="filterByChip('all',this,'issue-chips')">All</div>
-          <div class="chip" onclick="filterByChip('housing',this,'issue-chips')">🏠 Housing</div>
-          <div class="chip" onclick="filterByChip('mental health',this,'issue-chips')">🧠 Mental Health</div>
-          <div class="chip" onclick="filterByChip('sustainability',this,'issue-chips')">🌿 Sustainability</div>
-          <div class="chip" onclick="filterByChip('safety',this,'issue-chips')">🛡️ Safety</div>
-          <div class="chip" onclick="filterByChip('dei',this,'issue-chips')">🌍 DEI</div>
-          <div class="chip" onclick="filterByChip('ai',this,'issue-chips')">💻 Tech & AI</div>
-          <div class="chip" onclick="filterByChip('agriculture',this,'issue-chips')">🌾 Agriculture</div>
-          <div class="chip" onclick="filterByChip('food',this,'issue-chips')">🍎 Food</div>
-          <div class="chip" onclick="filterByChip('labor',this,'issue-chips')">💼 Labor</div>
+          <div class="chip on" onclick="filterByChip('All',this,'issue-chips')">All</div>
+          <div class="chip" onclick="filterByChip('Housing',this,'issue-chips')">🏠 Housing</div>
+          <div class="chip" onclick="filterByChip('Mental Health',this,'issue-chips')">🧠 Mental Health</div>
+          <div class="chip" onclick="filterByChip('Sustainability',this,'issue-chips')">🌿 Sustainability</div>
+          <div class="chip" onclick="filterByChip('Safety',this,'issue-chips')">🛡️ Safety</div>
+          <div class="chip" onclick="filterByChip('DEI',this,'issue-chips')">🌍 DEI</div>
+          <div class="chip" onclick="filterByChip('AI',this,'issue-chips')">💻 Tech & AI</div>
+          <div class="chip" onclick="filterByChip('Agriculture',this,'issue-chips')">🌾 Agriculture</div>
+          <div class="chip" onclick="filterByChip('Food',this,'issue-chips')">🍎 Food</div>
+          <div class="chip" onclick="filterByChip('Labor',this,'issue-chips')">💼 Labor</div>
         </div>
         <select class="fsel" onchange="sortIssues(this.value)">
           <option value="trending">🔥 Trending</option>
@@ -1045,7 +1045,7 @@ const LIVE_FEEDS = [
   {q:'university maryland housing college park rent',cat:'housing',color:'#E21833',tagClass:'tr',emoji:'🏠'},
   {q:'university maryland sustainability climate carbon',cat:'sustainability',color:'#2ECC8B',tagClass:'tn',emoji:'🌿'},
   {q:'university maryland safety crime UMPD route 1',cat:'safety',color:'#FF8C42',tagClass:'to',emoji:'🛡️'},
-  {q:'university maryland diversity equity inclusion DEI',cat:'dei',color:'#4A6CF7',tagClass:'tb',emoji:'🌍'},
+  {q:'university maryland diversity equity inclusion DEI',cat:'DEI',color:'#4A6CF7',tagClass:'tb',emoji:'🌍'},
   {q:'university maryland AI technology academic integrity',cat:'ai',color:'#B8920A',tagClass:'tg',emoji:'💻'},
   {q:'university maryland food insecurity dining campus pantry',cat:'food',color:'#FF6B6B',tagClass:'tr',emoji:'🍎'},
   {q:'university maryland agriculture research farm AGNR',cat:'agriculture',color:'#0D8A7A',tagClass:'tt',emoji:'🌾'},
