@@ -8,10 +8,18 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
   try {
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(500).json({ error: 'GEMINI_API_KEY is missing in environment variables' });
+    }
+
     const { messages } = req.body;
+    if (!messages || !messages[0] || !messages[0].content) {
+      return res.status(400).json({ error: 'Invalid request body — missing messages[0].content' });
+    }
+
     const prompt = messages[0].content;
 
-    const response = await fetch(
+    const geminiRes = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: 'POST',
@@ -26,21 +34,46 @@ export default async function handler(req, res) {
       }
     );
 
-    const data = await response.json();
+    const data = await geminiRes.json();
 
-    if (!data.candidates || !data.candidates[0]) {
-      throw new Error('No response from Gemini');
+    // If Gemini itself returned an error (bad request, quota, etc.)
+    if (!geminiRes.ok) {
+      return res.status(502).json({
+        error: 'Gemini API returned an error',
+        status: geminiRes.status,
+        details: data
+      });
     }
 
-    const text = data.candidates[0].content.parts[0].text;
+    // If response was blocked by safety filters or has no candidates
+    if (!data.candidates || data.candidates.length === 0) {
+      return res.status(502).json({
+        error: 'Gemini returned no candidates (possibly blocked by safety filters)',
+        details: data
+      });
+    }
 
-    // Return in same format as Anthropic so index.html needs no changes
+    const candidate = data.candidates[0];
+
+    if (!candidate.content || !candidate.content.parts || !candidate.content.parts[0]) {
+      return res.status(502).json({
+        error: 'Gemini candidate has no content.parts',
+        details: candidate
+      });
+    }
+
+    const text = candidate.content.parts[0].text;
+
     return res.status(200).json({
       content: [{ type: 'text', text: text }]
     });
 
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({
+      error: 'Function crashed',
+      message: err.message,
+      stack: err.stack
+    });
   }
 
 }
